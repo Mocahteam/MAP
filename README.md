@@ -1,0 +1,2 @@
+# MAP
+Mining Algorithm Patterns

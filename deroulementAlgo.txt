@@ -1,0 +1,64 @@
+      B  C  B  C  C  C  B  C  C  C  E  C  C  E  B  C  E  C  E
+  [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+B [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+C [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+B [3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+C [4, 3, 2, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+C [5, 4, 3, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+C [6, 5, 4, 3, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+E [6, 5, 4, 3, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+C [7, 6, 5, 4, 4, 4, 4, 4, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+E [7, 6, 5, 4, 4, 4, 4, 4, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+
+      B  C  B  C  C  C  B  C  C  C  E  C  C  E  B  C  E  C  E
+  [#, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+B [1, #, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+C [2, 1, #, #, #, #, #, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+B [3, 2, 1, 0, 0, 0, #, #, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+C [4, 3, 2, 1, 1, 1, 1, 1, #, #, #, #, 0, 0, 0, 0, 0, 0, 0, 0]
+C [5, 4, 3, 2, 2, 2, 2, 2, 1, 0, 0, 0, #, 0, 0, 0, 0, 0, 0, 0]
+C [6, 5, 4, 3, 3, 3, 3, 3, 2, 1, 0, 0, 0, #, #, #, #, #, 0, 0]
+E [6, 5, 4, 3, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, #, 0, 0]
+C [7, 6, 5, 4, 4, 4, 4, 4, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, #, 0]
+E [7, 6, 5, 4, 4, 4, 4, 4, 3, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, #]
+
+  +-+
+  | | Pb : Ajout d'un B(c) correspondant à un E(d)
+ \_/|
+ECECB
+dddcc
+  |
+ \_/ Solution : décomposition du E(d) en deux E(c et l)
+  **
+ECEECB
+ddlccc
+         +---+
+         |   | Pb : Ajout d'un B(d) correspondant à un E(c)
+        \_/  |
+ECEECBECCECCCB
+ddlccccddcccdd
+             |
+            \_/ Solution : décomposition du B(d) en deux B(c et l)
+             **
+ECEECBECCECCCBB
+ddlccccddcccdcl
+ / \ / \      |
+  |	  |       | Pb : Ajout d'un B(l) correspondant à un E(c)
+  |	  +-------+
+  |           | Solution : Chercher un E permettant de fermer ce B, 
+  +------------	  donc un E(l ou d) et noter ce E comme en chevauchement
+
+  +---------------+
+  |               | Pb : Ajout d'un B(c) correspondant à un E(l)
+ \_/              |
+ECEECBECCECCCBBCCCB
+ddlccccddcccdclcccc
+ \                |
+|                 | Solution : Chercher un E permettant de fermer ce B, 
++-----------------+   donc un E(l ou d) et noter ce E comme en chevauchement
+
++-------------------+
+|                   | Ajout d'un B(d) correspondant à un E(d)
+_/                  |    pas de soucis, rien à faire
+ECEECBECCECCCBBCCCBCB
+ddlccccddcccdclccccdd

@@ -1,32 +1,16 @@
 from Event import Event
 
 class Episode:
-    # weight of the support in relation to proximity parameter. Must be included between [0, 1]. 0 means the support is ignored (only proximity). 1 means the proximity is ignored (only support)
-    WEIGHT_SUPPORT:float
-    # control balancing between inside and outside proximity of episodes. Must be included between [0, 1]. 0 means take only inside proximity in consideration (no outside proximity). 1 means take only outside proximity in consideration (no inside proximity). If WEIGH_SUPPORT is set to 1, PROXIMITY_BALANCING is useless.
-    PROXIMITY_BALANCING:float
-
-    # enregistre parmis les top-k le support minimal
-    MIN_SUPPORT:int
-    # enregistre parmis les top-k le support maximal
-    MAX_SUPPORT:int
 
     def __init__ (self, event: Event, positions: list[tuple[int, int]]) -> None:
-        self.event = event
-        self.boundlist = positions
-        self.explored = False
-        self.durty = True
-        self.score = -1
+        self.event:Event = event
+        self.boundlist:list[tuple[int, int]] = positions
+        self.explored:bool = False
 
-    # Détermine si un Episode est plus petit qu'un autre Episode à partir de leur score
+    # Détermine si un Episode est plus petit qu'un autre Episode en fonction de son support
     def __lt__(self, other: object) -> bool:
         if isinstance(other, Episode):
-            selfScore:float = self.getScore()
-            otherScore:float = other.getScore()
-            if selfScore < otherScore or (selfScore == otherScore and str(self) < str(other)):
-                return True
-            else:
-                return False
+            return self.getSupport() < other.getSupport()
         else:
             return self < other
     
@@ -39,7 +23,27 @@ class Episode:
     
     def add(self, pos: tuple[int, int]) -> None:
         self.boundlist.append(pos)
-        self.durty = True
+    
+class NonOverlappedEpisode(Episode):
+    # weight of the support in relation to proximity parameter. Must be included between [0, 1]. 0 means the support is ignored (only proximity). 1 means the proximity is ignored (only support)
+    WEIGHT_SUPPORT:float
+    # control balancing between inside and outside proximity of episodes. Must be included between [0, 1]. 0 means take only inside proximity in consideration (no outside proximity). 1 means take only outside proximity in consideration (no inside proximity). If WEIGH_SUPPORT is set to 1, PROXIMITY_BALANCING is useless.
+    PROXIMITY_BALANCING:float
+
+    def __init__ (self, model: Episode) -> None:
+        # Initialiser la classe parente A en utilisant les valeurs de l'instance de A
+        super().__init__(model.event, model.boundlist)
+        self.score:float = 0
+
+    # Détermine si un Episode est plus petit qu'un autre Episode en fonction de son score
+    def __lt__(self, other: object) -> bool:
+        if isinstance(other, NonOverlappedEpisode):
+            if self.score < other.score or (self.score == other.score and str(self) < str(other)):
+                return True
+            else:
+                return False
+        else:
+            return self < other
 
     # calcul de la proximité externe de cet épisode comprise entre [0, 1] : proportion d'évènements intercallés entre chaque bounds
     def getOutsideProximity(self) -> float:
@@ -63,23 +67,20 @@ class Episode:
         else:
             return 1
 
-    # Retourne le score de cet épisode
-    def getScore(self) -> float:
-    
-        if self.getSupport() <= 1:
-            return 0 # Indépendamenet de WEIGHT_SUPPORT (même s'il est défini à 0 <=> ignorer le support) on discalifie les épisodes qui n'ont pas un support au moins égal à 2, en effet on cherche les épisodes qui se répètent au moins une fois (support >= 2)
-        part1:float = self.getSupport()/Episode.MAX_SUPPORT
-        # la partie 2 du score concerne la proximité. On cherche à réduire au maximum les proximités interne et externe. Le calcul des proximités internes et externes retourne une valeur comprise dans l'intervalle [0,1] avec 0 très positif, donc on prend l'opposé et on balance les deux proximités en fonction du PROXIMITY_BALANCING
-        part2:float = (1-Episode.PROXIMITY_BALANCING) * (1-self.getInsideProximity()) + Episode.PROXIMITY_BALANCING * (1-self.getOutsideProximity())
-        # Si WEIGHT_SUPPORT == 1 prise en compte uniquement du support, si == 0 prise en compte uniquement de la longueur du pattern du support
-        newScore = Episode.WEIGHT_SUPPORT*part1 + (1-Episode.WEIGHT_SUPPORT)*part2
-        if self.durty == False and self.score != newScore:
-            print ("Problème avec le durty !!!!")
-        else:
-            self.durty = False
+    # Calcule et met à jour le score de cet épisode
+    def computeScore(self, maxSup: int) -> None:
+        part1:float = 0
+        part2:float = 0
+        # Indépendamenet de WEIGHT_SUPPORT (même s'il est défini à 0 <=> ignorer le support) on discalifie les épisodes qui n'ont pas un support au moins égal à 2, en effet on cherche les épisodes qui se répètent au moins une fois (support >= 2)
+        if self.getSupport() >= 2:
+            part1 = self.getSupport()/maxSup
+            # la partie 2 du score concerne la proximité. On cherche à réduire au maximum les proximités interne et externe. Le calcul des proximités internes et externes retourne une valeur comprise dans l'intervalle [0,1] avec 0 très positif, donc on prend l'opposé et on balance les deux proximités en fonction du PROXIMITY_BALANCING
+            part2 = (1-NonOverlappedEpisode.PROXIMITY_BALANCING) * (1-self.getInsideProximity()) + NonOverlappedEpisode.PROXIMITY_BALANCING * (1-self.getOutsideProximity())
+            # Si WEIGHT_SUPPORT == 1 prise en compte uniquement du support, si == 0 prise en compte uniquement de la longueur du pattern du support
+        
+        self.score = NonOverlappedEpisode.WEIGHT_SUPPORT*part1 + (1-NonOverlappedEpisode.WEIGHT_SUPPORT)*part2
+
         self.part1 = part1
         self.part2 = part2
         self.inside = 1-self.getInsideProximity()
         self.outside = 1-self.getOutsideProximity()
-        self.score = newScore
-        return self.score

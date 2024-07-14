@@ -236,7 +236,7 @@ def computeTransformationMatrix(s1:list[LinearEvent], s2:list[LinearEvent]) -> l
         matrix[l][0] = matrix[l-1][0] if isHierachyOptional(s1, l-1) or isinstance(s1[l-1], LinearEnd) else matrix[l-1][0]+1 # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
     # initialisation de la première ligne
     for c in range(1, len(s2)+1):
-        matrix[0][c] = matrix[0][c-1] if isHierachyOptional(s2, c-1) or isinstance(s2[c-1], LinearEnd) else matrix[0][c-1]+1; # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
+        matrix[0][c] = matrix[0][c-1] if isHierachyOptional(s2, c-1) or isinstance(s2[c-1], LinearEnd) else matrix[0][c-1]+1 # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
 
     # calcul de la distance
     substitutionCost:int
@@ -334,11 +334,15 @@ def manageOverlapping(mergedSequence:list[LinearEvent]) -> None:
 	# 3- Noter "t" en chevauchement de manière à ce que toute nouvelle trace soit notée comme optionnelle tant que ce end n'a pas été fermé.
     elif (begin.orientation == "l" and end.orientation == "c") or (begin.orientation == "c" and end.orientation == "l"):
 		# 1- Chercher dans les ends précédents le premier "x" (ou "d") disponible correspondant à l'orientation du begin, noté "t" pour target.
-        tPos:int = endPos-1
+        tPos:int = endPos
         tEndFound = False
-        while not tEndFound and tPos >= 0:
+        while not tEndFound and tPos > 0:
+            # On cherche à partir de tPos-1 mais attention si l'évènement à tPos-1 est un begin il faut sauter jusqu'à son end pour chercher le premier end englobant ensuite
+            prevEvent:LinearEvent = mergedSequence[tPos-1]
             tPos = getEndPosOfLinearSequence(mergedSequence, tPos-1, -1) # On parcours en sens inverse car la fusion est inversée, l'indice 0 est la fin de la trace
-            if tPos >= 0 and mergedSequence[tPos].orientation == begin.orientation or mergedSequence[tPos].orientation == "d":
+            if isinstance(prevEvent, LinearBegin):
+                continue # Si l'event précédent est un Begin on ne fait rien de plus, tPos référence son End, on va donc poursuivre la recherche à partir de l'event précédant ce End
+            elif tPos >= 0 and mergedSequence[tPos].orientation == begin.orientation or mergedSequence[tPos].orientation == "d":
                 tEndFound = True
         if tPos >= 0:
             # 2- Mettre toutes les traces comprises entre "t" (s'il est trouve) et le end associé comme optionnelle (si on tombe sur une séquence on la marque comme optionnelle et on saute directement à son End pour éviter de traiter tout ses enfants).
@@ -442,9 +446,6 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
                 mergedEvent.orientation = "c"
                 mergedSequence.append(mergedEvent)
                 c -= 1
-            # Gestion de l'ajoute d'un bord
-            if mergedEvent != None and isinstance(mergedEvent, LinearBorder):
-                manageBorder(mergedSequence)
         # Ici les deux traces sont des séquences
         else:
             # Si la diagonale est le coût minimal et colonne c == ligne l privilégier la diagonale, sinon privilégier le min entre haut et gauche, si égalité et colonne c != ligne l privilégier le Begin sinon si égalité et colonne c == ligne l réduire en priorité la trace la plus longue, sinon à défaut prendre à gauche.
@@ -471,9 +472,9 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
                 mergedEvent.orientation = "c"
                 mergedSequence.append(mergedEvent)
                 c -= 1
-            # Gestion de la pile
-            if isinstance(mergedEvent, LinearBorder):
-                manageBorder(mergedSequence)
+        # Gestion de l'ajoute d'un bord
+        if mergedEvent != None and isinstance(mergedEvent, LinearBorder):
+            manageBorder(mergedSequence)
     return mergedSequence
 
 # Déterminer les options en fonction des orientations prises et des chevauchements détectés

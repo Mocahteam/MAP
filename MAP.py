@@ -17,7 +17,7 @@ class StabableRoot:
         self.stable = False
 
 def oneRootsNotStable(roots:list[StabableRoot]) -> bool:
-    for root in roots:
+    for root in reversed(roots):
         if not root.stable:
             return True
     return False
@@ -78,6 +78,8 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
 
                     # Transformation de cet épisode en une séquence linéarisée
                     bestPattern:list[LinearEvent] = bestEpisode.event.linearize()
+
+                    # par sécurité, ce cas ne devrait jamais arriver
                     if isinstance(bestEpisode.event, Call): # Si le meilleur épisode est un simple Call il faut l'encapsuler dans une séquence
                         bestPattern = [LinearBegin()]+bestPattern+[LinearEnd()]
 
@@ -86,16 +88,19 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
                     # On commence la compression depuis la fin
                     mergedBound:tuple[int, int] = bestEpisode.boundlist[-1]
                     mergedLinearSequence:list[LinearEvent] = mergeLinearSequences(root.getSubSequence(mergedBound[0], mergedBound[1]+1).linearize(), bestPattern)
+
                     mergeCount:int = 1
                     # Parcourir tous les bounds (de l'avant dernier au premier)
                     for k in range(len(bestEpisode.boundlist)-2, -1, -1):
                         currentBound:tuple[int, int] = bestEpisode.boundlist[k]
                         # vérifier si l'écart entre ce bound et le précédent est inférieur au seuil
-                        if (mergedBound[0] - currentBound[1] - 1)/rootSize < GAP_RATIO:
+                        if (mergedBound[0] - currentBound[1] - 1)/rootSize <= GAP_RATIO:
                             # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre le début du bound courrant et le début des épisodes précédement fusionnés)
                             linearSequence:list[LinearEvent] = root.getSubSequence(currentBound[0], mergedBound[0]).linearize()
+
                             # calcule la fusion entre le dernier état de fusion et cette nouvelle séquence linéarisée
                             mergedLinearSequence = mergeLinearSequences(linearSequence, mergedLinearSequence)
+
                             # on étend la plage de la fusion pour englober ce nouvel épisode
                             mergedBound = (currentBound[0], mergedBound[1])
                         else:
@@ -112,6 +117,7 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
 
                             # on réinitialise la fusion à la fusion du bound courant et du pattern fournit par TKE
                             mergedLinearSequence = mergeLinearSequences(root.getSubSequence(currentBound[0], currentBound[1]+1).linearize(), bestPattern)
+
                             # Et on repositionne le bound de fusion sur le bound courrant
                             mergedBound = currentBound
                             # on comptabilise une integration supplémentaire

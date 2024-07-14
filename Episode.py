@@ -30,6 +30,9 @@ class NonOverlappedEpisode(Episode):
     # control balancing between inside and outside proximity of episodes. Must be included between [0, 1]. 0 means take only inside proximity in consideration (no outside proximity). 1 means take only outside proximity in consideration (no inside proximity). If WEIGH_SUPPORT is set to 1, PROXIMITY_BALANCING is useless.
     PROXIMITY_BALANCING:float
 
+    # Support maximum
+    MAX_SUP:int
+
     def __init__ (self, model: Episode) -> None:
         # Initialiser la classe parente A en utilisant les valeurs de l'instance de A
         super().__init__(model.event, model.boundlist)
@@ -68,12 +71,12 @@ class NonOverlappedEpisode(Episode):
             return 1
 
     # Calcule et met à jour le score de cet épisode
-    def computeScore(self, maxSup: int) -> None:
+    def computeScore(self) -> None:
         part1:float = 0
         part2:float = 0
         # Indépendamenet de WEIGHT_SUPPORT (même s'il est défini à 0 <=> ignorer le support) on discalifie les épisodes qui n'ont pas un support au moins égal à 2, en effet on cherche les épisodes qui se répètent au moins une fois (support >= 2)
         if self.getSupport() >= 2:
-            part1 = self.getSupport()/maxSup
+            part1 = self.getSupport()/NonOverlappedEpisode.MAX_SUP
             # la partie 2 du score concerne la proximité. On cherche à réduire au maximum les proximités interne et externe. Le calcul des proximités internes et externes retourne une valeur comprise dans l'intervalle [0,1] avec 0 très positif, donc on prend l'opposé et on balance les deux proximités en fonction du PROXIMITY_BALANCING
             part2 = (1-NonOverlappedEpisode.PROXIMITY_BALANCING) * (1-self.getInsideProximity()) + NonOverlappedEpisode.PROXIMITY_BALANCING * (1-self.getOutsideProximity())
             # Si WEIGHT_SUPPORT == 1 prise en compte uniquement du support, si == 0 prise en compte uniquement de la longueur du pattern du support

@@ -1,13 +1,13 @@
 import copy
 from Episode import Episode, NonOverlappedEpisode
-from Event import Call, Event, Sequence
+from Event import Event, Sequence
 from bisect import insort
 
 # PTKE => Proximity Top-K Frequent Episodes
 class PTKE:
     K:int
-    # Window multiplier used by TKE to jump events proportionaly to episode size (will produce optional events)
-    QCSP_ALPHA:int
+    # GAP_RATIO controls the size of gaps between episodes in relation to the length of the episode. GAP_RATIO is a multiplier used by to jump events proportionaly to episode size (will produce optional events). 0 means episodes will be merge if no gap exists between them.
+    GAP_RATIO:float
 
     def __init__(self) -> None:
         self.kEpisodes:list[NonOverlappedEpisode] = []
@@ -46,7 +46,7 @@ class PTKE:
             # Désanlacer les épisodes => ici ils ne peuvent pas être enlacés mais finalement ça nous sert de cast
             noes:list[NonOverlappedEpisode] = self.unoverlapEpisode(episode)
             for noe in noes:
-                self.saveEpisode(noe)
+                self.saveEpisodeIn(noe, self.kEpisodes)
                 
         needExploration:bool = True
         while needExploration:
@@ -63,7 +63,7 @@ class PTKE:
                 # Ici les bounds des kEpisodes peuvent se chevaucher ([... <3,5> <4,6> ...] => dans cet exemple le premier bound fini à 5 alors que le suivant commence à 4). Pour la suite de l'algo on ne peut avoir de chevauchements entre les bounds. On va donc créer autant d'éposides que nécessaire pour désenlacer les bounds de chacun des kEpisodes
                 noes:list[NonOverlappedEpisode] = self.unoverlapEpisode(newE)
                 for noe in noes:
-                    self.saveEpisode(noe)
+                    self.saveEpisodeIn(noe, self.kEpisodes)
             needExploration = len(newEpisodes) > 0
         
         # Les épisodes sont maintenant désenlacés, on sélectionne les meilleurs
@@ -76,45 +76,46 @@ class PTKE:
 
         return bestNonOverlappedEpisodes
 
-    # Désenlace un épisode
+    # Désenlace un épisode et retourne les K meilleurs candidats
     def unoverlapEpisode(self, episode:Episode) -> list[NonOverlappedEpisode]:
+        nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
+        # Utilisation de l'épisode comme modèle pour initialiser la liste
+        nonOverlappedEpisodes.append(NonOverlappedEpisode(copy.deepcopy(episode)))
+        nonOverlappedEpisodes[0].boundlist = [] # On supprime la liste des bounds pour la reconstruire désenlacée
         # 1 - On désenlace la boundlist
-        scenarios:list[list[tuple[int, int]]] = []
         # on parcours tous les bounds suivants
         for bound in episode.boundlist:
             # placer ce bound dans les scenarios
             placed:bool = False
             # tenter de placer ce bound à la fin des scénarios
-            for scenario in scenarios:
-                if scenario[-1][1] < bound[0]:
-                    scenario.append(bound)
+            for noe in nonOverlappedEpisodes:
+                if len (noe.boundlist) == 0 or noe.boundlist[-1][1] < bound[0]:
+                    noe.boundlist.append(bound)
+                    noe.computeScore() # Recalculer son score pour prendre en compte ce nouveau bound ajouté
                     placed = True
             # Si le bound n'a pas pu être placé tenter de lui trouver une place au coeur d'un des scénarios
             if not placed:
-                newScenarios:list[list[tuple[int, int]]] = []
-                for scenario in scenarios:
+                newEpisodes:list[NonOverlappedEpisode] = []
+                for noe in nonOverlappedEpisodes:
                     # Remonter ce scénario jusqu'à trouver un emplacement valide
-                    i:int = len(scenario)-1
-                    while i >= 0 and scenario[i][1] >= bound[0]:
+                    i:int = len(noe.boundlist)-1
+                    while i >= 0 and noe.boundlist[i][1] >= bound[0]:
                         i -= 1
-                    # Si on a trouvé une place au coeur du scénario, on dupplique son début et on l'ajoute à la suite
+                    # Si on a trouvé une place au coeur du scénario, on duplique son début et on l'ajoute à la suite
                     if i >= 0:
-                        copiedScenario:list[tuple[int, int]] = scenario[0:i+1]
-                        copiedScenario.append(bound)
-                        newScenarios.append(copiedScenario)
+                        newNoe:NonOverlappedEpisode = NonOverlappedEpisode(copy.deepcopy(episode))
+                        newNoe.boundlist = noe.boundlist[0:i+1]
+                        newNoe.boundlist.append(bound)
+                        newEpisodes.append(newNoe)
                         placed = True
-                # on ajoute tout ces nouveaux scéanrios dans la liste des scénarios
-                scenarios = scenarios + newScenarios
+                # on ajoute tout ces nouveaux scénarios dans la liste des épisodes désenlacés
+                for newNoe in newEpisodes:
+                    self.saveEpisodeIn(newNoe, nonOverlappedEpisodes)
             # Si le bound n'a pas été placé dans un scénario existant, on crée un nouveau scénario commençant par ce bound
             if not placed:
-                scenarios.append([bound])
-        # 2 - Créer autant d'épisode désenlacé que de scénarios construits
-        nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
-        for scenario in scenarios:
-            newEpisode:Episode = copy.deepcopy(episode)
-            # redéfinition de la bound list avec la nouvelle calculée
-            newEpisode.boundlist = scenario
-            nonOverlappedEpisodes.append(NonOverlappedEpisode(newEpisode))
+                newNoe:NonOverlappedEpisode = NonOverlappedEpisode(copy.deepcopy(episode))
+                newNoe.boundlist = [bound]
+                self.saveEpisodeIn(newNoe, nonOverlappedEpisodes)
 
         return nonOverlappedEpisodes
 
@@ -129,12 +130,14 @@ class PTKE:
 	# Enregistre un épisode dans l'ensemble de top-k pattern.
 	# 
 	# :param episode: the episode to be saved
-    def saveEpisode(self, episode: NonOverlappedEpisode) -> None:
+    def saveEpisodeIn(self, episode: NonOverlappedEpisode, list:list[NonOverlappedEpisode]) -> None:
         # mise à jour du score de l'épisode à sauvegarder
         episode.computeScore()
         # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score
-        insort(self.kEpisodes, episode)
-        self.kEpisodes = self.kEpisodes[-PTKE.K:] # ne conserver que les K meilleurs
+        if len(list) < PTKE.K or episode.score > list[0].score:
+            insort(list, episode)
+        if len(list) > PTKE.K:
+            list.pop(0) # ne conserver que les K meilleurs
 
     # Etend un episode donné avec un event
     #
@@ -144,8 +147,8 @@ class PTKE:
     # 
     # :return: l'episode étendu
     def extendEpisodeWithEvent(self, episode:Episode, event:Event, eventPositions:list[int]) -> Episode:
-        # Calcul de la fenêtre maximale autorisée => QCSP_ALPHA * la longueur cumulée du kième épisodes + 1 (le nouvel evènement) => pour accepter d'éventuelles traces intercalées
-        max_window_size = (episode.event.getLength()+1)*PTKE.QCSP_ALPHA
+        # Calcul de la fenêtre maximale autorisée => la longueur cumulée du kième épisodes + 1 (le nouvel evènement) * (1 + GAP_RATIO)=> pour accepter d'éventuelles traces intercalées
+        max_window_size = (episode.event.getLength()+1)*(1+PTKE.GAP_RATIO)
         # Calcul des bounds contenant la fusion des bounds de l'épisode avec les positions d'un évènement
         newBoundlist:list[tuple[int, int]] = []
         i:int = 0
@@ -177,15 +180,10 @@ class PTKE:
 	    # clonage du contenu de l'épisode
         newEpisode:Episode = copy.deepcopy(episode)
         # ajout le l'évènement ajouté
-        if isinstance(newEpisode.event, Call): # par sécurité, ce cas ne devrait jamais arriver
-            # transformation du Call en une séquence le contenant
-            seq:Sequence = Sequence()
-            seq.event_list.append(newEpisode.event)
-            # ajout de l'évènement intégré aux bounds
-            seq.event_list.append(event)
-            newEpisode.event = seq
-        elif isinstance(newEpisode.event, Sequence):
+        if isinstance(newEpisode.event, Sequence):
             newEpisode.event.event_list.append(event)
+        else:
+            raise TypeError
         # redéfinition de la bound list avec la nouvelle calculée
         newEpisode.boundlist = newBoundlist
 

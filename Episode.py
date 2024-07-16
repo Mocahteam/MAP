@@ -64,9 +64,11 @@ class NonOverlappedEpisode(Episode):
     def getInsideProximity(self) -> float:
         if self.event.getLength() > 0 and self.getSupport() > 0:
             nbAdditionalEventInsideBounds:int = 0
+            boundsSum:int = 0
             for bound in self.boundlist:
                 nbAdditionalEventInsideBounds += bound[1] - bound[0] + 1 - self.event.getLength() # comptabiliser le nombre d'évènement intercalés à l'intérieur du bound
-            return nbAdditionalEventInsideBounds/(self.event.getLength()*self.getSupport()) # calcul de la proportion de proximité interne
+                boundsSum += bound[1] - bound[0] + 1
+            return nbAdditionalEventInsideBounds/boundsSum # calcul de la proportion de proximité interne
         else:
             return 1
 

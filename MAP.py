@@ -1,21 +1,49 @@
 import copy
 import time
 from Episode import NonOverlappedEpisode
-from Event import Call, Event, LinearEnd, Sequence, LinearEvent, LinearBegin, mergeLinearSequences
+from Event import Event, Sequence, LinearEvent, mergeLinearSequences
 from PTKE import PTKE
 
 
 # init constant values
 PTKE.K = 10
-PTKE.QCSP_ALPHA = 2
-TIME_LIMIT:int = 300
-GAP_RATIO:float = 0.5
+TIME_LIMIT:int = 5
 
 class StabableRoot:
     def __init__(self, root:Sequence) -> None:
         self.root = root
         self.stable = False
 
+
+class CompressionSet:
+	def __init__(self, ) -> None:
+		self.set:set[str] = set()
+		
+    # On considère que des CompressionSet sont égaux s'ils contiennent au moins une compression identique
+	def __eq__(self, other:object) -> bool:
+		return not self.__ne__(other)
+	
+	def __ne__(self, other:object) -> bool:
+		if not isinstance(other, CompressionSet):
+			return NotImplemented
+		return self.set.isdisjoint(other.set)
+	
+	def __hash__(self) -> int:
+		return hash(frozenset(self.set))
+	
+	def __repr__(self) -> str:
+		return f'CompressionSet({self.set})'
+	
+	# \brief Vérifie si au moins une des "compressions" est égale à la solution "solution". Retourne -1 si la compression n'est pas définie (OverTime par exemple). Retourne 1 si au moins une des compressions est égale à la solution ou 2 sinon
+	#
+	# @solution : représente la solution de référence sous la forme d'une liste
+	def getCode(self, solution:str) -> int:
+		if "OverTime" in self.set:
+			return -1
+		if solution in self.set:
+			return 1
+		return 2
+     
 def oneRootsNotStable(roots:list[StabableRoot]) -> bool:
     for root in reversed(roots):
         if not root.stable:
@@ -23,10 +51,12 @@ def oneRootsNotStable(roots:list[StabableRoot]) -> bool:
     return False
 
 # MAP => Mining Algorithm Patterns
-def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
-    GAP_RATIO = gr
+def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet:
+    PTKE.GAP_RATIO = gr
     NonOverlappedEpisode.WEIGHT_SUPPORT = ws
     NonOverlappedEpisode.PROXIMITY_BALANCING = pb
+
+    compressions:CompressionSet = CompressionSet()
 
     start_time:float = time.time()
 
@@ -44,8 +74,9 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
             # si ce root n'est pas stabilisé
             if not stabableRoot.stable:
                 # Couper si ça prend trop de temps
-                if time.time()-start_time > 20:
-                    return ["OverTime"]
+                if time.time()-start_time > TIME_LIMIT:
+                    compressions.set = {"OverTime"}
+                    return compressions
 
                 ptke:PTKE = PTKE()
                 bestEpisodes:list[NonOverlappedEpisode] = ptke.getBestEpisodes(stabableRoot.root.event_list)
@@ -72,16 +103,10 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
                         continue
 
                     # Si on a un support suffisant on tente l'intégration
-
                     root:Sequence = currentStabableRoot.root
-                    rootSize:int = len(root.linearize())
 
                     # Transformation de cet épisode en une séquence linéarisée
                     bestPattern:list[LinearEvent] = bestEpisode.event.linearize()
-
-                    # par sécurité, ce cas ne devrait jamais arriver
-                    if isinstance(bestEpisode.event, Call): # Si le meilleur épisode est un simple Call il faut l'encapsuler dans une séquence
-                        bestPattern = [LinearBegin()]+bestPattern+[LinearEnd()]
 
                     #print (str(bestEpisode)+f" => {bestEpisode.score:.2f} (part1:{bestEpisode.part1:.2f}; part2:{bestEpisode.part2:.2f}) (inside:{bestEpisode.inside:.2f}; outside:{bestEpisode.outside:.2f})")
 
@@ -93,8 +118,8 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
                     # Parcourir tous les bounds (de l'avant dernier au premier)
                     for k in range(len(bestEpisode.boundlist)-2, -1, -1):
                         currentBound:tuple[int, int] = bestEpisode.boundlist[k]
-                        # vérifier si l'écart entre ce bound et le précédent est inférieur au seuil
-                        if (mergedBound[0] - currentBound[1] - 1)/rootSize <= GAP_RATIO:
+                        # vérifier si l'écart entre le début de ce bound et le début du précédent est inférieur au seuil
+                        if mergedBound[0] - currentBound[0] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
                             # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre le début du bound courrant et le début des épisodes précédement fusionnés)
                             linearSequence:list[LinearEvent] = root.getSubSequence(currentBound[0], mergedBound[0]).linearize()
 
@@ -144,7 +169,6 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> list[str]:
     #print("Meilleure compression trouvée :")
     #print(str(root))
     #print("Fin")
-    compressions:list[str] = []
     for stabableRoot in stabableRoots:
-        compressions.append(str(stabableRoot.root))
+        compressions.set.add(str(stabableRoot.root))
     return compressions

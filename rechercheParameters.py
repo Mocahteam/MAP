@@ -74,9 +74,9 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 	gr:Decimal = point.gr
 	ws:Decimal = point.ws
 	pb:Decimal = point.pb
-	#gr = Decimal(0.10).quantize(Decimal('1.00'))
-	#ws = Decimal(0.50).quantize(Decimal('1.00'))
-	#pb = Decimal(0.50).quantize(Decimal('1.00'))
+	#gr = Decimal(0.80).quantize(Decimal('1.00'))
+	#ws = Decimal(0.10).quantize(Decimal('1.00'))
+	#pb = Decimal(0.20).quantize(Decimal('1.00'))
 	# dans le cas les paramètres ne sont plus légitimes
 	if(gr<g_gr_bounds[0] or ws<g_ws_bounds[0] or pb<g_pb_bounds[0] or gr>g_gr_bounds[1] or ws>g_ws_bounds[1] or pb>g_pb_bounds[1]):
 		raise IndexError
@@ -96,7 +96,12 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 			eventList.append(Call(char))
 		compressions:CompressionSet = MAP(eventList, float(gr), float(ws), float(pb))
 
+		#print()
+		#for c in compressions.set:
+		#	print(c)
+
 		g_tab_parametersToBestResultPos[i][j][k]=compressions.getCode(solution)
+		#print(solution+" "+str(g_tab_parametersToBestResultPos[i][j][k]))
 
 		# si on a trouvé la solution ne stocker que la solution sinon stocker toutes les compressions explorées
 		key:str = str(gr)+str(ws)+str(pb)
@@ -688,7 +693,8 @@ if __name__ == "__main__":
 		run(dichotomique=True, files=test_file)
 	else:
 		print("Lancement des tests...\n")
-		test_file = ["1_rienAFaire.log", "2_simpleBoucle.log", "3_simpleBoucleAvecDebut.log", "4_simpleBoucleAvecFin.log", "5_simpleBoucleAvecDebutEtFin.log", "6.01_simpleBoucleAvecIf.log", "6.02_simpleBoucleAvecIf.log", "6.03_simpleBoucleAvecIf.log", "6.04_simpleBoucleAvecIf.log", "6.05_simpleBoucleAvecIf.log", "6.06_simpleBoucleAvecIf.log", "6.07_simpleBoucleAvecIf.log", "6.08_simpleBoucleAvecIf.log", "6.09_simpleBoucleAvecIf.log", "6.10_simpleBoucleAvecIf.log", "6.11_simpleBoucleAvecIf.log", "6.12_simpleBoucleAvecIf.log", "6.13_simpleBoucleAvecIf.log", "6.14_simpleBoucleAvecIf.log", "7.01_bouclesEnSequence.log", "7.02_bouclesEnSequence.log", "8_bouclesEnSequenceAvecIf.log", "9.01_bouclesImbriquees.log", "9.02_bouclesImbriquees.log", "9.03_bouclesImbriquees.log"]
-		#test_file = ["m1.log", "m2.log", "m3.log", "m4.log", "m5.log", "m6.log", "m7.log", "m8.log", "m9.log", "m11.log","m81.log", "m82.log"]
-		#test_file = ["9.01_bouclesImbriquees.log"]
+		#test_file = ["1_rienAFaire.log", "2_simpleBoucle.log", "3_simpleBoucleAvecDebut.log", "4_simpleBoucleAvecFin.log", "5_simpleBoucleAvecDebutEtFin.log", "6.01_simpleBoucleAvecIf.log", "6.02_simpleBoucleAvecIf.log", "6.03_simpleBoucleAvecIf.log", "6.04_simpleBoucleAvecIf.log", "6.05_simpleBoucleAvecIf.log", "6.06_simpleBoucleAvecIf.log", "6.07_simpleBoucleAvecIf.log", "6.08_simpleBoucleAvecIf.log", "6.09_simpleBoucleAvecIf.log", "6.10_simpleBoucleAvecIf.log", "6.11_simpleBoucleAvecIf.log", "6.12_simpleBoucleAvecIf.log", "6.13_simpleBoucleAvecIf.log", "6.14_simpleBoucleAvecIf.log", "6.15_simpleBoucleAvecIf.log", "7.01_bouclesEnSequence.log", "7.02_bouclesEnSequence.log", "8_bouclesEnSequenceAvecIf.log", "9.01_bouclesImbriquees.log", "9.02_bouclesImbriquees.log", "9.03_bouclesImbriquees.log"]
+		#test_file = ["m1.log", "m2.log", "m3.log", "m4.log", "m5.log", "m6.log", "m7.log", "m81.log", "m82.log", "m11.log"]
+		#test_file = ["m8.log"]
+		test_file = ["6.15_simpleBoucleAvecIf.log"]
 		run(dichotomique=True, files=test_file)

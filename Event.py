@@ -14,6 +14,10 @@ class Event:
     @abstractmethod
     def linearize(self) -> list[LinearEvent]:
         pass
+    
+    @abstractmethod
+    def countCalls(self) -> int:
+        pass
 
 class Call(Event):
     def __init__(self, call:str) -> None:
@@ -37,6 +41,9 @@ class Call(Event):
     
     def linearize(self) -> list[LinearEvent]:
         return [LinearCall(self)]
+    
+    def countCalls(self) -> int:
+        return 1
 
 class Sequence(Event):
     def __init__(self) -> None:
@@ -63,6 +70,12 @@ class Sequence(Event):
 
     def getLength(self) -> int:
         return len(self.event_list)
+    
+    def countCalls(self) -> int:
+        counter:int = 0
+        for e in self.event_list:
+            counter += e.countCalls()
+        return counter
     
     # Getter pour récupérer une sous partie de la séquence comprise entre l'indice "start" (inclus) et l'indice "end" (exclus).
 	# Return la sous partie clonée de la séquence.

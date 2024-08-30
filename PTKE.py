@@ -131,13 +131,14 @@ class PTKE:
 	# 
 	# :param episode: the episode to be saved
     def saveEpisodeIn(self, episode: NonOverlappedEpisode, list:list[NonOverlappedEpisode]) -> None:
-        # mise à jour du score de l'épisode à sauvegarder
-        episode.computeScore()
-        # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score
-        if len(list) < PTKE.K or episode.score > list[0].score:
-            insort(list, episode)
-        if len(list) > PTKE.K:
-            list.pop(0) # ne conserver que les K meilleurs
+        if episode not in list:
+            # mise à jour du score de l'épisode à sauvegarder
+            episode.computeScore()
+            # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score
+            if len(list) < PTKE.K or episode.score > list[0].score:
+                insort(list, episode)
+            if len(list) > PTKE.K:
+                list.pop(0) # ne conserver que les K meilleurs
 
     # Etend un episode donné avec un event
     #

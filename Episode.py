@@ -16,6 +16,12 @@ class Episode:
     
     def __str__(self) -> str:
         return str(self.event)+": "+str(self.boundlist)
+        
+    def __eq__ (self, other:object) -> bool:
+        return isinstance(other, Episode) and self.event == other.event and self.boundlist == other.boundlist
+        
+    def __hash__ (self) -> int:
+        return self.event.__hash__()+hash(tuple(self.boundlist))
 
     # Retourne le support de cet épisode
     def getSupport(self) -> int:
@@ -47,6 +53,7 @@ class NonOverlappedEpisode(Episode):
                 return False
         else:
             return self < other
+
 
     # calcul de la proximité externe de cet épisode comprise entre [0, 1] : proportion d'évènements intercallés entre chaque bounds
     def getOutsideProximity(self) -> float:

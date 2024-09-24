@@ -40,7 +40,7 @@ class Cube:
 	def __eq__(self, other:object) -> bool:
 		return isinstance(other, Cube) and abs(self.gr_from-other.gr_from) < 0.001 and abs(self.gr_to-other.gr_to) < 0.001 and abs(self.ws_from-other.ws_from) < 0.001 and abs(self.ws_to-other.ws_to) < 0.001 and abs(self.pb_from-other.pb_from) < 0.001 and abs(self.pb_to-other.pb_to) < 0.001
 
-global g_exploredMap, g_nbSteps, gr_bounds, ws_bounds, pb_bounds, g_tab_parametersToBestResultPos, g_tab_filledMap
+global g_exploredMap, g_nbSteps, gr_bounds, ws_bounds, pb_bounds, g_tab_parametersToBestResultPos
 
 g_nbPoints:int = 11
 g_gr_bounds:tuple[Decimal, Decimal] = (Decimal(0).quantize(Decimal('1.00')), Decimal(8).quantize(Decimal('1.00')))
@@ -55,9 +55,6 @@ g_exploredMap:dict[str, CompressionSet] = {}
 
 # Matrice cubique stockant pour chaque point dans l'espace 3D si le point est une solution ou pas, les valeurs de la matrice peuvent être -1 (Overime), 1 (Egal à solution) ou 2 (Différentd de la solution). Cette matrice peut contenir des trous à savoir des zones non explorées
 g_tab_parametersToBestResultPos:np.ndarray[Any, np.dtype[np.float64]]
-
-# Matrice cubique stockant pour chaque point dans l'espace 3D si le point est une solution ou pas, les valeurs de la matrice peuvent être -1 (Overime), 1 (Egal à solution) ou 2 (Différentd de la solution). Contrairement à g_tab_parametersToBestResultPos les espaces entre les points calculés sont ici comblés
-g_tab_filledMap:np.ndarray[Any, np.dtype[np.float64]]
 
 # \brief arroundi un nombre à un multiple d'un epsilone
 def round_to_multiple(number:Decimal, episilon:Decimal) -> Decimal:
@@ -74,9 +71,9 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 	gr:Decimal = point.gr
 	ws:Decimal = point.ws
 	pb:Decimal = point.pb
-	#gr = Decimal(0.80).quantize(Decimal('1.00'))
-	#ws = Decimal(0.10).quantize(Decimal('1.00'))
-	#pb = Decimal(0.20).quantize(Decimal('1.00'))
+	#gr = Decimal(4.00).quantize(Decimal('1.00'))
+	#ws = Decimal(0.60).quantize(Decimal('1.00'))
+	#pb = Decimal(1.00).quantize(Decimal('1.00'))
 	# dans le cas les paramètres ne sont plus légitimes
 	if(gr<g_gr_bounds[0] or ws<g_ws_bounds[0] or pb<g_pb_bounds[0] or gr>g_gr_bounds[1] or ws>g_ws_bounds[1] or pb>g_pb_bounds[1]):
 		raise IndexError
@@ -88,7 +85,7 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 		i:int = round(gr/g_gr_step)
 		j:int = round(ws/g_ws_step)
 		k:int = round(pb/g_pb_step)
-		print("Call MAP with parameters\tgr: "+str(gr)+"   \tws: "+str(ws)+"   \tpb: "+str(pb), end='\r')
+		print("("+str(len(g_exploredMap))+") Call MAP with parameters\tgr: "+str(gr)+"   \tws: "+str(ws)+"   \tpb: "+str(pb), end='\r')
 		# Fait tourner l'algo de compression sur la trace
 		# Transformation du string en une liste d'évènement
 		eventList:list[Event] = []
@@ -117,10 +114,9 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 # @trace : la trace à compresser sous la forme d'une chaine de caractère
 # @solution : représente la solution de référence sous la forme d'une chaine de caractère.
 def search_gr_ws_by_rect(trace:str, solution:str) -> None:
-	global  g_exploredMap, g_tab_parametersToBestResultPos, g_tab_filledMap
+	global g_exploredMap, g_tab_parametersToBestResultPos
 	g_exploredMap = {}
 	g_tab_parametersToBestResultPos = np.zeros((g_nbPoints, g_nbPoints, g_nbPoints))
-	g_tab_filledMap = np.zeros((g_nbPoints, g_nbPoints, g_nbPoints))
 
 	gr_middle:Decimal = (g_gr_bounds[1]-g_gr_bounds[0])/2
 	ws_middle:Decimal = (g_ws_bounds[1]-g_ws_bounds[0])/2
@@ -172,17 +168,6 @@ def search_gr_ws_by_rect(trace:str, solution:str) -> None:
 		pb_halfGap = round_to_multiple(abs(p5.pb-p1.pb)/2, g_pb_step)
 		# si toutes les solution sont égales, il suffit de passer au cube suivant dans la queue
 		if (sol1 == sol2 and sol1 == sol3 and sol1 == sol4 and sol1 == sol5 and sol1 == sol6 and sol1 == sol7 and sol1 == sol8):
-			code = sol1.getCode(solution)
-			i_gr = r.gr_from
-			while (i_gr <= r.gr_to):
-				i_ws = r.ws_from
-				while (i_ws <= r.ws_to):
-					i_pb = r.pb_from
-					while (i_pb <= r.pb_to):
-						g_tab_filledMap[round(i_gr/g_gr_step)][round(i_ws/g_ws_step)][round(i_pb/g_pb_step)] = code
-						i_pb += g_pb_step
-					i_ws += g_ws_step
-				i_gr += g_gr_step
 			continue
 		#print (str(p1), str(p2), str(p3), str(p4), str(p5), str(p6), str(p7), str(p8))
 		# si la face devant est homogène mais différente d'un point en arrière
@@ -607,9 +592,10 @@ def search_gr_ws_by_rect(trace:str, solution:str) -> None:
 #
 # @trace : la trace à compresser sous la forme d'une chaine de caractère
 # @solution : représente la solution de référence sous la forme d'une chaine de caractère.
-def search_aveugle(trace:str, solution:str):
-	global  g_tab_parametersToBestResultPos
-
+def search_exhaustive(trace:str, solution:str):
+	global  g_exploredMap, g_tab_parametersToBestResultPos
+	
+	g_exploredMap = {}
 	g_tab_parametersToBestResultPos = np.zeros((g_nbPoints, g_nbPoints, g_nbPoints))
 
 	# boucle pour calculer les gr
@@ -620,7 +606,7 @@ def search_aveugle(trace:str, solution:str):
 			ws = j*g_ws_step
 			for k in range(g_nbPoints):
 				pb = k*g_pb_step
-				print("Call parser with parameters\tgr: "+str(gr)+"   \tws: "+str(ws)+"   \tpb: "+str(pb))
+				print("("+str(len(g_exploredMap))+") Call MAP with parameters\tgr: "+str(gr)+"   \tws: "+str(ws)+"   \tpb: "+str(pb), end='\r')
 				# Fait tourner l'algo de compression sur la trace
 				# Transformation du string en une liste d'évènement
 				eventList:list[Event] = []
@@ -629,16 +615,18 @@ def search_aveugle(trace:str, solution:str):
 				compressions:CompressionSet = MAP(eventList, float(gr), float(ws), float(pb))
 
 				g_tab_parametersToBestResultPos[i][j][k] = compressions.getCode(solution)
+				
+				g_exploredMap[str(i)+str(j)+str(k)] = compressions
 	
 
 
 # \brief Exécuter la recherche de paramètres avec la façon qu'on souhaite
 #
-# @dichotomique : utilisation l'algorithme de dichotomique avec des rectangles pour réduire le nombre de test
+# @dichotomous : utilisation l'algorithme de dichotomique avec des rectangles pour réduire le nombre de test
 # @files : liste des fichiers à analyser
-def run(dichotomique:bool, files:list[str]):
+def run(dichotomous:bool, files:list[str]):
 	# Façon dichotomique
-	if (dichotomique):
+	if (dichotomous):
 		for fileName in files:
 			# Chargement du contenu du fichier
 			trace:str = ""
@@ -652,13 +640,11 @@ def run(dichotomique:bool, files:list[str]):
 			# Analyse
 			search_gr_ws_by_rect(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
-			np.save("./files_npy/"+fileName.replace(".log", ".npy"),g_tab_parametersToBestResultPos)
-			# Idem que la précédente sauf que les trous de l'approche dicotomique sont remplis
-			np.save("./files_npy/filled_"+fileName.replace(".log", ".npy"), g_tab_filledMap)
+			np.save("./files_npy/dichotomous_"+fileName.replace(".log", ".npy"),g_tab_parametersToBestResultPos)
 			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
 			#print(str(g_exploredMap))
 			#print("************************************************************\n\n")
-	# Façon aveugle
+	# Façon exhaustive
 	else:
 		for fileName in files:
 			# Chargement du contenu du fichier
@@ -670,10 +656,12 @@ def run(dichotomique:bool, files:list[str]):
 			solution:str = ""
 			with open("./example/solutions/"+fileName, 'r') as file:
 				solution = file.readline()
-			search_aveugle(trace, solution)
+			search_exhaustive(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
-			np.save("./files_npy/"+fileName.replace(".log", ".npy"),g_tab_parametersToBestResultPos)
-			print("************************************************************\n\n")
+			np.save("./files_npy/exhaustive_"+fileName.replace(".log", ".npy"), g_tab_parametersToBestResultPos)
+			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
+			#print(str(g_exploredMap))
+			#print("************************************************************\n\n")
 
 if __name__ == "__main__":
 	test_file:list[str] = []
@@ -682,19 +670,18 @@ if __name__ == "__main__":
 		os.makedirs("./files_npy/")
 	if(len(argv)>2):
 		test_file.append(argv[1])
-		if(sys.argv[2]=="aveugle"):
-			run(dichotomique=False, files=test_file)
-		elif(sys.argv[2]=="dichotomique"):
-			run(dichotomique=True, files=test_file)
+		if(sys.argv[2]=="exhaustive"):
+			run(dichotomous=False, files=test_file)
+		elif(sys.argv[2]=="dichotomous"):
+			run(dichotomous=True, files=test_file)
 		else:
-			print("Utilisation dans terminal : python rechercheParameters.py fileName aveugle/dichotimique\n")
+			print("Utilisation dans terminal : python rechercheParameters.py fileName exhaustive/dichotomous\n")
 	elif(len(sys.argv)==2):
 		test_file.append(argv[1])
-		run(dichotomique=True, files=test_file)
+		run(dichotomous=True, files=test_file)
 	else:
 		print("Lancement des tests...\n")
 		#test_file = ["1_rienAFaire.log", "2_simpleBoucle.log", "3_simpleBoucleAvecDebut.log", "4_simpleBoucleAvecFin.log", "5_simpleBoucleAvecDebutEtFin.log", "6.01_simpleBoucleAvecIf.log", "6.02_simpleBoucleAvecIf.log", "6.03_simpleBoucleAvecIf.log", "6.04_simpleBoucleAvecIf.log", "6.05_simpleBoucleAvecIf.log", "6.06_simpleBoucleAvecIf.log", "6.07_simpleBoucleAvecIf.log", "6.08_simpleBoucleAvecIf.log", "6.09_simpleBoucleAvecIf.log", "6.10_simpleBoucleAvecIf.log", "6.11_simpleBoucleAvecIf.log", "6.12_simpleBoucleAvecIf.log", "6.13_simpleBoucleAvecIf.log", "6.14_simpleBoucleAvecIf.log", "6.15_simpleBoucleAvecIf.log", "7.01_bouclesEnSequence.log", "7.02_bouclesEnSequence.log", "8_bouclesEnSequenceAvecIf.log", "9.01_bouclesImbriquees.log", "9.02_bouclesImbriquees.log", "9.03_bouclesImbriquees.log"]
-		#test_file = ["m1.log", "m2.log", "m3.log", "m4.log", "m5.log", "m6.log", "m7.log", "m81.log", "m82.log", "m11.log"]
-		#test_file = ["m8.log"]
-		test_file = ["6.15_simpleBoucleAvecIf.log"]
-		run(dichotomique=True, files=test_file)
+		#test_file = ["m1.log", "m2.log", "m3.log", "m4.log", "m5.log", "m6.log", "m7.log", "m81.log", "m82.log", "m11.log"]#, "m9.log"]
+		test_file = ["m9.log"]
+		run(dichotomous=True, files=test_file)

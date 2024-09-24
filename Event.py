@@ -28,7 +28,7 @@ class Call(Event):
         return self.call + ('*' if self.opt else '')
     
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, Call) and self.call == other.call
+        return isinstance(other, Call) and self.call == other.call and self.opt == other.opt
     
     def __ne__(self, other: object) -> bool:
         return not self.__eq__(other)
@@ -60,13 +60,13 @@ class Sequence(Event):
         return export
     
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, Sequence) and self.event_list == other.event_list
+        return isinstance(other, Sequence) and self.opt == other.opt and self.event_list == other.event_list
     
     def __ne__(self, other: object) -> bool:
         return not self.__eq__(other)
     
     def __hash__(self) -> int:
-        return hash(str(self))
+        return hash(tuple(self.event_list))
 
     def getLength(self) -> int:
         return len(self.event_list)

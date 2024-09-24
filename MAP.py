@@ -21,9 +21,11 @@ class CompressionSet:
 	def __init__(self, ) -> None:
 		self.set:set[str] = set()
 		
-    # On considère que des CompressionSet sont égaux s'ils contiennent au moins une compression identique
+    # On considère que des CompressionSet sont égaux s'ils contiennent au moins une compression identique ou que les deux sont vides
 	def __eq__(self, other:object) -> bool:
-		return not self.__ne__(other)
+		if not isinstance(other, CompressionSet):
+			return NotImplemented
+		return (not self.__ne__(other)) or (len(self.set) == 0 and len(other.set) == 0)
 	
 	def __ne__(self, other:object) -> bool:
 		if not isinstance(other, CompressionSet):
@@ -152,6 +154,6 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
     #print("Meilleure compression trouvée :")
     #print(str(root))
     #print("Fin")
-    for modelRoot in roots:
+    for modelRoot in roots[1:]: # On saute le premier root (le root original)
         compressions.set.add(str(modelRoot.content))
     return compressions

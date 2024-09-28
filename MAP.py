@@ -48,6 +48,14 @@ class CompressionSet:
 			return -1
 		return 2
 
+def mergeUsingPatternOrNot (mergeCount:int, root:Root, mergedBound:tuple[int, int], newRoot:Root, mergedLinearSequence:list[LinearEvent]) -> None:
+    # injection de la dernière fusion dans le root
+    if mergeCount == 1 and not isinstance(root.content.event_list[mergedBound[0]], Sequence):
+        # S'il n'y a eu qu'une seule fusion et qu'elle ne portait pas sur une Sequence on réinjecte les évènements directement sans les encapsuler dans une séquence de pattern donc on retire le Begin et le End du pattern
+        newRoot.content.appendLinearSequence(mergedLinearSequence[1:-1])
+    else:
+        newRoot.content.appendLinearSequence(mergedLinearSequence)
+
 # MAP => Mining Algorithm Patterns
 def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet:
     PTKE.GAP_RATIO = gr
@@ -74,7 +82,7 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
             compressions.set.add("OverTime")
             #for r in roots:
             #      print (r.content)
-            return compressions
+            break
 
         ptke:PTKE = PTKE()
         bestEpisodes:list[NonOverlappedEpisode] = ptke.getBestEpisodes(root.content.event_list)
@@ -105,41 +113,41 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
                     currentBound:tuple[int, int] = bestEpisode.boundlist[k]
                     # vérifier si l'écart entre la fin du précédent et la fin de ce bound est inférieur au seuil
                     if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
+                        # linearisation du bound courrant
+                        linearSequenceCurrentBound:list[LinearEvent] = root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize()
+
                         # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre la fin des épisodes précédement fusionnés et le debut du bound courrant)
                         if mergedBound[1]+1 < currentBound[0]:
-                            # On crée une séquence temproraire
+                            # On crée une séquence temporaire
                             subSequence:Sequence = Sequence()
                             # On clone le contenu intercallé
                             subSequence.event_list = copy.deepcopy(root.content.event_list[mergedBound[1]+1:currentBound[0]])
                             # On linéarise cette séquence et on fait sauter le Begin et le End
                             linearSequenceInsertedEvents:list[LinearEvent] = subSequence.linearize()[1:-1]
-                            # On insère cette partie à l'avant dernière position de la fusion précédente
-                            mergedLinearSequence[-1:-1] = linearSequenceInsertedEvents
-
-                        # linearisation du bound courrant
-                        linearSequenceCurrentBound:list[LinearEvent] = root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize()
-
+                            # On insère cette partie à l'avant dernière position du bound courant
+                            linearSequenceCurrentBound[-1:-1] = linearSequenceInsertedEvents
 
                         # calcule la fusion entre le dernier état de fusion et cette nouvelle séquence linéarisée
                         mergedLinearSequence = mergeLinearSequences(linearSequenceCurrentBound, mergedLinearSequence)
 
                         # on étend la plage de la fusion pour englober ce nouvel épisode
                         mergedBound = (mergedBound[0], currentBound[1])
+                        mergeCount += 1
                     else:
                         # l'écart entre la fusion précédente et le bound courant est trop importante donc on injecte la fusion précédente dans le root
-                        newRoot.content.appendLinearSequence(mergedLinearSequence)
+                        mergeUsingPatternOrNot(mergeCount, root, mergedBound, newRoot, mergedLinearSequence)
                         # on termine en ajoutant les évènements intercalés avec le début du bound courant
                         newRoot.content.event_list += root.content.event_list[mergedBound[1]+1:currentBound[0]]
 
                         # on réinitialise la fusion à la fusion du bound courant et du pattern fournit par TKE
                         mergedLinearSequence = mergeLinearSequences(root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize(), bestPattern)
+                        mergeCount = 1
 
                         # Et on repositionne le bound de fusion sur le bound courrant
                         mergedBound = currentBound
-                        # on comptabilise une integration supplémentaire
-                        mergeCount += 1
-                # injection de la dernière fusion dans le root
-                newRoot.content.appendLinearSequence(mergedLinearSequence)
+                                
+                mergeUsingPatternOrNot(mergeCount, root, mergedBound, newRoot, mergedLinearSequence)
+                
                 # on termine en ajoutant la fin inchangée
                 newRoot.content.event_list += root.content.event_list[bestEpisode.boundlist[-1][1]+1:]
 

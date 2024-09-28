@@ -60,7 +60,7 @@ class Sequence(Event):
         return export
     
     def __eq__(self, other: object) -> bool:
-        return isinstance(other, Sequence) and self.opt == other.opt and self.event_list == other.event_list
+        return isinstance(other, Sequence) and self.opt == other.opt and len(self.event_list) == len(other.event_list) and self.event_list == other.event_list
     
     def __ne__(self, other: object) -> bool:
         return not self.__eq__(other)

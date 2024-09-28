@@ -1,5 +1,6 @@
 import copy
-from Episode import BoundList, Episode, NonOverlappedEpisode
+#import time
+from Episode import BoundGraph, BoundList, Episode, NonOverlappedEpisode, Scorable
 from Event import Event, Sequence
 from bisect import insort
 
@@ -48,7 +49,7 @@ class PTKE:
         
         # initialisation des k premiers épisodes 
         for event, noe in mapEventToNOE.items():
-            self.saveEpisodeIn(noe, self.kEpisodes)
+            self.saveInTopK(noe, self.kEpisodes) # type: ignore
                 
         needExploration:bool = True
         while needExploration:
@@ -65,58 +66,68 @@ class PTKE:
                 # Ici les bounds des kEpisodes peuvent se chevaucher ([... <3,5> <4,6> ...] => dans cet exemple le premier bound fini à 5 alors que le suivant commence à 4). Pour la suite de l'algo on ne peut avoir de chevauchements entre les bounds. On va donc créer autant d'éposides que nécessaire pour désenlacer les bounds de chacun des kEpisodes
                 noes:list[NonOverlappedEpisode] = self.unoverlapEpisode(newE)
                 for noe in noes:
-                    self.saveEpisodeIn(noe, self.kEpisodes)
+                    self.saveInTopK(noe, self.kEpisodes) # type: ignore
             needExploration = len(newEpisodes) > 0
         
-        # Les épisodes sont maintenant désenlacés, on sélectionne les meilleurs
+        # Les épisodes sont maintenant désenlacés, on sélectionne tous les épisodes avec un score égal au meilleur
         bestNonOverlappedEpisodes:list[NonOverlappedEpisode] = []
         for nonOverlappedEpisode in self.kEpisodes:
             if len(bestNonOverlappedEpisodes) == 0 or nonOverlappedEpisode.getScore() == bestNonOverlappedEpisodes[0].getScore():
                 bestNonOverlappedEpisodes.append(nonOverlappedEpisode)
-            elif nonOverlappedEpisode.getScore() > bestNonOverlappedEpisodes[0].getScore():
-                bestNonOverlappedEpisodes = [nonOverlappedEpisode]
+            else:
+                break
 
         return bestNonOverlappedEpisodes
 
     # Désenlace un épisode et retourne les K meilleurs candidats
     def unoverlapEpisode(self, episode:Episode) -> list[NonOverlappedEpisode]:
-        nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
-        # Utilisation de l'épisode comme modèle pour initialiser la liste
-        nonOverlappedEpisodes.append(NonOverlappedEpisode(copy.deepcopy(episode.event)))
+        #start_time:float = time.time()
+        tmp:int = 0
+
+        # création de la liste des feuilles à explorer
+        topkLeafs:list[BoundGraph] = []
         # 1 - On désenlace la boundlist
-        # on parcours tous les bounds suivants
+        # on parcours tous les bounds
         for bound in episode.boundlist:
             # placer ce bound dans les scenarios
-            placed:bool = False
-            # tenter de placer ce bound à la fin des scénarios
-            for noe in nonOverlappedEpisodes:
-                if len (noe.boundlist) == 0 or noe.boundlist[-1][1] < bound[0]:
-                    noe.boundlist.append(bound)
-                    placed = True
+            # tenter de placer ce bound à la suite de chaque feuille
+            newLeafs:list[BoundGraph] = []
+            for leaf in topkLeafs:
+                if leaf.bound[1] < bound[0]:
+                    newLeafs.append(BoundGraph(episode.event, bound, leaf))
             # Si le bound n'a pas pu être placé tenter de lui trouver une place au coeur d'un des scénarios
-            if not placed:
-                newEpisodes:list[NonOverlappedEpisode] = []
-                for noe in nonOverlappedEpisodes:
-                    # Remonter ce scénario jusqu'à trouver un emplacement valide
-                    i:int = len(noe.boundlist)-1
-                    while i >= 0 and noe.boundlist[i][1] >= bound[0]:
-                        i -= 1
-                    # Si on a trouvé une place au coeur du scénario, on duplique son début et on l'ajoute à la suite
-                    if i >= 0:
-                        newNoe:NonOverlappedEpisode = NonOverlappedEpisode(copy.deepcopy(episode.event))
-                        newNoe.boundlist = noe.boundlist.slice(0, i+1)
-                        newNoe.boundlist.append(bound)
-                        newEpisodes.append(newNoe)
-                        placed = True
-                # on ajoute tout ces nouveaux scénarios dans la liste des épisodes désenlacés
-                for newNoe in newEpisodes:
-                    self.saveEpisodeIn(newNoe, nonOverlappedEpisodes)
-            # Si le bound n'a pas été placé dans un scénario existant, on crée un nouveau scénario commençant par ce bound
-            if not placed:
-                newNoe:NonOverlappedEpisode = NonOverlappedEpisode(copy.deepcopy(episode.event))
-                newNoe.boundlist = BoundList([bound])
-                self.saveEpisodeIn(newNoe, nonOverlappedEpisodes)
+            if len(newLeafs) == 0:
+                # parcourir chaque feuille
+                for node in topkLeafs:
+                    # Remonter ce scénario dont leaf est la feuille terminale jusqu'à trouver un emplacement valide
+                    while node.parent != None and node.bound[1] >= bound[0]:
+                        node = node.parent
+                    # Si on a trouvé un emplacement, on ajoute à ce noeud une nouvelle feuille si elle ne la contient pas déjà
+                    if node.bound[1] < bound[0] and not node.hasChild(bound):
+                        newLeafs.append(BoundGraph(episode.event, bound, node))
+            # Si le bound n'a pas été placé dans un scénario existant, on crée un nouveau arbre commençant par ce bound
+            if len(newLeafs) == 0:
+                newLeafs.append(BoundGraph(episode.event, bound))
+            # Ajout des nouvelles feuilles à liste des topk
+            for leaf in newLeafs:
+                self.saveInTopK(leaf, topkLeafs) # type: ignore
+            tmp += 1
 
+        # Construire les épisodes sans recouvrement à partir des feuilles retenues
+        nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
+        for node in topkLeafs:
+            # on remonte l'arbre pour récupérer les bounds désenlacés (du dernier au premier)
+            bounds:list[tuple[int, int]] = [node.bound]
+            while node.parent != None:
+                node = node.parent
+                bounds.append(node.bound)
+            # on inverse la liste des bounds et on les enregistre
+            nonOverlappedEpisodes.append(NonOverlappedEpisode(copy.deepcopy(episode.event)))
+            reversedBoundList = nonOverlappedEpisodes[-1].boundlist
+            for bound in reversed(bounds):
+                reversedBoundList.append(bound)
+
+        #print (str(time.time()-start_time))
         return nonOverlappedEpisodes
 
     # Obtention du support minimal
@@ -125,18 +136,19 @@ class PTKE:
         if len(self.kEpisodes) < PTKE.K:
             return 0
         else:
-            return self.kEpisodes[0].getSupport()
+            return self.kEpisodes[-1].getSupport()
 
-	# Enregistre un épisode dans l'ensemble de top-k pattern.
+	# Enregistre un item dans l'ensemble des top-k.
 	# 
-	# :param episode: the episode to be saved
-    def saveEpisodeIn(self, episode: NonOverlappedEpisode, list:list[NonOverlappedEpisode]) -> None:
-        if episode not in list:
-            # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score
-            if len(list) < PTKE.K or episode.getScore() > list[0].getScore():
-                insort(list, episode)
-            if len(list) > PTKE.K:
-                list.pop(0) # ne conserver que les K meilleurs
+	# :param item: the item to be saved
+	# :param topk: the list containing the topk items
+    def saveInTopK(self, item: Scorable, topk:list[Scorable]) -> None:
+        if item not in topk:
+            # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score (du meilleur en premier au moins bon en dernier)
+            if len(topk) < PTKE.K or item.getScore() > topk[-1].getScore():
+                insort(topk, item)
+            if len(topk) > PTKE.K:
+                topk.pop() # ne conserver que les K meilleurs
 
     # Etend un episode donné avec un event
     #

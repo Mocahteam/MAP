@@ -71,9 +71,9 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 	gr:Decimal = point.gr
 	ws:Decimal = point.ws
 	pb:Decimal = point.pb
-	#gr = Decimal(4.00).quantize(Decimal('1.00'))
-	#ws = Decimal(0.60).quantize(Decimal('1.00'))
-	#pb = Decimal(1.00).quantize(Decimal('1.00'))
+	#gr = Decimal(8.00).quantize(Decimal('1.00'))
+	#ws = Decimal(0.20).quantize(Decimal('1.00'))
+	#pb = Decimal(0.20).quantize(Decimal('1.00'))
 	# dans le cas les paramètres ne sont plus légitimes
 	if(gr<g_gr_bounds[0] or ws<g_ws_bounds[0] or pb<g_pb_bounds[0] or gr>g_gr_bounds[1] or ws>g_ws_bounds[1] or pb>g_pb_bounds[1]):
 		raise IndexError

@@ -1,4 +1,5 @@
 {
+    "editor.wordWrap": "on",
     "python.analysis.typeCheckingMode": "strict",
     "files.associations": {
         "algorithm": "cpp",

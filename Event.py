@@ -7,6 +7,11 @@ class Event:
     def __init__(self) -> None:
         self.opt:bool = False
 
+    # Pour vérifier l'égalité du contenu de l'Event sans prise en compte de la propriété "opt"
+    @abstractmethod
+    def isEquiv(self, other: object) -> bool:
+        pass
+
     @abstractmethod
     def getLength(self) -> int:
         pass
@@ -35,6 +40,9 @@ class Call(Event):
     
     def __hash__(self) -> int:
         return hash(self.call)
+    
+    def isEquiv(self, other: object) -> bool:
+        return isinstance(other, Call) and self.call == other.call
 
     def getLength(self) -> int:
         return 1
@@ -67,6 +75,9 @@ class Sequence(Event):
     
     def __hash__(self) -> int:
         return hash(tuple(self.event_list))
+    
+    def isEquiv(self, other: object) -> bool:
+        return isinstance(other, Sequence) and len(self.event_list) == len(other.event_list) and self.event_list == other.event_list
 
     def getLength(self) -> int:
         return len(self.event_list)
@@ -116,7 +127,7 @@ class Sequence(Event):
         linearSequence.append(LinearEnd())
         return linearSequence
     
-    # Tansforme une liste de LinearEvent en un liste d'Event et l'ajoute à la fin de le séquence
+    # Tansforme une liste de LinearEvent en une liste d'Event et l'ajoute à la fin de la séquence
     def appendLinearSequence (self, linearSequence:list[LinearEvent]) -> None:
         i:int = 0
         while i < len(linearSequence): # Ne pas passer par un for ... in ... car on veut contrôler dans la boucle le compteur (cf cas du begin)
@@ -139,7 +150,7 @@ class Sequence(Event):
                 newSeq.appendLinearSequence(subLinearSequence)
                 # On saute à la fin de la sous-séquence linéarisée puisqu'elle vient d'être traité dans l'appel récursif
                 i = end-1 # on enlève 1 parce qu'il est rajouté dans le cas général, ainsi i sera bien positionné sur "end"
-                # Ajout de cette nouvelle séquende
+                # Ajout de cette nouvelle séquence
                 self.event_list.append(newSeq)
             i += 1
 
@@ -373,7 +384,7 @@ def manageOverlapping(mergedSequence:list[LinearEvent]) -> None:
                 castEvent.overlapped = True
 
 
-# Gère les ajouts de Begin et End. On assume pour cette fonction que le dernier évènement de de la séquence linéarisée est le dernier Begin ou End ajouté sur lequel on va travailler
+# Gère les ajouts de Begin et End. On assume pour cette fonction que le dernier évènement de la séquence linéarisée est le dernier Begin ou End ajouté sur lequel on va travailler
 #
 # :param mergedSequence: la séquence fusionnée à adapter en fonction des enchainements de Begin et End et de leur orientation (Cette liste est inversé, le premier élément de la liste doit être le plus ancien).
 def manageBorder(mergedSequence:list[LinearEvent]) -> None:
@@ -381,7 +392,7 @@ def manageBorder(mergedSequence:list[LinearEvent]) -> None:
     border = mergedSequence[-1]
     if isinstance(border, LinearEnd):
         # on se sert de l'attribut "optionnel" d'une séquence End pour coder le fait que cette séquence est potentiellement optionnelle jusqu'à preuve du contraire (si elle ne contient aucune trace alignée). Cette astuce sera aussi utilisée pour déterminer si un Call doit être mis en option sur un changement de ligne ou de colonne (pas la diagonale) en effet si le End de la séquence mère est tagué Optionnel alors il n'est pas nécessaire de noter les Call enfants comme optionnels.
-        # # Donc, par défaut, on tague toutes les Séquences End comme optionnelle. Si ensuite en construisant la fusion on trouve des traces alignées, on annulera cette mise en option.
+        # Donc, par défaut, on tague toutes les Séquences End comme optionnelle. Si ensuite en construisant la fusion on trouve des traces alignées, on annulera cette mise en option.
         border.opt = True
 	# ici on est sur un Begin, il faut vérifier si on peut dépiler simplement ou s'il faut faire des opérations spécifiques
     elif isinstance(border, LinearBegin):
@@ -428,7 +439,8 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
                 mergedSequence.append(mergedEvent)
                 # noter que le end associé ne peut plus être optionnel (voir commentaire dans manageBorder)
                 endPos:int = getEndPosOfLinearSequence(mergedSequence, len(mergedSequence)-1, -1) # On parcours en sens inverse car la fusion est inversée, l'indice 0 est la fin de la trace
-                mergedSequence[endPos].opt = False
+                if endPos != -1:
+                    mergedSequence[endPos].opt = False
                 l -= 1
                 c -= 1
             # sinon si coût minimum sur la ligne d'en dessus ou coût égal mais le nombre de ligne est plus grand que le nombre de colonne, prendre la ligne du dessus

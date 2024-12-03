@@ -76,6 +76,16 @@ class PTKE:
                 bestNonOverlappedEpisodes.append(nonOverlappedEpisode)
             else:
                 break
+        
+        # Ramener les épisodes qui ont une forme [[...]] à [...]
+        for epi in bestNonOverlappedEpisodes:
+            # Si l'épisode est une séquence (normalement c'est forcément le cas) et qu'il ne contient qu'un seul enfant
+            if isinstance(epi.event, Sequence) and epi.event.getLength() == 1:
+                seq:Sequence = epi.event
+                # Si son unique enfant est lui même une séquence, on est dans le cas à simplifier
+                if isinstance(seq.event_list[0], Sequence):
+                    seqChild:Sequence = seq.event_list[0]
+                    epi.event = seqChild
 
         return bestNonOverlappedEpisodes
 

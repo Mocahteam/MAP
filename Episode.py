@@ -120,9 +120,9 @@ class Scorable:
             outsideProx:float = 1
 
             # Le score se décompose en 2 partie
-            # La partie 1 la performance de l'épisode de point de vu de son support
+            # La partie 1 : la performance de l'épisode de point de vu de son support
             part1:float = 0
-            # La partie 1 la performance de l'épisode de point de vu de ses proximités (interne et externe)
+            # La partie 2 : la performance de l'épisode de point de vu de ses proximités (interne et externe)
             part2:float = 0
 
             part1 = self.getSupport()/NonOverlappedEpisode.MAX_SUP

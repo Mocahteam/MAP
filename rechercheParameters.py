@@ -1,4 +1,3 @@
-import os
 from typing import Any 
 from Event import Call, Event
 from MAP import MAP, CompressionSet
@@ -71,9 +70,9 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 	gr:Decimal = point.gr
 	ws:Decimal = point.ws
 	pb:Decimal = point.pb
-	#gr = Decimal(8.00).quantize(Decimal('1.00'))
-	#ws = Decimal(0.20).quantize(Decimal('1.00'))
-	#pb = Decimal(0.20).quantize(Decimal('1.00'))
+	#gr = Decimal(1.00).quantize(Decimal('1.00'))
+	#ws = Decimal(0.50).quantize(Decimal('1.00'))
+	#pb = Decimal(0.50).quantize(Decimal('1.00'))
 	# dans le cas les paramètres ne sont plus légitimes
 	if(gr<g_gr_bounds[0] or ws<g_ws_bounds[0] or pb<g_pb_bounds[0] or gr>g_gr_bounds[1] or ws>g_ws_bounds[1] or pb>g_pb_bounds[1]):
 		raise IndexError
@@ -624,24 +623,27 @@ def search_exhaustive(trace:str, solution:str):
 #
 # @dichotomous : utilisation l'algorithme de dichotomique avec des rectangles pour réduire le nombre de test
 # @files : liste des fichiers à analyser
-def run(dichotomous:bool, files:list[str]):
+def run(dichotomous:bool, files:list[str], mainDir:str):
 	# Façon dichotomique
 	if (dichotomous):
 		for fileName in files:
 			# Chargement du contenu du fichier
 			trace:str = ""
-			with open("./example/"+fileName, 'r') as file:
+			with open(mainDir+"/example/"+fileName+".log", 'r') as file:
 				trace = file.readline()
-			print("Recherche des paramètres pour le fichier : "+fileName)
+			print("Recherche des paramètres pour le fichier : "+mainDir+"/"+fileName+".log")
 			# Chargement du contenu de la solution
 			solution:str = ""
-			with open("./example/solutions/"+fileName, 'r') as file:
+			with open(mainDir+"/example/solutions/"+fileName+".log", 'r') as file:
 				solution = file.readline()
 			# Analyse
 			search_gr_ws_by_rect(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
-			np.save("./files_npy/dichotomous_"+fileName.replace(".log", ".npy"),g_tab_parametersToBestResultPos)
+			np.save(mainDir+"/files_npy/dichotomous_"+fileName+".npy",g_tab_parametersToBestResultPos)
 			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
+			# Sauvegarde des solutions explorées
+			with open(mainDir+"/solutionsExplored/dichotomous_"+fileName+".txt", "w", encoding="utf-8") as fichier:
+				fichier.write(str(g_exploredMap).replace("),", "),\n"))
 			#print(str(g_exploredMap))
 			#print("************************************************************\n\n")
 	# Façon exhaustive
@@ -649,39 +651,49 @@ def run(dichotomous:bool, files:list[str]):
 		for fileName in files:
 			# Chargement du contenu du fichier
 			trace:str = ""
-			with open("./example/"+fileName, 'r') as file:
+			with open(mainDir+"/example/"+fileName+".log", 'r') as file:
 				trace = file.readline()
-			print("Recherche des paramètres pour le fichier : "+fileName)
+			print("Recherche des paramètres pour le fichier : "+mainDir+"/"+fileName+".log")
 			# Chargement du contenu de la solution
 			solution:str = ""
-			with open("./example/solutions/"+fileName, 'r') as file:
+			with open(mainDir+"/example/solutions/"+fileName+".log", 'r') as file:
 				solution = file.readline()
 			search_exhaustive(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
-			np.save("./files_npy/exhaustive_"+fileName.replace(".log", ".npy"), g_tab_parametersToBestResultPos)
+			np.save(mainDir+"/files_npy/exhaustive_"+fileName+".npy", g_tab_parametersToBestResultPos)
 			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
+			# Sauvegarde des solutions explorées
+			with open(mainDir+"/solutionsExplored/exhaustive_"+fileName+".txt", "w", encoding="utf-8") as fichier:
+				fichier.write(str(g_exploredMap).replace("),", "),\n"))
 			#print(str(g_exploredMap))
 			#print("************************************************************\n\n")
 
 if __name__ == "__main__":
 	test_file:list[str] = []
 	argv = sys.argv
-	if(not os.path.exists("./files_npy/")):
-		os.makedirs("./files_npy/")
-	if(len(argv)>2):
+	if(len(argv)>3):
 		test_file.append(argv[1])
-		if(sys.argv[2]=="exhaustive"):
-			run(dichotomous=False, files=test_file)
-		elif(sys.argv[2]=="dichotomous"):
-			run(dichotomous=True, files=test_file)
+		mainDir:str = argv[2]
+		if(sys.argv[3]=="exhaustive"):
+			run(False, test_file, mainDir)
+		elif(sys.argv[3]=="dichotomous"):
+			run(True, test_file, mainDir)
 		else:
-			print("Utilisation dans terminal : python rechercheParameters.py fileName exhaustive/dichotomous\n")
-	elif(len(sys.argv)==2):
+			print("Utilisation dans terminal : python rechercheParameters.py fileName mainDirectory exhaustive/dichotomous\n")
+	elif(len(sys.argv)==3):
 		test_file.append(argv[1])
-		run(dichotomous=True, files=test_file)
+		run(True, test_file, argv[2])
 	else:
 		print("Lancement des tests...\n")
-		#test_file = ["1_rienAFaire.log", "2_simpleBoucle.log", "3_simpleBoucleAvecDebut.log", "4_simpleBoucleAvecFin.log", "5_simpleBoucleAvecDebutEtFin.log", "6.01_simpleBoucleAvecIf.log", "6.02_simpleBoucleAvecIf.log", "6.03_simpleBoucleAvecIf.log", "6.04_simpleBoucleAvecIf.log", "6.05_simpleBoucleAvecIf.log", "6.06_simpleBoucleAvecIf.log", "6.07_simpleBoucleAvecIf.log", "6.08_simpleBoucleAvecIf.log", "6.09_simpleBoucleAvecIf.log", "6.10_simpleBoucleAvecIf.log", "6.11_simpleBoucleAvecIf.log", "6.12_simpleBoucleAvecIf.log", "6.13_simpleBoucleAvecIf.log", "6.14_simpleBoucleAvecIf.log", "6.15_simpleBoucleAvecIf.log", "7.01_bouclesEnSequence.log", "7.02_bouclesEnSequence.log", "8_bouclesEnSequenceAvecIf.log", "9.01_bouclesImbriquees.log", "9.02_bouclesImbriquees.log", "9.03_bouclesImbriquees.log"]
-		#test_file = ["m1.log", "m2.log", "m3.log", "m4.log", "m5.log", "m6.log", "m7.log", "m81.log", "m82.log", "m11.log"]#, "m9.log"]
-		test_file = ["m9.log"]
-		run(dichotomous=True, files=test_file)
+		#test_file = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m81", "m82", "m11"]#, "m9"]
+		#test_file = ["m9"]
+		#mainDir = "./dataset1"
+		
+		#test_file = ["1_rienAFaire", "2_simpleBoucle", "3_simpleBoucleAvecDebut", "4_simpleBoucleAvecFin", "5_simpleBoucleAvecDebutEtFin", "6.01_simpleBoucleAvecIf", "6.02_simpleBoucleAvecIf", "6.03_simpleBoucleAvecIf", "6.04_simpleBoucleAvecIf", "6.05_simpleBoucleAvecIf", "6.06_simpleBoucleAvecIf", "6.07_simpleBoucleAvecIf", "6.08_simpleBoucleAvecIf", "6.09_simpleBoucleAvecIf", "6.10_simpleBoucleAvecIf", "6.11_simpleBoucleAvecIf", "6.12_simpleBoucleAvecIf", "6.13_simpleBoucleAvecIf", "6.14_simpleBoucleAvecIf", "6.15_simpleBoucleAvecIf", "7.01_bouclesEnSequence", "7.02_bouclesEnSequence", "8_bouclesEnSequenceAvecIf", "9.01_bouclesImbriquees", "9.02_bouclesImbriquees", "9.03_bouclesImbriquees"]
+		#test_file = ["2_simpleBoucle"]
+		#mainDir = "./dataset2"
+
+		test_file = ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf", "7_NestedLoopIf2"]
+		#test_file = ["7_NestedLoopIf"]
+		mainDir = "./dataset3"
+		run(True, test_file, mainDir)

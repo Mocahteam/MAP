@@ -1,16 +1,136 @@
 import copy
+from multiprocessing import Pool
 #import time
 from Episode import BoundGraph, BoundList, Episode, NonOverlappedEpisode, Scorable
 from Event import Event, Sequence
 from bisect import insort
 
+# Enregistre un item dans l'ensemble des top-k.
+# 
+# :param item: the item to be saved
+# :param topk: the list containing the topk items
+def saveInTopK(item: Scorable, topk:list[Scorable]) -> None:
+    """
+    Save an item in the top-k set while maintaining the sorted order.
+    
+    Args:
+        item (Scorable): The item to be saved
+        topk (list[Scorable]): The list containing the top-k items
+        
+    Note:
+        The list is maintained sorted by score in descending order.
+        If the list exceeds K items after insertion, the lowest scoring item is removed.
+    """
+    if item not in topk:
+        # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score (du meilleur en premier au moins bon en dernier)
+        if len(topk) < PTKE.K or item.getScore() > topk[-1].getScore():
+            insort(topk, item)
+        if len(topk) > PTKE.K:
+            topk.pop() # ne conserver que les K meilleurs
+
+            
+
+# Désenlace un épisode et retourne les K meilleurs candidats
+def unoverlapEpisode(params:tuple[Episode, int, float, float]) -> list[NonOverlappedEpisode]:
+    """
+    Unravel an episode into non-overlapping episodes and return the K best candidates.
+    
+    This function takes an episode with potentially overlapping bounds and creates
+    multiple non-overlapping episodes by:
+    1. Creating a tree structure of bounds
+    2. Finding valid paths through the tree
+    3. Converting each valid path into a non-overlapping episode
+    
+    Args:
+        params (tuple[Episode, int, float, float]): Tuple containing:
+            - Episode: The episode to unravel
+            - int: Maximum support value
+            - float: Proximity balancing factor
+            - float: Weight support factor
+            
+    Returns:
+        list[NonOverlappedEpisode]: List of best non-overlapping episodes
+    """
+    episode:Episode = params[0]
+    NonOverlappedEpisode.MAX_SUP = params[1]
+    NonOverlappedEpisode.PROXIMITY_BALANCING = params[2]
+    NonOverlappedEpisode.WEIGHT_SUPPORT = params[3]
+    #start_time:float = time.time()
+    tmp:int = 0
+
+    # création de la liste des feuilles à explorer
+    topkLeafs:list[BoundGraph] = []
+    # 1 - On désenlace la boundlist
+    # on parcours tous les bounds
+    for bound in episode.boundlist:
+        # placer ce bound dans les scenarios
+        # tenter de placer ce bound à la suite de chaque feuille
+        newLeafs:list[BoundGraph] = []
+        for leaf in topkLeafs:
+            if leaf.bound[1] < bound[0]:
+                newLeafs.append(BoundGraph(episode.event, bound, leaf))
+        # Si le bound n'a pas pu être placé tenter de lui trouver une place au coeur d'un des scénarios
+        if len(newLeafs) == 0:
+            # parcourir chaque feuille
+            for node in topkLeafs:
+                # Remonter ce scénario dont leaf est la feuille terminale jusqu'à trouver un emplacement valide
+                while node.parent != None and node.bound[1] >= bound[0]:
+                    node = node.parent
+                # Si on a trouvé un emplacement, on ajoute à ce noeud une nouvelle feuille si elle ne la contient pas déjà
+                if node.bound[1] < bound[0] and not node.hasChild(bound):
+                    newLeafs.append(BoundGraph(episode.event, bound, node))
+        # Si le bound n'a pas été placé dans un scénario existant, on crée un nouveau arbre commençant par ce bound
+        if len(newLeafs) == 0:
+            newLeafs.append(BoundGraph(episode.event, bound))
+        # Ajout des nouvelles feuilles à liste des topk
+        for leaf in newLeafs:
+            saveInTopK(leaf, topkLeafs) # type: ignore
+        tmp += 1
+
+    # Construire les épisodes sans recouvrement à partir des feuilles retenues
+    nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
+    for node in topkLeafs:
+        # on remonte l'arbre pour récupérer les bounds désenlacés (du dernier au premier)
+        bounds:list[tuple[int, int]] = [node.bound]
+        while node.parent != None:
+            node = node.parent
+            bounds.append(node.bound)
+        # on inverse la liste des bounds et on les enregistre
+        nonOverlappedEpisodes.append(NonOverlappedEpisode(copy.deepcopy(episode.event)))
+        reversedBoundList = nonOverlappedEpisodes[-1].boundlist
+        for bound in reversed(bounds):
+            reversedBoundList.append(bound)
+
+    #print (str(time.time()-start_time))
+    return nonOverlappedEpisodes
+
 # PTKE => Proximity Top-K Frequent Episodes
 class PTKE:
+    """
+    Proximity Top-K Frequent Episodes (PTKE) algorithm implementation.
+    
+    This class implements the PTKE algorithm which finds the K most frequent episodes
+    in a sequence while considering proximity between events. Episodes are built
+    incrementally and scored based on support and proximity metrics.
+    
+    Class Attributes:
+        K (int): Number of top episodes to maintain
+        GAP_RATIO (float): Controls allowed gap size between episodes relative to episode length
+        
+    Attributes:
+        kEpisodes (list[NonOverlappedEpisode]): Current top-K episodes
+        minScore (float): Minimum score among top-K episodes
+    """
     K:int
     # GAP_RATIO controls the size of gaps between episodes in relation to the length of the episode. GAP_RATIO is a multiplier used by to jump events proportionaly to episode size (will produce optional events). 0 means episodes will be merge if no gap exists between them.
     GAP_RATIO:float
+    # Number of processes to use for parallel processing
+    PROCESS_NUMBER:int = 5
 
     def __init__(self) -> None:
+        """
+        Initialize a new PTKE instance with empty episode list and minimum score.
+        """
         self.kEpisodes:list[NonOverlappedEpisode] = []
         self.minScore:float = 0
 
@@ -19,6 +139,22 @@ class PTKE:
     # :param event_list: Liste des évènements desquels extraire les meilleurs épisodes
     # :return: La liste des épisodes sans chevauchement des bounds ayant le meilleur score
     def getBestEpisodes(self, event_list: list[Event]) -> list[NonOverlappedEpisode]:
+        """
+        Find the best non-overlapping episodes from a list of events.
+        
+        This method implements the main PTKE algorithm:
+        1. Maps events to their locations
+        2. Creates initial single-event episodes
+        3. Iteratively extends episodes with new events
+        4. Unravels overlapping episodes into non-overlapping ones
+        5. Maintains the K best episodes based on score
+        
+        Args:
+            event_list (list[Event]): List of events to analyze
+            
+        Returns:
+            list[NonOverlappedEpisode]: List of best non-overlapping episodes
+        """
         self.minScore = 1
         NonOverlappedEpisode.MAX_SUP = 1
         # Map enregistrant pour chaque event ses positions d'apparition
@@ -49,26 +185,46 @@ class PTKE:
         
         # initialisation des k premiers épisodes 
         for event, noe in mapEventToNOE.items():
-            self.saveInTopK(noe, self.kEpisodes) # type: ignore
+            saveInTopK(noe, self.kEpisodes) # type: ignore
                 
         needExploration:bool = True
+#        statLoop:float = time.time()
         while needExploration:
             newEpisodes:list[Episode] = []
+            lengthSum:int = 0
             # Etendre chacun des meilleurs épisodes avec un évènement supplémentaire
             for kEpisode in self.kEpisodes:
                 if not kEpisode.explored:
                     for event, positions in mapEventToLocations.items():
                         newEpisode:Episode = self.extendEpisodeWithEvent(kEpisode, event, positions)
-                        newEpisodes.append(newEpisode)
+                        if len(newEpisode.boundlist) > 0:
+                            lengthSum += len(newEpisode.boundlist)
+                            newEpisodes.append(newEpisode)
                     kEpisode.explored = True
-            # ajouter les nouveaux épisodes aux top-k
-            for newE in newEpisodes:
-                # Ici les bounds des kEpisodes peuvent se chevaucher ([... <3,5> <4,6> ...] => dans cet exemple le premier bound fini à 5 alors que le suivant commence à 4). Pour la suite de l'algo on ne peut avoir de chevauchements entre les bounds. On va donc créer autant d'éposides que nécessaire pour désenlacer les bounds de chacun des kEpisodes
-                noes:list[NonOverlappedEpisode] = self.unoverlapEpisode(newE)
-                for noe in noes:
-                    self.saveInTopK(noe, self.kEpisodes) # type: ignore
+
+            # Ici les bounds des kEpisodes peuvent se chevaucher ([... <3,5> <4,6> ...] => dans cet exemple le premier bound fini à 5 alors que le suivant commence à 4). Pour la suite de l'algo on ne peut avoir de chevauchements entre les bounds. On va donc créer autant d'éposides que nécessaire pour désenlacer les bounds de chacun des kEpisodes
+            # Si la longueur moyenne est supérieur à un seuil, traiter en parallèle
+
+            if len(newEpisodes) > 0 and lengthSum/len(newEpisodes) > 100:
+                print ("MT")
+                # Désenlacement des épisodes en parallèle
+                # Création d'un pool avec X processus
+                results:list[list[NonOverlappedEpisode]]
+                with Pool(processes=PTKE.PROCESS_NUMBER) as pool:
+                    results = pool.map(unoverlapEpisode, [(newEpi, NonOverlappedEpisode.MAX_SUP, NonOverlappedEpisode.PROXIMITY_BALANCING, NonOverlappedEpisode.WEIGHT_SUPPORT) for newEpi in newEpisodes])
+                # ajouter les nouveaux épisodes aux top-k
+                for result in results:
+                    for noe in result:
+                        saveInTopK(noe, self.kEpisodes) # type: ignore
+            else:
+                # Désenlacement des épisodes en série
+                for newE in newEpisodes:
+                    noes:list[NonOverlappedEpisode] = unoverlapEpisode((newE, NonOverlappedEpisode.MAX_SUP, NonOverlappedEpisode.PROXIMITY_BALANCING, NonOverlappedEpisode.WEIGHT_SUPPORT))
+                    # ajouter les nouveaux épisodes aux top-k
+                    for noe in noes:
+                        saveInTopK(noe, self.kEpisodes) # type: ignore
+            
             needExploration = len(newEpisodes) > 0
-        
         # Les épisodes sont maintenant désenlacés, on sélectionne tous les épisodes avec un score égal au meilleur
         bestNonOverlappedEpisodes:list[NonOverlappedEpisode] = []
         for nonOverlappedEpisode in self.kEpisodes:
@@ -87,78 +243,28 @@ class PTKE:
                     seqChild:Sequence = seq.event_list[0]
                     epi.event = seqChild
 
+#        print (time.time()-statLoop)
+#        for epi in bestNonOverlappedEpisodes:
+#            print (epi.event)
+
         return bestNonOverlappedEpisodes
-
-    # Désenlace un épisode et retourne les K meilleurs candidats
-    def unoverlapEpisode(self, episode:Episode) -> list[NonOverlappedEpisode]:
-        #start_time:float = time.time()
-        tmp:int = 0
-
-        # création de la liste des feuilles à explorer
-        topkLeafs:list[BoundGraph] = []
-        # 1 - On désenlace la boundlist
-        # on parcours tous les bounds
-        for bound in episode.boundlist:
-            # placer ce bound dans les scenarios
-            # tenter de placer ce bound à la suite de chaque feuille
-            newLeafs:list[BoundGraph] = []
-            for leaf in topkLeafs:
-                if leaf.bound[1] < bound[0]:
-                    newLeafs.append(BoundGraph(episode.event, bound, leaf))
-            # Si le bound n'a pas pu être placé tenter de lui trouver une place au coeur d'un des scénarios
-            if len(newLeafs) == 0:
-                # parcourir chaque feuille
-                for node in topkLeafs:
-                    # Remonter ce scénario dont leaf est la feuille terminale jusqu'à trouver un emplacement valide
-                    while node.parent != None and node.bound[1] >= bound[0]:
-                        node = node.parent
-                    # Si on a trouvé un emplacement, on ajoute à ce noeud une nouvelle feuille si elle ne la contient pas déjà
-                    if node.bound[1] < bound[0] and not node.hasChild(bound):
-                        newLeafs.append(BoundGraph(episode.event, bound, node))
-            # Si le bound n'a pas été placé dans un scénario existant, on crée un nouveau arbre commençant par ce bound
-            if len(newLeafs) == 0:
-                newLeafs.append(BoundGraph(episode.event, bound))
-            # Ajout des nouvelles feuilles à liste des topk
-            for leaf in newLeafs:
-                self.saveInTopK(leaf, topkLeafs) # type: ignore
-            tmp += 1
-
-        # Construire les épisodes sans recouvrement à partir des feuilles retenues
-        nonOverlappedEpisodes:list[NonOverlappedEpisode] = []
-        for node in topkLeafs:
-            # on remonte l'arbre pour récupérer les bounds désenlacés (du dernier au premier)
-            bounds:list[tuple[int, int]] = [node.bound]
-            while node.parent != None:
-                node = node.parent
-                bounds.append(node.bound)
-            # on inverse la liste des bounds et on les enregistre
-            nonOverlappedEpisodes.append(NonOverlappedEpisode(copy.deepcopy(episode.event)))
-            reversedBoundList = nonOverlappedEpisodes[-1].boundlist
-            for bound in reversed(bounds):
-                reversedBoundList.append(bound)
-
-        #print (str(time.time()-start_time))
-        return nonOverlappedEpisodes
 
     # Obtention du support minimal
     def getMinSup(self) -> int:
+        """
+        Get the minimum support threshold for episodes.
+        
+        Returns:
+            int: 0 if fewer than K episodes exist, otherwise the support of the
+                lowest scoring episode in the top-K list
+        """
         # Tantqu'on n'a pas encore identifié K épisodes, considérer le support minimal à 0 pour autoriser de nouvelles explorations
         if len(self.kEpisodes) < PTKE.K:
             return 0
         else:
             return self.kEpisodes[-1].getSupport()
 
-	# Enregistre un item dans l'ensemble des top-k.
-	# 
-	# :param item: the item to be saved
-	# :param topk: the list containing the topk items
-    def saveInTopK(self, item: Scorable, topk:list[Scorable]) -> None:
-        if item not in topk:
-            # insertion de l'épisode dans les meilleurs k episodes et maintient de la liste triée par le score (du meilleur en premier au moins bon en dernier)
-            if len(topk) < PTKE.K or item.getScore() > topk[-1].getScore():
-                insort(topk, item)
-            if len(topk) > PTKE.K:
-                topk.pop() # ne conserver que les K meilleurs
+
 
     # Etend un episode donné avec un event
     #
@@ -168,6 +274,25 @@ class PTKE:
     # 
     # :return: l'episode étendu
     def extendEpisodeWithEvent(self, episode:Episode, event:Event, eventPositions:list[int]) -> Episode:
+        """
+        Extend an episode by adding a new event.
+        
+        This method attempts to extend an existing episode with a new event by:
+        1. Calculating the maximum allowed window size based on GAP_RATIO
+        2. Finding valid combinations of existing bounds with new event positions
+        3. Creating a new episode with the extended event sequence
+        
+        Args:
+            episode (Episode): Episode to extend
+            event (Event): Event to add
+            eventPositions (list[int]): Positions where the event occurs
+            
+        Returns:
+            Episode: New episode containing the original episode extended with the event
+            
+        Raises:
+            TypeError: If the episode's event is not a Sequence
+        """
         # Calcul de la fenêtre maximale autorisée => la longueur cumulée du kième épisodes + 1 (le nouvel evènement) * (1 + GAP_RATIO)=> pour accepter d'éventuelles traces intercalées
         max_window_size = (episode.event.getLength()+1)*(1+PTKE.GAP_RATIO)
         # Calcul des bounds contenant la fusion des bounds de l'épisode avec les positions d'un évènement

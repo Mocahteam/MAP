@@ -4,62 +4,192 @@ from typing import Optional
 import copy
 
 class Event:
+    """
+    Abstract base class representing an event in a sequence.
+    
+    This class serves as the foundation for all event types in the sequence system.
+    It provides basic functionality and interface that all events must implement.
+    
+    Attributes:
+        opt (bool): Flag indicating if the event is optional
+    """
     def __init__(self) -> None:
         self.opt:bool = False
 
-    # Pour vérifier l'égalité du contenu de l'Event sans prise en compte de la propriété "opt"
     @abstractmethod
     def isEquiv(self, other: object) -> bool:
+        """
+        Checks if two events are equivalent, ignoring the 'opt' property.
+        
+        Args:
+            other (object): The event to compare with
+            
+        Returns:
+            bool: True if the events are equivalent, False otherwise
+        """
         pass
 
     @abstractmethod
     def getLength(self) -> int:
+        """
+        Gets the length of the event.
+        
+        Returns:
+            int: The length of the event
+        """
         pass
     
     @abstractmethod
     def linearize(self) -> list[LinearEvent]:
+        """
+        Converts the event into a linear sequence of events.
+        
+        Returns:
+            list[LinearEvent]: A list of linearized events
+        """
         pass
     
     @abstractmethod
     def countCalls(self) -> int:
+        """
+        Counts the number of calls in this event.
+        
+        Returns:
+            int: The total number of calls
+        """
         pass
 
 class Call(Event):
+    """
+    Represents a call event in a sequence.
+    
+    A Call is a basic event that represents a single function call or operation.
+    
+    Attributes:
+        call (str): The name or identifier of the call
+        opt (bool): Inherited from Event, indicates if the call is optional
+    """
     def __init__(self, call:str) -> None:
+        """
+        Initializes a new Call event.
+        
+        Args:
+            call (str): The name or identifier of the call
+        """
         super().__init__()
         self.call:str = call
     
     def __str__(self) -> str:
+        """
+        Returns a string representation of the call.
+        
+        Returns:
+            str: The call string, with '*' appended if the call is optional
+        """
         return self.call + ('*' if self.opt else '')
     
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two calls are equal.
+        
+        Args:
+            other (object): The call to compare with
+            
+        Returns:
+            bool: True if the calls are equal (same call string and opt value), False otherwise
+        """
         return isinstance(other, Call) and self.call == other.call and self.opt == other.opt
     
     def __ne__(self, other: object) -> bool:
+        """
+        Checks if two calls are not equal.
+        
+        Args:
+            other (object): The call to compare with
+            
+        Returns:
+            bool: True if the calls are not equal, False otherwise
+        """
         return not self.__eq__(other)
     
     def __hash__(self) -> int:
+        """
+        Computes the hash value for the call.
+        
+        Returns:
+            int: Hash value based on the call string
+        """
         return hash(self.call)
     
     def isEquiv(self, other: object) -> bool:
+        """
+        Checks if two calls are equivalent (same call string, ignoring opt value).
+        
+        Args:
+            other (object): The call to compare with
+            
+        Returns:
+            bool: True if the calls are equivalent, False otherwise
+        """
         return isinstance(other, Call) and self.call == other.call
 
     def getLength(self) -> int:
+        """
+        Gets the length of the call (always 1).
+        
+        Returns:
+            int: Always returns 1 as a call is an atomic event
+        """
         return 1
     
     def linearize(self) -> list[LinearEvent]:
+        """
+        Converts the call into a linear sequence (single LinearCall).
+        
+        Returns:
+            list[LinearEvent]: A list containing a single LinearCall
+        """
         return [LinearCall(self)]
     
     def countCalls(self) -> int:
+        """
+        Counts the number of calls (always 1).
+        
+        Returns:
+            int: Always returns 1 as this represents a single call
+        """
         return 1
 
 class Sequence(Event):
+    """
+    Represents a sequence of events.
+    
+    A Sequence is a container that holds multiple events in order. It can be marked as
+    a root sequence or as an optional sequence.
+    
+    Attributes:
+        event_list (list[Event]): List of events in the sequence
+        isRoot (bool): Flag indicating if this is a root sequence
+        opt (bool): Inherited from Event, indicates if the sequence is optional
+    """
     def __init__(self) -> None:
+        """
+        Initializes a new empty sequence.
+        """
         super().__init__()
         self.event_list:list[Event] = []
         self.isRoot:bool = False
 
     def __str__(self) -> str:
+        """
+        Returns a string representation of the sequence.
+        
+        The sequence is represented with square brackets unless it's a root sequence.
+        Optional sequences are marked with '*'.
+        
+        Returns:
+            str: String representation of the sequence
+        """
         export:str = '' if self.isRoot else '['
         if len(self.event_list) > 0:
             for e in self.event_list:
@@ -68,29 +198,85 @@ class Sequence(Event):
         return export
     
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two sequences are equal.
+        
+        Args:
+            other (object): The sequence to compare with
+            
+        Returns:
+            bool: True if the sequences have the same events in the same order and same opt value
+        """
         return isinstance(other, Sequence) and self.opt == other.opt and len(self.event_list) == len(other.event_list) and self.event_list == other.event_list
     
     def __ne__(self, other: object) -> bool:
+        """
+        Checks if two sequences are not equal.
+        
+        Args:
+            other (object): The sequence to compare with
+            
+        Returns:
+            bool: True if the sequences are not equal
+        """
         return not self.__eq__(other)
     
     def __hash__(self) -> int:
+        """
+        Computes the hash value for the sequence.
+        
+        Returns:
+            int: Hash value based on the tuple of events in the sequence
+        """
         return hash(tuple(self.event_list))
     
     def isEquiv(self, other: object) -> bool:
+        """
+        Checks if two sequences are equivalent (same events, ignoring opt value).
+        
+        Args:
+            other (object): The sequence to compare with
+            
+        Returns:
+            bool: True if the sequences are equivalent
+        """
         return isinstance(other, Sequence) and len(self.event_list) == len(other.event_list) and self.event_list == other.event_list
 
     def getLength(self) -> int:
+        """
+        Gets the length of the sequence (number of events).
+        
+        Returns:
+            int: The number of events in the sequence
+        """
         return len(self.event_list)
     
     def countCalls(self) -> int:
+        """
+        Counts the total number of calls in the sequence.
+        
+        Returns:
+            int: The total number of calls across all events in the sequence
+        """
         counter:int = 0
         for e in self.event_list:
             counter += e.countCalls()
         return counter
     
-    # Getter pour récupérer une sous partie de la séquence comprise entre l'indice "start" (inclus) et l'indice "end" (exclus).
-	# Return la sous partie clonée de la séquence.
     def getSubSequence(self, start:int, end:int) -> Sequence:
+        """
+        Extracts a subsequence from the current sequence.
+        
+        Creates a new sequence containing events from start (inclusive) to end (exclusive).
+        Special handling is done for single-event sequences to preserve their structure.
+        
+        Args:
+            start (int): Starting index (inclusive)
+            end (int): Ending index (exclusive)
+            
+        Returns:
+            Sequence: A new sequence containing the specified subsequence
+        """
         start = start if start >= 0 else 0
         end = end if end > start and end <= self.getLength() else self.getLength()
         subSequence:Sequence = Sequence()
@@ -121,6 +307,30 @@ class Sequence(Event):
     #
     # :return: un vecteur d'évènement linéarisé représentant une version linéarisée des traces
     def linearize(self) -> list[LinearEvent]:
+        """
+        Linearizes the sequence into a flat list of events.
+
+        Transforms a hierarchical sequence structure into a linear sequence where nested
+        sequences are represented by Begin/End markers.
+
+        Example:
+        Given this hierarchical sequence (where C=Call, S=Sequence):
+        ```
+              C
+             \\ /
+          C C S
+          \\_ _/
+        C C S C
+        ```
+
+        The linearized output will be (where Sb=SequenceBegin, Se=SequenceEnd):
+        ```
+        C C Sb C C Sb C Se Se C
+        ```
+
+        Returns:
+            list[LinearEvent]: A list of linear events representing the flattened sequence
+        """
         linearSequence:list[LinearEvent] = [LinearBegin()]
         for e in self.event_list:
             linearSequence += e.linearize()
@@ -129,6 +339,19 @@ class Sequence(Event):
     
     # Tansforme une liste de LinearEvent en une liste d'Event et l'ajoute à la fin de la séquence
     def appendLinearSequence (self, linearSequence:list[LinearEvent]) -> None:
+        """
+        Transforms a list of LinearEvents into Events and appends them to the sequence.
+
+        This method recursively processes a linearized sequence and reconstructs the
+        hierarchical structure by:
+        1. Converting LinearCalls back to Calls
+        2. Creating new Sequences when encountering LinearBegin markers
+        3. Processing nested sequences recursively
+        4. Preserving optional flags from the linear events
+
+        Args:
+            linearSequence (list[LinearEvent]): The linearized sequence to convert and append
+        """
         i:int = 0
         while i < len(linearSequence): # Ne pas passer par un for ... in ... car on veut contrôler dans la boucle le compteur (cf cas du begin)
             # on ajoute la trace courante
@@ -154,49 +377,200 @@ class Sequence(Event):
                 self.event_list.append(newSeq)
             i += 1
 
-
 class LinearEvent:
+    """
+    Base class for linear events used in sequence linearization.
+    
+    A linear event is a basic building block used to represent sequences in a linear form.
+    It can be marked as optional and has an orientation indicating its source in the merge process.
+    
+    Attributes:
+        opt (bool): Flag indicating if the event is optional
+        orientation (str): Source orientation ('l' for line/s1, 'c' for column/s2, 'd' for diagonal/both)
+    """
     def __init__(self) -> None:
         self.opt:bool = False
-        self.orientation:str = "" # Orientation indique si la sélection de cet évènement provient de la ligne noté "l" (source s1), de la colonne noté "c" (source s2), ou de la diagonale noté "d" (sources s1 et s2 alignées) lors de la remonté de la matrice de transformation fournie par computeTransformationMatrix
+        # Orientation indique si la sélection de cet évènement provient de la ligne noté "l" (source s1), de la colonne noté "c" (source s2), ou de la diagonale noté "d" (sources s1 et s2 alignées) lors de la remonté de la matrice de transformation fournie par computeTransformationMatrix
+        self.orientation:str = "" 
 
 class LinearCall(LinearEvent):
+    """
+    Represents a linearized call event.
+    
+    A LinearCall wraps a Call event in the linearized sequence representation.
+    
+    Attributes:
+        call (Call): The original Call event being wrapped
+        opt (bool): Inherited from LinearEvent
+        orientation (str): Inherited from LinearEvent
+    """
     def __init__(self, call:Call) -> None:
+        """
+        Initializes a new LinearCall.
+        
+        Args:
+            call (Call): The Call event to wrap
+        """
         super().__init__()
         self.call:Call = call
     
     def __str__(self) -> str:
+        """
+        Returns a string representation of the linear call.
+        
+        Returns:
+            str: String representation of the wrapped call
+        """
         return str(self.call)
     
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two linear calls are equal.
+        
+        Args:
+            other (object): The linear call to compare with
+            
+        Returns:
+            bool: True if both wrap the same call
+        """
         return isinstance(other, LinearCall) and self.call == other.call
 
 class LinearBorder(LinearEvent):
+    """
+    Abstract base class for sequence border events (Begin/End).
+    
+    Border events mark the boundaries of sequences in the linearized representation.
+    """
     def __init__(self) -> None:
         super().__init__()
 
 class LinearBegin(LinearBorder):
+    """
+    Represents the beginning of a sequence in linear form.
+    
+    Marked with '[' in string representation.
+    """
     def __init__(self) -> None:
         super().__init__()
 
     def __str__(self) -> str:
+        """
+        Returns the string representation of sequence beginning.
+        
+        Returns:
+            str: Always returns '['
+        """
         return "["
     
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two sequence beginnings are equal.
+        
+        Args:
+            other (object): The border to compare with
+            
+        Returns:
+            bool: True if other is also a LinearBegin
+        """
         return isinstance(other, LinearBegin)
     
 class LinearEnd(LinearBorder):
+    """
+    Represents the end of a sequence in linear form.
+    
+    Marked with ']' in string representation.
+    Can be marked as overlapped to handle special merge cases.
+    
+    Attributes:
+        overlapped (bool): Flag indicating if this end is part of an overlapping sequence
+    """
     def __init__(self) -> None:
         super().__init__()
         self.overlapped:bool = False
 
     def __str__(self) -> str:
+        """
+        Returns the string representation of sequence end.
+        
+        Returns:
+            str: Always returns ']'
+        """
         return "]"
     
     def __eq__(self, other: object) -> bool:
+        """
+        Checks if two sequence ends are equal.
+        
+        Args:
+            other (object): The border to compare with
+            
+        Returns:
+            bool: True if other is also a LinearEnd
+        """
         return isinstance(other, LinearEnd)
 
+class LinearEventWithStats:
+    """
+    Container for a linear event sequence with associated statistics.
+    
+    Tracks the number of optional events, alignments, and merges performed
+    during sequence construction.
+    
+    Attributes:
+        linearEvent (list[LinearEvent]): The sequence of linear events
+        countOpt (int): Count of optional events
+        countAlign (int): Count of aligned events
+        countMerge (int): Count of merge operations
+    """
+    def __init__(self) -> None:
+        self.linearEvent:list[LinearEvent] = []
+        self.countOpt:int = 0
+        self.countAlign:int = 0
+        self.countMerge:int = 0
+    
+    def update(self, linearEvent:list[LinearEvent], countOpt:int, countAlign:int) -> None:
+        """
+        Updates the statistics for this sequence.
+        
+        Args:
+            linearEvent (list[LinearEvent]): New sequence of events
+            countOpt (int): Number of optional events to add
+            countAlign (int): Number of alignments to add
+        """
+        self.linearEvent = linearEvent
+        self.countOpt += countOpt
+        self.countAlign += countAlign
+        self.countMerge += 1
 
+class Root:
+    """
+    Root container for a sequence with associated statistics.
+    
+    Holds a sequence and tracks merge statistics.
+    
+    Attributes:
+        content (Sequence): The contained sequence
+        countOpt (int): Count of optional events
+        countAlign (int): Count of alignments
+        countMerge (int): Count of merge operations
+    """
+    def __init__(self, root:Sequence) -> None:
+        self.content:Sequence = root
+        self.countOpt:int = 0
+        self.countAlign:int = 0
+        self.countMerge:int = 0
+
+    def __eq__(self, other:object) -> bool:
+        """
+        Checks if two roots are equal.
+        
+        Args:
+            other (object): The root to compare with
+            
+        Returns:
+            bool: True if both contain the same sequence
+        """
+        return isinstance(other, Root) and self.content == other.content
 
 # Vérifie si l'évènement à la position "pos" dans "eventList" est optionnel ainsi que l'ensemble des Séquences dans lesquelles cet évènement est inclus
 # Exemple des évènements vérifiés
@@ -206,6 +580,28 @@ class LinearEnd(LinearBorder):
 #         |              \_/  \_/
 # Sb C Sb C C Sb C C Se C Se C Se C Sb C Se
 def isHierachyOptional(eventList:list[LinearEvent], pos:int) -> bool:
+    """
+    Checks if an event at a given position is optional in its hierarchical context.
+    
+    Verifies if the event itself is optional or if it's contained within an optional sequence.
+    The function traverses the sequence structure to check all containing sequences.
+    
+    Example structure checked:
+    ```
+            +---------------+----+
+            |               |    |
+            |             \\ | /\\ | /  
+            |              \\_/  \\_/
+    Sb C Sb C C Sb C C Se C Se C Se
+    ```
+    
+    Args:
+        eventList (list[LinearEvent]): The list of linear events to check
+        pos (int): Position of the event to check
+        
+    Returns:
+        bool: True if the event is optional in its context, False otherwise
+    """
     pos = 0 if pos < 0 else pos
     # si la position est au delà de la longueur de la trace, renvoyer faux
     if pos > len(eventList):
@@ -249,6 +645,37 @@ def isHierachyOptional(eventList:list[LinearEvent], pos:int) -> bool:
 # 
 # :return: la matrice d'alignement indiquant comment les deux listes de traces ont été alignées. La valeur située en bas à droite de la matrice représente la distance entre s1 et s2
 def computeTransformationMatrix(s1:list[LinearEvent], s2:list[LinearEvent]) -> list[list[int]]:
+    """
+    Computes a transformation matrix between two linearized sequences.
+    
+    Calculates a Levenshtein-like distance matrix with the following costs:
+    - Vertical cost (l[i-1]c[j] -> l[i]c[j]):
+        * 0 if l[i] is optional or a sequence end
+        * 1 otherwise
+    - Horizontal cost (l[i]c[j-1] -> l[i]c[j]):
+        * 0 if c[j] is optional or a sequence end
+        * 1 otherwise
+    - Diagonal cost (l[i-1]c[j-1] -> l[i]c[j]):
+        * 0 if l[i] != c[j]
+        * 1 if l[i] == c[j]
+    
+    Example:
+    For s1 = ABC and s2 = AC, the result matrix is:
+    ```
+        - A C
+    - [[0 1 2],
+    A  [1 0 1],
+    B  [2 1 1],
+    C  [3 2 1]]
+    ```
+    
+    Args:
+        s1 (list[LinearEvent]): First linearized sequence
+        s2 (list[LinearEvent]): Second linearized sequence
+        
+    Returns:
+        list[list[int]]: Transformation matrix showing how to align the sequences
+    """
     # matrix est une matrice de s1+1 lignes et s2+1 colonnes remplie de 0
     matrix:list[list[int]] = [[0 for _ in range(len(s2)+1)] for _ in range(len(s1)+1)]
 
@@ -257,10 +684,12 @@ def computeTransformationMatrix(s1:list[LinearEvent], s2:list[LinearEvent]) -> l
     matrix[0][0] = 0
     # initialisation de la première colonne
     for l in range(1, len(s1)+1):
-        matrix[l][0] = matrix[l-1][0] if isHierachyOptional(s1, l-1) or isinstance(s1[l-1], LinearEnd) else matrix[l-1][0]+1 # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
+        # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
+        matrix[l][0] = matrix[l-1][0] if isHierachyOptional(s1, l-1) or isinstance(s1[l-1], LinearEnd) else matrix[l-1][0]+1 
     # initialisation de la première ligne
     for c in range(1, len(s2)+1):
-        matrix[0][c] = matrix[0][c-1] if isHierachyOptional(s2, c-1) or isinstance(s2[c-1], LinearEnd) else matrix[0][c-1]+1 # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
+        # on ajoute 1 si la trace n'est pas optionnelle (ou fille d'une trace optionnelle) et que ce n'est pas une fin de séquence
+        matrix[0][c] = matrix[0][c-1] if isHierachyOptional(s2, c-1) or isinstance(s2[c-1], LinearEnd) else matrix[0][c-1]+1
 
     # calcul de la distance
     substitutionCost:int
@@ -288,6 +717,31 @@ def computeTransformationMatrix(s1:list[LinearEvent], s2:list[LinearEvent]) -> l
 #
 # :return: l'indice de fin dans "linearSequence" de la séquence dans laquelle l'évènemenr à l'indice "start" est inclus. -1 est retourné si l'algorithme a atteind le bout de la trace sans identifié la fin de la séquence associé à l'évènement de l'indice "start".
 def getEndPosOfLinearSequence(linearSequence:list[LinearEvent], start:int, step:int) -> int:
+    """
+    Finds the end position of a sequence from a given starting point.
+    
+    If the starting position is a sequence end, returns immediately.
+    Otherwise, searches forward or backward (based on step) to find the corresponding
+    sequence end.
+    
+    Example structure:
+    ```
+     +---+---------------------+
+     |   |                     |
+     |   |         +---+       |
+     |   |         | \\ | /   \\ | / 
+     |   |         |  \\_/     \\_/ 
+    Sb C C Sb C C Sb C Se Se C Se
+    ```
+    
+    Args:
+        linearSequence (list[LinearEvent]): The linearized sequence to search in
+        start (int): Starting position in the sequence
+        step (int): Direction to search (positive for forward, negative for backward)
+        
+    Returns:
+        int: Position of the sequence end, or -1 if not found
+    """
     seqCounter:int = 0
     i:int = 0 if start < 0 else start
 
@@ -312,6 +766,24 @@ def getEndPosOfLinearSequence(linearSequence:list[LinearEvent], start:int, step:
 
 # Reconfigure mergedSequence en cas de détection de chevauchement, on assume que le dernier élément de la séquence fusionnée est un LinearBegin
 def manageOverlapping(mergedSequence:list[LinearEvent]) -> None:
+    """
+    Handles overlapping sequences during merge.
+    
+    Reconfigures the merged sequence when overlapping is detected. Assumes the last
+    element of the merged sequence is a LinearBegin.
+    
+    The function handles three main cases:
+    1. Begin and End have same orientation - no action needed
+    2. End is diagonal but Begin isn't - transforms End to match Begin's orientation
+    3. Begin is diagonal but End isn't - splits Begin to handle both orientations
+    4. Begin and End have opposite orientations - handles sequence overlap
+    
+    Args:
+        mergedSequence (list[LinearEvent]): The sequence being merged (modified in-place)
+        
+    Raises:
+        Exception: If prerequisites are not met or incompatible types are found
+    """
     if not isinstance(mergedSequence[-1], LinearBegin):
         raise Exception	("Prerequisite not satisfied, mergedSequence has to end with a LinearBegin event")
     
@@ -388,6 +860,22 @@ def manageOverlapping(mergedSequence:list[LinearEvent]) -> None:
 #
 # :param mergedSequence: la séquence fusionnée à adapter en fonction des enchainements de Begin et End et de leur orientation (Cette liste est inversé, le premier élément de la liste doit être le plus ancien).
 def manageBorder(mergedSequence:list[LinearEvent]) -> None:
+    """
+    Manages sequence borders during merge.
+    
+    Handles the addition of Begin and End events in the merged sequence.
+    Assumes the last event in the sequence is the most recently added Begin or End.
+    
+    The function:
+    1. For End events: Marks them as potentially optional
+    2. For Begin events: Handles potential overlapping
+    
+    Args:
+        mergedSequence (list[LinearEvent]): The sequence being merged (modified in-place)
+        
+    Raises:
+        Exception: If the last event is not a LinearBorder
+    """
     # Récupérer la dernière extrémitée ajoutée
     border = mergedSequence[-1]
     if isinstance(border, LinearEnd):
@@ -408,6 +896,32 @@ def manageBorder(mergedSequence:list[LinearEvent]) -> None:
 # :param transformationMatrix: la matrice de transformation permettant de savoir comment aligner les traces de s1 et s2 (voir computeTransformationMatrix pour la génération de cette matrice de transformation)
 # :return: résultat de la fusion entre s1 et s2 (Attention la liste retournée est inversée à savoir que le premier évènement est la fusion des derniers évènements de s1 et s2). 
 def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transformationMatrix:list[list[int]]) -> list[LinearEvent]:
+    """
+    Merges two linearized sequences using a transformation matrix.
+
+    This function performs a bottom-up traversal of the transformation matrix to merge
+    sequences s1 and s2. The merge process follows these rules:
+    1. For first row/column: Take events from the remaining sequence
+    2. For Call vs Call:
+       - If equal and diagonal cost is minimal: Take diagonal (marked as 'd')
+       - If vertical cost is minimal or equal with longer s1: Take from s1 (marked as 'l')
+       - Otherwise: Take from s2 (marked as 'c')
+    3. For Call vs Border or Border vs Call:
+       - Take the minimal cost path, preferring the Border's direction if costs are equal
+    4. For Border vs Border:
+       - If same type and diagonal cost is minimal: Take diagonal
+       - If vertical cost is minimal or equal with specific conditions: Take from s1
+       - Otherwise: Take from s2
+
+    Args:
+        s1 (list[LinearEvent]): First linearized sequence to merge
+        s2 (list[LinearEvent]): Second linearized sequence to merge
+        transformationMatrix (list[list[int]]): Alignment matrix from computeTransformationMatrix
+
+    Returns:
+        list[LinearEvent]: Merged sequence (in reverse order, first event is the merge of
+        the last events from s1 and s2)
+    """
     # Séquence fusionnée
     mergedSequence:list[LinearEvent] = []
     mergedEvent:Optional[LinearEvent] = None
@@ -418,7 +932,8 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
     while l > 0 or c > 0:
         # si on est sur la première ligne (ou la première colonne) prendre la trace de la ligne (respectivement colonne)
         if l == 0 or c == 0:
-            mergedEvent = copy.deepcopy(s2[c-1] if l == 0 else s1[l-1]) # transformationMatrix contient une ligne et une colonne de plus que s1 et s2, d'où le -1
+            # transformationMatrix contient une ligne et une colonne de plus que s1 et s2, d'où le -1
+            mergedEvent = copy.deepcopy(s2[c-1] if l == 0 else s1[l-1]) 
             mergedEvent.orientation = "c" if l == 0 else "l"
             mergedSequence.append(mergedEvent) 
             if l == 0:
@@ -505,7 +1020,24 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
 # Déterminer les options en fonction des orientations prises et des chevauchements détectés
 #
 # :param mergedSequence: la séquence fusionnée à adapter en fonction des enchainements de Begin et End et de leur orientation (Cette liste est inversé, le premier élément de la liste doit être le plus ancien).
-def updateOptions(mergedSequence:list[LinearEvent]) -> None:
+# :return: un couple contenant en premier le nombre d'option définit lors de ce merge et en second le nombre d'alignement (nbOpt, nbAlign)
+def updateOptions(mergedSequence:list[LinearEvent]) -> tuple[int, int]:
+    """
+    Updates event options based on orientations and overlaps.
+    
+    Determines which events should be marked as optional based on:
+    1. Event orientation
+    2. Sequence containment
+    3. Sequence overlapping
+    
+    Args:
+        mergedSequence (list[LinearEvent]): The sequence to update
+        
+    Returns:
+        tuple[int, int]: (number of options set, number of alignments)
+    """
+    nbOpt:int = 0
+    nbAlign:int = 0
     for eventPos in range(len(mergedSequence)):
         event:LinearEvent = mergedSequence[eventPos]
         # On ne touche pas à l'option dans le cas où on est sur un End
@@ -530,7 +1062,13 @@ def updateOptions(mergedSequence:list[LinearEvent]) -> None:
             #   OU
             #   s'il y a eu un alignment et que son end associé nous indique un chevauchement de séquence
             if (event.orientation != "d" and ((isinstance(event, LinearCall) and (end == None or not end.opt)) or (isinstance(event, LinearBegin) and end != None and end.opt) or (end != None and end.overlapped))) or (event.orientation == "d" and end != None and end.overlapped):
-                event.opt = True
+                # Ne comptabiliser la trace comme optionnelle que qi elle ne l'était pas déjà
+                if not event.opt:
+                    event.opt = True
+                    nbOpt += 1
+            elif (event.orientation == "d"):
+                nbAlign += 1
+    return (nbOpt, nbAlign)
 
 # Fusionne deux séquences linéarisées
 #
@@ -546,9 +1084,27 @@ def updateOptions(mergedSequence:list[LinearEvent]) -> None:
 # :param s1: la première séquence linéarisée passée en entrée de la fusion.
 # :param s2: la seconde séquence linéarisée passée en entrée de la fusion.
 #
-# :return: la nouvelle séquence créée résultante de la fusion de s1 et s2
-def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> list[LinearEvent]:
-    mergedSequence:list[LinearEvent] = [] # La séquence contenant le résultat de la fusion
+# :return: la nouvelle un tuple contenant en premier la séquence créée résultante de la fusion de s1 et s2, en second le nombre d'option définit lors de cette fusion et en troisème le nombre d'alignements
+def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> LinearEventWithStats:
+    """
+    Merges two linearized sequences into a new generalized sequence.
+    
+    Creates a new sequence that represents the most general form combining both
+    input sequences. Handles special cases like:
+    1. [AB[C]] and [[A]BC] => [[A]B[C]]
+    2. A[C] and AB => A[*C]B
+    3. A[BC] and [AB]C => [*A[B]*C]
+    4. A[B] and [AB] => [A[B]]
+    5. [A]B and [AB] => [[A]B]
+    
+    Args:
+        s1 (list[LinearEvent]): First sequence to merge
+        s2 (list[LinearEvent]): Second sequence to merge
+        
+    Returns:
+        LinearEventWithStats: Merged sequence with statistics about options and alignments
+    """
+    mergedSequence:list[LinearEvent] = []
 
     transformationMatrix:list[list[int]] = computeTransformationMatrix(s1, s2)
 
@@ -556,8 +1112,11 @@ def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> list[Lin
     mergedSequence:list[LinearEvent] = computeMergedSequence(s1, s2, transformationMatrix)
 
     # Déterminer les options en fonction des orientations prises et des chevauchements détectés
-    updateOptions(mergedSequence)
+    statsMerge:tuple[int, int] = updateOptions(mergedSequence)
 
     # On met le vecteur de fusion dans le bon sens
     mergedSequence.reverse()
-    return mergedSequence
+
+    result:LinearEventWithStats = LinearEventWithStats()
+    result.update(mergedSequence, statsMerge[0], statsMerge[1]-1) # -1 sur le compteur d'alignement pour ne pas comptabiliser le merge du premier Begin qui sera toujours présent
+    return result

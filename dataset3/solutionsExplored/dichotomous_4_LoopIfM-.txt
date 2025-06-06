@@ -1,0 +1,5188 @@
+{
+    "4.00gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "8.00gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "4.00gr_1.00ws_0.50pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.50pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_1.00ws_1.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_1.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.70ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.70ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.60ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.60ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.70ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.70ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.60ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.60ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_1.00ws_0.80pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.80pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.80ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.80ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.50ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_1.00ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.70ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.70ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_1.00ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.50ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.50ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.70ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.70ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.70ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.70ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.60ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.60ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.60ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.60ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_1.00ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.80ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.80ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.80ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.80ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.80ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.80ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_1.00ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.80ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.80ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_1.00ws_0.40pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_1.00ws_0.40pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*DB*C*D]B[CDB]CDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DBC]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DB*C]DZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[D[BCDBCD]*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]Z",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "ABCDBC[DB*D*B*CD*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*]D*]Z",
+            "OptCount": "8",
+            "AlignCount": "29",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "9"
+        },
+        {
+            "Compression": "AB[CD[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CD*B]CDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "ABC[DB*CD*B*D*B*C]DBCDZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        },
+        {
+            "Compression": "ABC[D[BC*D*B*C*D*]B*C]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]BCDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "AB[CD*[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]BCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*]D*]Z",
+            "OptCount": "9",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]Z",
+            "OptCount": "4",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DBCDZ",
+            "OptCount": "3",
+            "AlignCount": "23",
+            "MergeCount": "8"
+        }
+    ],
+    "8.00gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*DB*C*D]B[CDB]CDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DBC]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DB*C]DZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[D[BCDBCD]*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]Z",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "ABCDBC[DB*D*B*CD*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*]D*]Z",
+            "OptCount": "8",
+            "AlignCount": "29",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "9"
+        },
+        {
+            "Compression": "AB[CD[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CD*B]CDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "ABC[DB*CD*B*D*B*C]DBCDZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        },
+        {
+            "Compression": "ABC[D[BC*D*B*C*D*]B*C]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]BCDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "AB[CD*[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]BCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*]D*]Z",
+            "OptCount": "9",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]Z",
+            "OptCount": "4",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DBCDZ",
+            "OptCount": "3",
+            "AlignCount": "23",
+            "MergeCount": "8"
+        }
+    ],
+    "4.00gr_0.30ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "8.00gr_0.30ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "4.00gr_0.30ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "8.00gr_0.30ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "4.00gr_0.40ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.40ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.40ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.40ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "8.00gr_0.20ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "4.00gr_0.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "8.00gr_0.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "4.00gr_0.20ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "8.00gr_0.00ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "4.00gr_0.10ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "8.00gr_0.10ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "4.00gr_0.10ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "8.00gr_0.20ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "4.00gr_0.10ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "8.00gr_0.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "4.00gr_0.30ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.10ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.10ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.00pb": [
+        {
+            "Compression": "A[D*B*C*D*BCD*B*C*D*]Z",
+            "OptCount": "4",
+            "AlignCount": "19",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[D*B*D*B*CD*B*D*B*]Z",
+            "OptCount": "4",
+            "AlignCount": "17",
+            "MergeCount": "19"
+        },
+        {
+            "Compression": "A[D*B*D*B*C*D*BCD*B*D*B*C*D*]Z",
+            "OptCount": "6",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]CDZ",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]Z",
+            "OptCount": "3",
+            "AlignCount": "19",
+            "MergeCount": "19"
+        }
+    ],
+    "8.00gr_0.00ws_0.00pb": [
+        {
+            "Compression": "A[D*B*C*D*BCD*B*C*D*]Z",
+            "OptCount": "4",
+            "AlignCount": "19",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[D*B*D*B*CD*B*D*B*]Z",
+            "OptCount": "4",
+            "AlignCount": "17",
+            "MergeCount": "19"
+        },
+        {
+            "Compression": "A[D*B*D*B*C*D*BCD*B*D*B*C*D*]Z",
+            "OptCount": "6",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]CDZ",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]Z",
+            "OptCount": "3",
+            "AlignCount": "19",
+            "MergeCount": "19"
+        }
+    ],
+    "4.00gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.10ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.00ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.10ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.10ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.40ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.40ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "8.00gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "4.00gr_0.30ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.30ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "4.00gr_0.40ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "8.00gr_0.40ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "0.00gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_1.00ws_0.50pb": [],
+    "0.00gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_1.00ws_1.00pb": [],
+    "0.00gr_0.80ws_0.80pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.80ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_1.00ws_0.80pb": [],
+    "1.60gr_1.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_1.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.90pb": [],
+    "0.80gr_0.90ws_0.90pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_1.00ws_0.90pb": [],
+    "0.80gr_1.00ws_0.90pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_1.00pb": [],
+    "0.80gr_0.90ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_1.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.80pb": [],
+    "0.80gr_0.90ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_1.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.50pb": [],
+    "1.60gr_0.80ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_1.00ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.70pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.80ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_1.00ws_0.70pb": [],
+    "1.60gr_1.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.60pb": [],
+    "0.80gr_0.90ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_1.00ws_0.60pb": [],
+    "0.80gr_1.00ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.70pb": [],
+    "0.80gr_0.90ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_1.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.50pb": [],
+    "0.80gr_0.90ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_1.00ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.60pb": [],
+    "0.80gr_0.80ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.70ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.60ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.70ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.60ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.80ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_1.00ws_0.50pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.80ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_1.00ws_1.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.70ws_1.00pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.70ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.60ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.60ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.70ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.60ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.70ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.70ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.70ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_1.00ws_0.80pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.50ws_0.00pb": [],
+    "0.00gr_1.00ws_0.00pb": [],
+    "0.00gr_0.80ws_0.30pb": [],
+    "1.60gr_0.80ws_0.30pb": [],
+    "0.00gr_1.00ws_0.30pb": [],
+    "1.60gr_1.00ws_0.30pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.40pb": [],
+    "0.80gr_0.90ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_1.00ws_0.40pb": [],
+    "0.80gr_1.00ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.30pb": [],
+    "0.80gr_0.90ws_0.30pb": [],
+    "0.80gr_1.00ws_0.30pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_0.30pb": [],
+    "1.60gr_0.90ws_0.30pb": [],
+    "0.80gr_0.80ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.80ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.90ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.40pb": [],
+    "1.60gr_0.90ws_0.50pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_1.00ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.00pb": [],
+    "1.60gr_0.80ws_0.00pb": [],
+    "1.60gr_1.00ws_0.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.80ws_0.20pb": [],
+    "1.60gr_0.80ws_0.20pb": [],
+    "0.00gr_1.00ws_0.20pb": [],
+    "1.60gr_1.00ws_0.20pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.10pb": [],
+    "0.80gr_0.90ws_0.10pb": [],
+    "0.00gr_1.00ws_0.10pb": [],
+    "0.80gr_1.00ws_0.10pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.20pb": [],
+    "0.80gr_0.90ws_0.20pb": [],
+    "0.80gr_1.00ws_0.20pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.90ws_0.00pb": [],
+    "0.80gr_0.90ws_0.00pb": [],
+    "0.80gr_1.00ws_0.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.80ws_0.10pb": [],
+    "1.60gr_0.80ws_0.10pb": [],
+    "1.60gr_0.90ws_0.10pb": [],
+    "0.80gr_0.80ws_0.20pb": [],
+    "1.60gr_0.90ws_0.20pb": [],
+    "0.80gr_0.80ws_0.00pb": [],
+    "1.60gr_0.90ws_0.00pb": [],
+    "0.00gr_0.80ws_0.10pb": [],
+    "2.40gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.70ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.70ws_0.30pb": [],
+    "1.60gr_0.70ws_0.30pb": [],
+    "0.80gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.70ws_0.30pb": [],
+    "0.00gr_0.60ws_0.30pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.60ws_0.40pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.70ws_0.40pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.60ws_0.50pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.50ws_0.40pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.50ws_0.00pb": [],
+    "0.00gr_0.70ws_0.00pb": [],
+    "1.60gr_0.70ws_0.00pb": [],
+    "0.00gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.70ws_0.20pb": [],
+    "1.60gr_0.70ws_0.20pb": [],
+    "0.80gr_0.60ws_0.10pb": [],
+    "1.60gr_0.60ws_0.10pb": [],
+    "0.80gr_0.70ws_0.10pb": [],
+    "1.60gr_0.70ws_0.10pb": [],
+    "0.80gr_0.60ws_0.20pb": [],
+    "1.60gr_0.60ws_0.20pb": [],
+    "0.80gr_0.70ws_0.20pb": [],
+    "0.80gr_0.60ws_0.00pb": [],
+    "1.60gr_0.60ws_0.00pb": [],
+    "0.80gr_0.70ws_0.00pb": [],
+    "0.00gr_0.60ws_0.10pb": [],
+    "0.00gr_0.70ws_0.10pb": [],
+    "0.00gr_0.60ws_0.20pb": [],
+    "0.00gr_0.60ws_0.00pb": [],
+    "0.80gr_0.50ws_0.10pb": [],
+    "1.60gr_0.50ws_0.10pb": [],
+    "0.80gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.50ws_0.00pb": [],
+    "0.00gr_0.50ws_0.10pb": [],
+    "2.40gr_0.80ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_1.00ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.80ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_1.00ws_0.30pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.80ws_0.40pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_1.00ws_0.40pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.80ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_1.00ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.50ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.50ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.70ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.70ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.60ws_0.20pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.60ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_1.00ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.30ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.30ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.30ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "2.40gr_0.40ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.40ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.20ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "2.40gr_0.10ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "2.40gr_0.10ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "2.40gr_0.10ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "2.40gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*DB*C*D]B[CDB]CDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DBC]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DB*C]DZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[D[BCDBCD]*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]Z",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "ABCDBC[DB*D*B*CD*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*]D*]Z",
+            "OptCount": "8",
+            "AlignCount": "29",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "9"
+        },
+        {
+            "Compression": "AB[CD[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CD*B]CDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "ABC[DB*CD*B*D*B*C]DBCDZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        },
+        {
+            "Compression": "ABC[D[BC*D*B*C*D*]B*C]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]BCDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "AB[CD*[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]BCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*]D*]Z",
+            "OptCount": "9",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]Z",
+            "OptCount": "4",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DBCDZ",
+            "OptCount": "3",
+            "AlignCount": "23",
+            "MergeCount": "8"
+        }
+    ],
+    "2.40gr_0.30ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.30ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.10ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.10ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BC*DB*C*D]B[CDB]CDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DBC]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DB*C]DZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[D[BCDBCD]*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]Z",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "ABCDBC[DB*D*B*CD*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*]D*]Z",
+            "OptCount": "8",
+            "AlignCount": "29",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "9"
+        },
+        {
+            "Compression": "AB[CD[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CD*B]CDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*C*D*B*D*B*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "ABC[DB*CD*B*D*B*C]DBCDZ",
+            "OptCount": "5",
+            "AlignCount": "21",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        },
+        {
+            "Compression": "ABC[D[BC*D*B*C*D*]B*C]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]BCDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "AB[CD*[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]BCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        },
+        {
+            "Compression": "A[BC*[DB*D*B*C*]D*]Z",
+            "OptCount": "9",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]Z",
+            "OptCount": "4",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC[DB*D*B*C*D*B*C*]D*]Z",
+            "OptCount": "13",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*D*B*C]DBCDZ",
+            "OptCount": "3",
+            "AlignCount": "23",
+            "MergeCount": "8"
+        }
+    ],
+    "0.80gr_0.30ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.30ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.30ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.30ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.30ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "1.60gr_0.30ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "0.80gr_0.40ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.40ws_0.60pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.40ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.40ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.00ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.20ws_0.50pb": [
+        {
+            "Compression": "A[BD*B*CD]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.00ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.20ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.00ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "1.60gr_0.00ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "0.80gr_0.10ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "1.60gr_0.10ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "0.80gr_0.10ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.70pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "1.60gr_0.20ws_0.60pb": [
+        {
+            "Compression": "ABC[DBD*B*C]DZ",
+            "OptCount": "2",
+            "AlignCount": "27",
+            "MergeCount": "9"
+        }
+    ],
+    "0.80gr_0.10ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.50pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.00ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.00ws_1.00pb": [
+        {
+            "Compression": "A[BC[DB*[CDBCDB]*C*]D*]BCDZ",
+            "OptCount": "14",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CDB]CDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DBC]DZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BC[DB*C]DZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[D[BCDBCD]*B*C]DZ",
+            "OptCount": "5",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*[CD*B*C*D*B*]C*][DBC]DZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]*C*D][BCD]Z",
+            "OptCount": "11",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB[CD*B*C*D*B*]C*]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]Z",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "AB[CD[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*[CD*B*C*D*B*]C*D]BCDZ",
+            "OptCount": "11",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]*C*D][BC*D]Z",
+            "OptCount": "12",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*[C*D*BC*D*B*]CD*B*C*]DZ",
+            "OptCount": "12",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCDB[CD*BC*D*B]CDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "ABC[DB*[CD*B*C*D*B*]C*][DB*C]DZ",
+            "OptCount": "11",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]C*D]BCDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "5"
+        },
+        {
+            "Compression": "ABCD[B[CDBCDB]*C*DB*CD]Z",
+            "OptCount": "6",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]B[CD*B]CDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D]BCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[B[CD*B*C*D*B*]C*D]Z",
+            "OptCount": "9",
+            "AlignCount": "29",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[BC*D]BCDZ",
+            "OptCount": "1",
+            "AlignCount": "28",
+            "MergeCount": "10"
+        },
+        {
+            "Compression": "ABC[D[BC*D*B*C*D*]B*C]DZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]BCDZ",
+            "OptCount": "4",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BCD]BCDZ",
+            "OptCount": "3",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*[CD*B*C*D*B*]C*]DZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*[CD*B*C*D*B*]C*]DBCDZ",
+            "OptCount": "10",
+            "AlignCount": "22",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "AB[C[DB*[CDBCDB]*C*]D*B]CDZ",
+            "OptCount": "14",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "AB[CD*[BC*D*B*C*D*]B*]CDZ",
+            "OptCount": "10",
+            "AlignCount": "25",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*[CDBCDB]*C*]D*]Z",
+            "OptCount": "15",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABCD[BC*DB*C*D]BCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "20",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC[DB*[CDBCDB]*C*]D*]Z",
+            "OptCount": "14",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*[DB*[CDBCDB]*C*]D*]BCDZ",
+            "OptCount": "15",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        },
+        {
+            "Compression": "ABCDB[CD*BC*D*B]CDBCDBCDBCDZ",
+            "OptCount": "3",
+            "AlignCount": "14",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]*C*D]Z",
+            "OptCount": "11",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]*C*D]BCDBCDZ",
+            "OptCount": "11",
+            "AlignCount": "22",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "AB[C[DB[CDBCDB]*C]*D*B]CDZ",
+            "OptCount": "13",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[B[CD*B*C*D*B*]C*D]BCDZ",
+            "OptCount": "9",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "ABC[DB*[CD*B*C*D*B*]C*]DBCDBCDZ",
+            "OptCount": "10",
+            "AlignCount": "19",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[B[C*D*B*C*D*B*]*C*D]BCDZ",
+            "OptCount": "11",
+            "AlignCount": "25",
+            "MergeCount": "4"
+        },
+        {
+            "Compression": "A[BC*DB*C*D][BC*D]Z",
+            "OptCount": "4",
+            "AlignCount": "28",
+            "MergeCount": "3"
+        }
+    ],
+    "0.80gr_0.30ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.30ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.30ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.30ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.10ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.80pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.10ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_1.00pb": [
+        {
+            "Compression": "A[BC*D]Z",
+            "OptCount": "1",
+            "AlignCount": "31",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.00ws_0.00pb": [],
+    "2.40gr_0.30ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.30ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.30ws_0.00pb": [],
+    "1.60gr_0.30ws_0.00pb": [],
+    "0.00gr_0.30ws_0.20pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.30ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.40ws_0.00pb": [],
+    "1.60gr_0.40ws_0.00pb": [],
+    "0.80gr_0.40ws_0.10pb": [],
+    "1.60gr_0.40ws_0.10pb": [],
+    "0.00gr_0.40ws_0.00pb": [],
+    "0.00gr_0.40ws_0.10pb": [],
+    "0.80gr_0.30ws_0.00pb": [],
+    "0.80gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.30ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.40ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.40ws_0.20pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.40ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.10ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.10ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.00ws_0.00pb": [
+        {
+            "Compression": "A[D*BCD*]BDBC[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]CD[BC]DZ",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]C[D*BCD*]Z",
+            "OptCount": "4",
+            "AlignCount": "16",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[DBCD]BDBC[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD][D*BD*]C[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "25",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]C[[BC]*D[BC]*]Z",
+            "OptCount": "4",
+            "AlignCount": "18",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[D*BCD*][D*BD*]C[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]CDZ",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]Z",
+            "OptCount": "3",
+            "AlignCount": "19",
+            "MergeCount": "19"
+        }
+    ],
+    "0.00gr_0.20ws_0.00pb": [],
+    "1.60gr_0.20ws_0.00pb": [],
+    "0.00gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.10ws_0.00pb": [],
+    "1.60gr_0.10ws_0.00pb": [],
+    "0.80gr_0.20ws_0.00pb": [],
+    "0.80gr_0.10ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.10ws_0.00pb": [],
+    "0.00gr_0.10ws_0.10pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.00gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.00ws_0.00pb": [
+        {
+            "Compression": "A[DBCD][B][DBCD][B]C[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD][B]]CDZ",
+            "OptCount": "2",
+            "AlignCount": "32",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B][D*BCD*][B]CDZ",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B]D[BC]D[B]C[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D][BC][D]BC[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]B[D][BC][D]BC[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]B[DBCD]BCDZ",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D*BCD*]BC[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B]D[B]C[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD][B]D[BC]D[B]C[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D*BCD*]BCDZ",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[DBCD]BD[BC]DBC[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]BDBC[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD][B]]C[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "43",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B][D*BCD*][B]C[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D*BCD*]BC[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "15",
+            "MergeCount": "15"
+        },
+        {
+            "Compression": "A[DBCD]B[DBCD]BCD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD]B]CD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD][B]]C[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "31",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "18"
+        },
+        {
+            "Compression": "A[[DBCD]B]C[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "39",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD]B]C[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "27",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD][B]]C[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "34",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD][B][DBCD][B]CDZ",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B][D*BCD*][B]C[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "20",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD]B]CDZ",
+            "OptCount": "2",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]B[DBCD]BC[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B][D][BC][D][B]C[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "20",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]BD[BC]DBC[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "15"
+        },
+        {
+            "Compression": "A[DBCD][B]D[B]C[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[[DBCD]B]C[D][BC][D]Z",
+            "OptCount": "2",
+            "AlignCount": "30",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]BDBC[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[[DBCD][B]]CD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "32",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]B[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD][B][D][BC][D][B]C[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "28",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD]B[DBCD]BC[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "27",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[DBCD][B][DBCD][B]C[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "29",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[DBCD][B][DBCD][B]CD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "26",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*][B][D*BCD*][B]CD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*BCD*]B[D*BCD*]BCD[BC]DZ",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "15"
+        }
+    ],
+    "0.80gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "0.80gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.00gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[BCD]BD[BCD]Z",
+            "OptCount": "0",
+            "AlignCount": "30",
+            "MergeCount": "10"
+        }
+    ],
+    "1.60gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.30ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.30ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.00ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.10ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.20ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.20ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.00ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.00ws_0.40pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "0.80gr_0.10ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "1.60gr_0.10ws_0.30pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.00pb": [
+        {
+            "Compression": "A[D*B*CD*B*][D*B*CD*B*]Z",
+            "OptCount": "4",
+            "AlignCount": "14",
+            "MergeCount": "18"
+        },
+        {
+            "Compression": "A[D*BCD*]BDBC[D*BCD*]Z",
+            "OptCount": "2",
+            "AlignCount": "16",
+            "MergeCount": "16"
+        },
+        {
+            "Compression": "A[DBCD]BDBC[DBCD]Z",
+            "OptCount": "2",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        },
+        {
+            "Compression": "A[D*B*C*D*BCD*B*C*D*]Z",
+            "OptCount": "4",
+            "AlignCount": "19",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[DBCD][D*BD*]C[DBCD]Z",
+            "OptCount": "3",
+            "AlignCount": "25",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[[DBD]*C*DBCD[DBD]*C*]Z",
+            "OptCount": "5",
+            "AlignCount": "24",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[D*BCD*][D*BD*]C[D*BCD*]Z",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "3"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]CDZ",
+            "OptCount": "3",
+            "AlignCount": "17",
+            "MergeCount": "17"
+        },
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[D*B*D*BCD*B*D*]Z",
+            "OptCount": "3",
+            "AlignCount": "19",
+            "MergeCount": "19"
+        },
+        {
+            "Compression": "A[DBCDB]Z",
+            "OptCount": "4",
+            "AlignCount": "24",
+            "MergeCount": "2"
+        }
+    ],
+    "2.40gr_0.00ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.00ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.30ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.40ws_0.10pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.20ws_0.10pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.20ws_0.20pb": [
+        {
+            "Compression": "A[B*D*BCDB*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "29",
+            "MergeCount": "11"
+        }
+    ],
+    "2.40gr_0.30ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ],
+    "2.40gr_0.40ws_0.00pb": [
+        {
+            "Compression": "A[B*C*DB*C*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        },
+        {
+            "Compression": "A[C*D*BC*D*]Z",
+            "OptCount": "2",
+            "AlignCount": "18",
+            "MergeCount": "21"
+        }
+    ]
+}

@@ -7,7 +7,6 @@ import numpy as np
 import sys
 from decimal import Decimal
 import argparse
-from PTKE import PTKE
 
 # la classe Point
 # un objet Point représente par sa valeur de gr, ws et pb
@@ -713,8 +712,6 @@ def parse_arguments() -> argparse.Namespace:
 	# Options communes aux deux formats
 	parser.add_argument('-m', '--mode', choices=['exhaustive', 'dichotomous'],
 					default='dichotomous', help='Mode d\'analyse (défaut: dichotomous)')
-	parser.add_argument('-j', '--jobs', type=int, default=5,
-					help='Nombre de jobs pour le traitement parallèle (défaut: 5)')
 	
 	return parser.parse_args()
 
@@ -747,8 +744,6 @@ if __name__ == "__main__":
 	}
 
 	args = parse_arguments()
-	
-	PTKE.PROCESS_NUMBER = args.jobs
 	
 	if args.file:
 		# Mode fichier individuel

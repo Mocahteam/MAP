@@ -124,8 +124,6 @@ class PTKE:
     K:int
     # GAP_RATIO controls the size of gaps between episodes in relation to the length of the episode. GAP_RATIO is a multiplier used by to jump events proportionaly to episode size (will produce optional events). 0 means episodes will be merge if no gap exists between them.
     GAP_RATIO:float
-    # Number of processes to use for parallel processing
-    PROCESS_NUMBER:int = 5
 
     def __init__(self) -> None:
         """
@@ -203,14 +201,14 @@ class PTKE:
                     kEpisode.explored = True
 
             # Ici les bounds des kEpisodes peuvent se chevaucher ([... <3,5> <4,6> ...] => dans cet exemple le premier bound fini à 5 alors que le suivant commence à 4). Pour la suite de l'algo on ne peut avoir de chevauchements entre les bounds. On va donc créer autant d'éposides que nécessaire pour désenlacer les bounds de chacun des kEpisodes
-            # Si la longueur moyenne est supérieur à un seuil, traiter en parallèle
-
+            
+            # Si la longueur moyenne des bounds à désenlacer pour ces nouveaux épisodes est supérieur à un seuil, les traiter en parallèle
             if len(newEpisodes) > 0 and lengthSum/len(newEpisodes) > 100:
                 print ("MT")
                 # Désenlacement des épisodes en parallèle
                 # Création d'un pool avec X processus
                 results:list[list[NonOverlappedEpisode]]
-                with Pool(processes=PTKE.PROCESS_NUMBER) as pool:
+                with Pool(processes=5) as pool:
                     results = pool.map(unoverlapEpisode, [(newEpi, NonOverlappedEpisode.MAX_SUP, NonOverlappedEpisode.PROXIMITY_BALANCING, NonOverlappedEpisode.WEIGHT_SUPPORT) for newEpi in newEpisodes])
                 # ajouter les nouveaux épisodes aux top-k
                 for result in results:

@@ -689,7 +689,7 @@ def run(dichotomous:bool, files:list[str], mainDir:str) -> None:
 			g_exploredMap_dict:dict[str, list[CompressionStats]] = {}
 			for key, value in g_exploredMap.items():
 				g_exploredMap_dict[key] = value.to_dict()
-			with open(mainDir+"/solutionsExplored/dichotomous_"+fileName+".txt", "w", encoding="utf-8") as fichier:
+			with open(mainDir+"/solutionsExplored/exhaustive_"+fileName+".txt", "w", encoding="utf-8") as fichier:
 				json.dump(g_exploredMap_dict, fichier, default=custom_serializer, ensure_ascii=False, indent=4)
 				#fichier.write(str(g_exploredMap).replace("),", "),\n"))
 			#print(str(g_exploredMap))

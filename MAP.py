@@ -17,22 +17,22 @@ class CompressionStats:
     compression string, score, and various counters for operations performed.
     
     Attributes:
-        compression (str): The compressed representation
+        compression (Sequence): The compressed representation
         countOpt (int): Count of optional elements
         countAlign (int): Count of alignment operations
         countMerge (int): Count of merge operations
     """
-    def __init__(self, compression:str, countOpt:int, countAlign:int, countMerge:int) -> None:
+    def __init__(self, compression:Sequence, countOpt:int, countAlign:int, countMerge:int) -> None:
         """
         Initialize a new CompressionStats instance.
         
         Args:
-            compression (str): The compressed representation
+            compression (Sequence): The compressed representation
             countOpt (int): Count of optional elements
             countAlign (int): Count of alignment operations
             countMerge (int): Count of merge operations
         """
-        self.compression:str = compression
+        self.compression:Sequence = compression
         self.countOpt:int = countOpt
         self.countAlign:int = countAlign
         self.countMerge:int = countMerge
@@ -65,7 +65,7 @@ class CompressionStats:
         Returns:
             str: Space-separated string of compression and counters
         """
-        return self.compression+" "+str(self.countOpt)+" "+str(self.countAlign)+" "+str(self.countMerge)
+        return str(self.compression)+" "+str(self.countOpt)+" "+str(self.countAlign)+" "+str(self.countMerge)
     
     def to_dict(self) -> dict[str, str]:
         """
@@ -75,7 +75,7 @@ class CompressionStats:
             dict[str, str]: Dictionary containing all stats as string values
         """
         return {
-            "Compression": self.compression,
+            "Compression": str(self.compression),
             "OptCount": str(self.countOpt),
             "AlignCount": str(self.countAlign),
             "MergeCount": str(self.countMerge)
@@ -331,6 +331,9 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
         The algorithm stops after TIME_LIMIT seconds, adding an "OverTime"
         compression stat if the limit is reached.
     """
+    #gr = 8
+    #ws = 0.5
+    #pb = 0.5
     PTKE.GAP_RATIO = gr
     NonOverlappedEpisode.WEIGHT_SUPPORT = ws
     NonOverlappedEpisode.PROXIMITY_BALANCING = pb
@@ -352,7 +355,7 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
         root:Root = roots[root_i]
         # Couper si ça prend trop de temps
         if time.time()-start_time > TIME_LIMIT:
-            compressions.set.add(CompressionStats("OverTime", 0, 0, 0))
+            compressions.set.add(CompressionStats(Sequence(), 0, 0, 0))
             #for r in roots:
             #      print (r.content)
             break
@@ -396,8 +399,15 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
                             subSequence:Sequence = Sequence()
                             # On clone le contenu intercallé
                             subSequence.event_list = copy.deepcopy(root.content.event_list[mergedBound[1]+1:currentBound[0]])
-                            # On linéarise cette séquence et on fait sauter le Begin et le End
-                            linearSequenceInsertedEvents:list[LinearEvent] = subSequence.linearize()[1:-1]
+                            # Appel récursif de MAP pour compresser les traces intercalées
+                            result:CompressionSet = MAP(subSequence.event_list, gr, ws, pb)
+                            linearSequenceInsertedEvents:list[LinearEvent]
+                            if len(result.set) > 0 :
+                                # transformation de la première compression trouvée en une séquence linéarisée et on fait sauter le Begin et le End
+                                linearSequenceInsertedEvents = result.set.pop().compression.linearize()[1:-1]
+                            else:
+                                # Si pas de compression générée, on linéarise simplement la séquence entercalée et on fait sauter le Begin et le End
+                                linearSequenceInsertedEvents = subSequence.linearize()[1:-1]
                             # On merge cette partie avec les évènements intercalés, à noter que lors des premiers Event intercallés on va chercher à fusionner [] avec une liste d'Events non vide, ils seront donc tous mis en optionnel et c'est justement ce que l'on cherche.
                             result1:LinearEventWithStats = mergeLinearSequences(linearSequenceInsertedEvents, intercaletedEvents.linearEvent)
                             # Prise en compte du résultat et comptabilisation des stats d'option et d'alignement
@@ -438,6 +448,5 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
     #print("Fin")
     # Enregistrement des compressions
     for modelRoot in roots[1:]: # On saute le premier root (le root original)
-        content:str = str(modelRoot.content)
-        compressions.set.add(CompressionStats(content, modelRoot.countOpt, modelRoot.countAlign, modelRoot.countMerge))
+        compressions.set.add(CompressionStats(modelRoot.content, modelRoot.countOpt, modelRoot.countAlign, modelRoot.countMerge))
     return compressions

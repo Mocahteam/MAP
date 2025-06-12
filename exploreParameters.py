@@ -2,7 +2,7 @@ import json
 import os
 from typing import Any, Union
 from Event import Call, Event
-from MAP import MAP, CompressionSet, CompressionStats#, computeScore
+from MAP import MAP, CompressionSet, CompressionStats
 import numpy as np
 import sys
 from decimal import Decimal
@@ -85,13 +85,6 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 	k:int = round(pb/g_pb_step)
 	# si nous avons déjà exploré ces paramètres nous retounons l'analyse directement
 	if key in g_exploredMap.keys():
-		# si on a trouvé la solution ne retourner que la solution sinon retourner toutes les compressions explorées
-#		result:CompressionSet = CompressionSet()
-#		if g_tab_parametersToBestResultPos[i][j][k] == 1:
-#			result.set = {(solution, computeScore(solution))}
-#		else:
-#			result = g_exploredMap[key]
-#		return result
 		return g_exploredMap[key]
 	# sinon nous faisons l'essaie avec les paramètres du point
 	else:
@@ -110,13 +103,6 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 		g_tab_parametersToBestResultPos[i][j][k]=g_exploredMap[key].getCode(solution)
 		#print(solution+" "+str(g_tab_parametersToBestResultPos[i][j][k]))
 
-		# si on a trouvé la solution ne retourner que la solution sinon retourner toutes les compressions explorées
-#		result:CompressionSet = CompressionSet()
-#		if g_tab_parametersToBestResultPos[i][j][k] == 1:
-#			result.set = {(solution, computeScore(solution))}
-#		else:
-#			result = g_exploredMap[key]
-#		return result
 		return g_exploredMap[key]
 
 # \brief Compresse les logs contenus dans le fichier "targetFileName" en explorant les paramètres gr, ws et pb de manière dichotomique.
@@ -626,7 +612,7 @@ def search_exhaustive(trace:str, solution:str) -> None:
 
 				g_tab_parametersToBestResultPos[i][j][k] = compressions.getCode(solution)
 				
-				g_exploredMap[str(i)+"gr_"+str(j)+"ws_"+str(k)+"pb"] = compressions
+				g_exploredMap[str(gr)+"gr_"+str(ws)+"ws_"+str(pb)+"pb"] = compressions
 	
 def custom_serializer(obj:Any):
 	if hasattr(obj, "to_dict"):
@@ -706,8 +692,7 @@ def parse_arguments() -> argparse.Namespace:
 	parser.add_argument('-d', '--directory', help='Répertoire principal', required='-f' in sys.argv)
 	
 	# Second format : dataset prédéfini
-	group.add_argument('-s', '--dataset', choices=['dataset1', 'dataset2', 'dataset3'],
-					help='Nom du dataset prédéfini à utiliser')
+	group.add_argument('-s', '--dataset', choices=['dataset1', 'dataset2', 'dataset3'], help='Nom du dataset prédéfini à utiliser')
 	
 	# Options communes aux deux formats
 	parser.add_argument('-m', '--mode', choices=['exhaustive', 'dichotomous'],
@@ -728,6 +713,7 @@ if __name__ == "__main__":
 		},
 		"dataset3": {
 			"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
+			#"files": ["7_NestedLoopIf2"],
 			"dir": "./dataset3"
 		}
 	}

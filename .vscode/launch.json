@@ -8,8 +8,9 @@
             "name": "Python Debugger: RechercheParams",
             "type": "debugpy",
             "request": "launch",
-            "program": "rechercheParameters.py",
-            "console": "integratedTerminal"
+            "program": "exploreParameters.py",
+            "console": "integratedTerminal",
+            "args": ["-f", "7_NestedLoopIf2", "-d", "dataset3", "-m", "exhaustive"]
         }
     ]
 }

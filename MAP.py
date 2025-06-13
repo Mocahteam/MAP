@@ -168,7 +168,7 @@ class CompressionSet:
         # Convertir la liste en ensemble pour la désérialisation
         return cls(set=set(list_)) # type: ignore
 	
-	# \brief Vérifie si au moins une des "compressions" est égale à la solution "solution". Retourne 1 si au moins une des compressions est égale à la solution ou -1 si la compression n'est pas allée au bout (contient "OverTime") ou 2 sinon
+	# \brief Vérifie si au moins une des "compressions" est égale à la solution "solution". Retourne 1 si au moins une des compressions est égale à la solution ou -1 si la compression n'est pas allée au bout ("OverTime") ou 2 sinon
 	#
 	# @solution : représente la solution de référence sous la forme d'une liste
     def getCode(self, solution:str) -> int:
@@ -181,9 +181,9 @@ class CompressionSet:
         Returns:
             int: 1 if a match is found, -1 if overtime occurred, 2 otherwise
         """
-        if any(solution == s.compression for s in self.set):
+        if any(solution == str(s.compression) for s in self.set):
             return 1
-        if any("OverTime"== s.compression for s in self.set):
+        if any(s.countOpt == 0 and s.countAlign == 0 and s.countMerge == 0 for s in self.set):
             return -1
         return 2
 

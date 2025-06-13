@@ -712,8 +712,8 @@ if __name__ == "__main__":
 			"dir": "./dataset2"
 		},
 		"dataset3": {
-			"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
-			#"files": ["7_NestedLoopIf2"],
+			#"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
+			"files": ["7_NestedLoopIf2"],
 			"dir": "./dataset3"
 		}
 	}

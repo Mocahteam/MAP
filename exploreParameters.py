@@ -688,7 +688,7 @@ def parse_arguments() -> argparse.Namespace:
 	group = parser.add_mutually_exclusive_group(required=True)
 	
 	# Premier format : fichier et répertoire individuels
-	group.add_argument('-f', '--file', help='Nom du fichier à analyser ou * pour tous les fichiers')
+	group.add_argument('-f', '--file', help='Nom du fichier à analyser ou \'all\' pour tous les fichiers')
 	parser.add_argument('-d', '--directory', help='Répertoire principal', required='-f' in sys.argv)
 	
 	# Second format : dataset prédéfini
@@ -724,7 +724,7 @@ if __name__ == "__main__":
 	if args.file:
 		# Mode fichier
 		test_files=[]
-		if args.file == "*":
+		if args.file == "all":
 			if not os.path.isdir(args.directory):
 				print("Error: "+args.directory+" is not a directory")
 				sys.exit(1)

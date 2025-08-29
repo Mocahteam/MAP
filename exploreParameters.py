@@ -688,7 +688,7 @@ def parse_arguments() -> argparse.Namespace:
 	group = parser.add_mutually_exclusive_group(required=True)
 	
 	# Premier format : fichier et répertoire individuels
-	group.add_argument('-f', '--file', help='Nom du fichier à analyser')
+	group.add_argument('-f', '--file', help='Nom du fichier à analyser ou * pour tous les fichiers')
 	parser.add_argument('-d', '--directory', help='Répertoire principal', required='-f' in sys.argv)
 	
 	# Second format : dataset prédéfini
@@ -709,11 +709,12 @@ if __name__ == "__main__":
 		},
 		"dataset2": {
 			"files": ["1_rienAFaire", "2_simpleBoucle", "3_simpleBoucleAvecDebut", "4_simpleBoucleAvecFin", "5_simpleBoucleAvecDebutEtFin", "6.01_simpleBoucleAvecIf", "6.02_simpleBoucleAvecIf", "6.03_simpleBoucleAvecIf", "6.04_simpleBoucleAvecIf", "6.05_simpleBoucleAvecIf", "6.06_simpleBoucleAvecIf", "6.07_simpleBoucleAvecIf", "6.08_simpleBoucleAvecIf", "6.09_simpleBoucleAvecIf", "6.10_simpleBoucleAvecIf", "6.11_simpleBoucleAvecIf", "6.12_simpleBoucleAvecIf", "6.13_simpleBoucleAvecIf", "6.14_simpleBoucleAvecIf", "6.15_simpleBoucleAvecIf", "7.01_bouclesEnSequence", "7.02_bouclesEnSequence", "8_bouclesEnSequenceAvecIf", "9.01_bouclesImbriquees", "9.02_bouclesImbriquees", "9.03_bouclesImbriquees"],
+			#"files": ["6.04_simpleBoucleAvecIf"],
 			"dir": "./dataset2"
 		},
 		"dataset3": {
-			"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
-			#"files": ["7_NestedLoopIf2"],
+			#"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
+			"files": ["7_NestedLoopIf3", "7_NestedLoopIf4"],
 			"dir": "./dataset3"
 		}
 	}
@@ -721,20 +722,29 @@ if __name__ == "__main__":
 	args = parse_arguments()
 	
 	if args.file:
-		# Mode fichier individuel
-		test_file = [args.file]
-		run(args.mode == "dichotomous", test_file, args.directory)
+		# Mode fichier
+		test_files=[]
+		if args.file == "*":
+			if not os.path.isdir(args.directory):
+				print("Error: "+args.directory+" is not a directory")
+				sys.exit(1)
+			if not os.path.isdir(args.directory+"/example") or not os.path.isdir(args.directory+"/example/solutions"):
+				print("Error: "+args.directory+" is not correctly structured. It must contain these sub directories: "+args.directory+"/example/solutions/")
+				sys.exit(1)
+			test_files=[f.replace('.log', '') for f in os.listdir(args.directory+"/example") if f.endswith(".log")]
+		else:
+			test_files = [args.file]
+		run(args.mode == "dichotomous", test_files, args.directory)
 	else:
 		# Mode dataset
 		dataset = datasets[args.dataset]
 		files_list = dataset["files"]
 		if not isinstance(files_list, list):
-			print("Erreur: files incorrect type")
+			print("Error: files incorrect type")
 			sys.exit(1)
 
 		dataset_dir = dataset["dir"]
 		if not isinstance(dataset_dir, str):
-			print("Erreur: dir incorrect type")
+			print("Error: dir incorrect type")
 			sys.exit(1)
-		
 		run(args.mode == "dichotomous", files_list, dataset_dir)

@@ -161,7 +161,7 @@ class PTKE:
         mapEventToNOE:dict[Event, NonOverlappedEpisode] = {}
         # parcourir toutes les traces de la séquence et enregistrer les positions d'apparition de chaque item
         for i in range(len(event_list)):
-            event:Event = event_list[i]
+            event:Event = event_list[i].getMainStructure()
             if event in mapEventToLocations:
                 # trace déjà connue => ajout de la nouvelle position
                 mapEventToLocations[event].append(i)

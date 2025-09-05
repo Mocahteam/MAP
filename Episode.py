@@ -181,7 +181,16 @@ class Episode:
         Returns:
             str: String representation showing the event and its bounds
         """
-        return str(self.event)+": "+str(self.boundlist)
+        return str(self.event)+": ("+str(len(self.boundlist))+") "+str(self.boundlist)
+    
+    def __repr__(self) -> str:
+        """
+        Get a string representation of the episode.
+        
+        Returns:
+            str: String representation showing the event and its bounds
+        """
+        return str(self.event)+": ("+str(len(self.boundlist))+") "+str(self.boundlist)
         
     def __eq__ (self, other:object) -> bool:
         """

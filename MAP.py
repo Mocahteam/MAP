@@ -362,7 +362,6 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
 
         ptke:PTKE = PTKE()
         bestEpisodes:list[NonOverlappedEpisode] = ptke.getBestEpisodes(root.content.event_list)
-
         # Pour chaque épisode donné par tke, simuler la compression
         best_i:int = 0
         while best_i<len(bestEpisodes):
@@ -392,7 +391,8 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
                 for k in range(1, len(bestEpisode.boundlist)):
                     currentBound:tuple[int, int] = bestEpisode.boundlist[k]
                     # vérifier si l'écart entre la fin du précédent et la fin de ce bound est inférieur au seuil
-                    if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
+                    #if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
+                    if currentBound[1] - mergedBound[1] <= currentBound[1]-currentBound[0] + 1*(1 + PTKE.GAP_RATIO)*NonOverlappedEpisode.PROXIMITY_BALANCING:
                         # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre la fin des épisodes précédement fusionnés et le debut du bound courrant)
                         if mergedBound[1]+1 < currentBound[0]:
                             # On crée une séquence temporaire

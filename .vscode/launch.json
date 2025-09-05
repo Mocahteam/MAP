@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "exploreParameters.py",
             "console": "integratedTerminal",
-            "args": ["-f", "7_NestedLoopIf2", "-d", "dataset3", "-m", "exhaustive"]
+            "args": ["-f", "15_1_", "-d", "datasetXP", "-m", "exhaustive"]
         }
     ]
 }

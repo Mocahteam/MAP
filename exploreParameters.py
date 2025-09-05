@@ -714,8 +714,13 @@ if __name__ == "__main__":
 		},
 		"dataset3": {
 			#"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
-			"files": ["7_NestedLoopIf3", "7_NestedLoopIf4"],
+			"files": ["7_NestedLoopIf3"],
 			"dir": "./dataset3"
+		},
+		"datasetXP": {
+			#"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
+			"files": ["15_1"],
+			"dir": "./datasetXP"
 		}
 	}
 
@@ -723,7 +728,7 @@ if __name__ == "__main__":
 	
 	if args.file:
 		# Mode fichier
-		test_files=[]
+		test_files:list[str]=[]
 		if args.file == "all":
 			if not os.path.isdir(args.directory):
 				print("Error: "+args.directory+" is not a directory")
@@ -731,7 +736,7 @@ if __name__ == "__main__":
 			if not os.path.isdir(args.directory+"/example") or not os.path.isdir(args.directory+"/example/solutions"):
 				print("Error: "+args.directory+" is not correctly structured. It must contain these sub directories: "+args.directory+"/example/solutions/")
 				sys.exit(1)
-			test_files=[f.replace('.log', '') for f in os.listdir(args.directory+"/example") if f.endswith(".log")]
+			test_files=[f.replace('.log', '') for f in os.listdir(args.directory+"/example") if f.endswith(".log")] # type: ignore
 		else:
 			test_files = [args.file]
 		run(args.mode == "dichotomous", test_files, args.directory)

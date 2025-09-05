@@ -30,6 +30,16 @@ class Event:
         pass
 
     @abstractmethod
+    def getMainStructure(self) -> Event:
+        """
+        Return the main structure of the event.
+            
+        Returns:
+            Event: the main structure of the event
+        """
+        pass
+
+    @abstractmethod
     def getLength(self) -> int:
         """
         Gets the length of the event.
@@ -132,6 +142,15 @@ class Call(Event):
             bool: True if the calls are equivalent, False otherwise
         """
         return isinstance(other, Call) and self.call == other.call
+    
+    def getMainStructure(self) -> Event:
+        """
+        Return the main structure of the event. For a Call it is self.
+            
+        Returns:
+            Event: the main structure of the event
+        """
+        return self
 
     def getLength(self) -> int:
         """
@@ -241,6 +260,19 @@ class Sequence(Event):
             bool: True if the sequences are equivalent
         """
         return isinstance(other, Sequence) and len(self.event_list) == len(other.event_list) and self.event_list == other.event_list
+    
+    def getMainStructure(self) -> Event:
+        """
+        Return the main structure of the event, optional events are not part of the main structure.
+            
+        Returns:
+            Event: the main structure of the event
+        """
+        result:Sequence = Sequence()
+        for e in self.event_list:
+            if not e.opt:
+                result.event_list.append(e.getMainStructure())
+        return result
 
     def getLength(self) -> int:
         """
@@ -392,6 +424,9 @@ class LinearEvent:
         self.opt:bool = False
         # Orientation indique si la sélection de cet évènement provient de la ligne noté "l" (source s1), de la colonne noté "c" (source s2), ou de la diagonale noté "d" (sources s1 et s2 alignées) lors de la remonté de la matrice de transformation fournie par computeTransformationMatrix
         self.orientation:str = "" 
+    
+    def __repr__(self) -> str:
+        return str(self)
 
 class LinearCall(LinearEvent):
     """
@@ -542,6 +577,9 @@ class LinearEventWithStats:
         self.countAlign += countAlign
         self.countMerge += 1
 
+    def __repr__(self) -> str:
+        return "(Op: "+str(self.countOpt)+", Al: "+str(self.countAlign)+", Me: "+str(self.countMerge)+") "+str(self.linearEvent)
+
 class Root:
     """
     Root container for a sequence with associated statistics.
@@ -571,6 +609,9 @@ class Root:
             bool: True if both contain the same sequence
         """
         return isinstance(other, Root) and self.content == other.content
+    
+    def __repr__(self) -> str:
+        return "(Op: "+str(self.countOpt)+", Al: "+str(self.countAlign)+", Me: "+str(self.countMerge)+") "+str(self.content)
 
 # Vérifie si l'évènement à la position "pos" dans "eventList" est optionnel ainsi que l'ensemble des Séquences dans lesquelles cet évènement est inclus
 # Exemple des évènements vérifiés

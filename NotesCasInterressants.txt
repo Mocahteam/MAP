@@ -1,0 +1,11 @@
+dataset1 => m82
+source : AIJLIJLIJLIJLIJLIJLIJLIJLIJLIJLIJLIIJSIJSIJSIJSIJSIJIJSIJSIJSIJSIJSIZ
+attendu : A[IJL]I[S*IJS*]IZ
+résultats interessants :
+ - A[IJL]I[IJI*J*S]IZ
+ - A[IJL][I*J*IJSI*J*]Z => meilleur score 
+
+ dataset3 => 7_NestedLoopIf1
+ il ne trouve pas le A[[CD]*B[CD]*]Z mais trouve A[[B]*CD[B]*]CDZ
+
+

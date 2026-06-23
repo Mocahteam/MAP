@@ -456,7 +456,7 @@ class LinearCall(LinearEvent):
         Returns:
             str: String representation of the wrapped call
         """
-        return str(self.call)
+        return self.call.call + ('*' if self.opt else '') # ne pas retourner str(self.call) car la propriété d'option du Call peut être désynchronisée de celle du LinearCall
     
     def __eq__(self, other: object) -> bool:
         """
@@ -530,7 +530,7 @@ class LinearEnd(LinearBorder):
         Returns:
             str: Always returns ']'
         """
-        return "]"
+        return "]"+ ('*' if self.opt else '')
     
     def __eq__(self, other: object) -> bool:
         """
@@ -864,7 +864,7 @@ def manageOverlapping(mergedSequence:list[LinearEvent]) -> None:
         manageOverlapping(mergedSequence)
 	
     # le begin est soit "l" soit "c" et le end associé est l'opposée (cas de séquences qui se chevochent)
-	# exemple : A[BC] vs [AB]C => avec "A[BC]" sur les lignes de la matrice et "[AB]C" sur les colonnes. Sur la remontée on sera sur "B]C]". Les deux "]" ont été ajoutés une première fois en ligne puis en colonne (dernier ajout en "c") et on cherche à ajouter "[" en ligne ce qui est pour l'instant pas possible puisque l'orientation du begin n'est pas cohérent avec l'orientation de son end associé. On va donc passer les traces non incluses dans le chevauchement en optionnelle pour obtenir [*A[B]*C] qui est bien un moyen de fusionner les deux traces en exemple.
+	# exemple : A[BC] vs [AB]C => avec "A[BC]" sur les lignes de la matrice et "[AB]C" sur les colonnes. Sur la remontée on sera sur "B]C]". Les deux "]" ont été ajoutés une première fois en ligne puis en colonne (dernier ajout en "c") et on cherche à ajouter "[" en ligne ce qui est pour l'instant pas possible puisque l'orientation du begin n'est pas cohérent avec l'orientation de son end associé. On va donc passer les traces non incluses dans le chevauchement en optionnelle pour obtenir [A*[B]C*] qui est bien un moyen de fusionner les deux traces en exemple.
 	# Soit "x" l'orientation du begin (l'orientation du end associé est le complément de "x") :
 	# 1- Chercher dans les ends précédents le premier "x" (ou "d") disponible correspondant à l'orientation du begin, noté "t" pour target.
 	# 2- Mettre toutes les traces comprises entre "t" (s'il est trouve) et le end associé comme optionnelle (si on tombe sur une séquence on la marque comme optionnelle et on saute directement à son End pour éviter de traiter tout ses enfants).
@@ -944,15 +944,19 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
     sequences s1 and s2. The merge process follows these rules:
     1. For first row/column: Take events from the remaining sequence
     2. For Call vs Call:
-       - If equal and diagonal cost is minimal: Take diagonal (marked as 'd')
-       - If vertical cost is minimal or equal with longer s1: Take from s1 (marked as 'l')
-       - Otherwise: Take from s2 (marked as 'c')
+       - If C1 == C2 and diagonal cost is minimal: Take diagonal (marked as 'd')
+       - ElIf C1 != C2 and vertical cost is minimal: Take from s1 (marked as 'l')
+       - ElIf C1 != C2 and vertical cost is equal to horizontal cost and s1 is longer than s2: Take from s1 (marked as 'l')
+       - Else: Take from s2 (marked as 'c')
     3. For Call vs Border or Border vs Call:
-       - Take the minimal cost path, preferring the Border's direction if costs are equal
+       - Take the minimal cost path (avoid diagonal), preferring the Border's direction if costs are equal (marked as 'l' or 'c')
     4. For Border vs Border:
-       - If same type and diagonal cost is minimal: Take diagonal
-       - If vertical cost is minimal or equal with specific conditions: Take from s1
-       - Otherwise: Take from s2
+       - If same type and diagonal cost is minimal: Take diagonal (marked as 'd')
+       - ElIf vertical cost is minimal: Take from s1 (marked as 'l')
+       - ElIf horizontal cost is minimal: Take from s2 (marked as 'c')
+       - ElIf vertical cost is equal to horizontal cost and borders are different: Take from the sequence with a Begin (marked as 'l' or 'c')
+       - ElIf vertical cost is equal to horizontal cost and borders are equal: Take from the sequence with the longest remaining length (marked as 'l' or 'c')
+       - Else: Take from s2 (marked as 'c')
 
     Args:
         s1 (list[LinearEvent]): First linearized sequence to merge
@@ -1053,7 +1057,7 @@ def computeMergedSequence(s1:list[LinearEvent], s2:list[LinearEvent], transforma
                 mergedEvent.orientation = "c"
                 mergedSequence.append(mergedEvent)
                 c -= 1
-        # Gestion de l'ajoute d'un bord
+        # Gestion de l'ajout d'un bord
         if mergedEvent != None and isinstance(mergedEvent, LinearBorder):
             manageBorder(mergedSequence)
     return mergedSequence
@@ -1117,8 +1121,8 @@ def updateOptions(mergedSequence:list[LinearEvent]) -> tuple[int, int]:
 #
 # Exemple de cas singuliers :
 #  1 - [AB[C]] et [[A]BC] => [[A]B[C]]
-#  2 - A[C] et AB => A[*C]B
-#  3 - A[BC] et [AB]C => [*A[B]*C]
+#  2 - A[C]B et AB => A[C]*B
+#  3 - A[BC] et [AB]C => [A*[B]C*]
 #  4 - A[B] et [AB] => [A[B]]
 #  5 - [A]B et [AB] => [[A]B]
 #  
@@ -1133,8 +1137,8 @@ def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> LinearEv
     Creates a new sequence that represents the most general form combining both
     input sequences. Handles special cases like:
     1. [AB[C]] and [[A]BC] => [[A]B[C]]
-    2. A[C] and AB => A[*C]B
-    3. A[BC] and [AB]C => [*A[B]*C]
+    2. A[C]B and AB => A[C]*B
+    3. A[BC] and [AB]C => [A*[B]C*]
     4. A[B] and [AB] => [A[B]]
     5. [A]B and [AB] => [[A]B]
     
@@ -1148,7 +1152,7 @@ def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> LinearEv
     mergedSequence:list[LinearEvent] = []
 
     transformationMatrix:list[list[int]] = computeTransformationMatrix(s1, s2)
-
+    
     # Construction de la fusion entre s1 et s2 en prenant en compte les chevauchements de Séquence
     mergedSequence:list[LinearEvent] = computeMergedSequence(s1, s2, transformationMatrix)
 
@@ -1158,6 +1162,65 @@ def mergeLinearSequences(s1:list[LinearEvent], s2:list[LinearEvent]) -> LinearEv
     # On met le vecteur de fusion dans le bon sens
     mergedSequence.reverse()
 
+    # Suppression des doublons d'Event optionnels
+    cpt:int = 0
+    while cpt < len(mergedSequence):
+        event:LinearEvent = mergedSequence[cpt]
+        if event.opt:
+            # Rechercher dans les event optionnels précédents si un event est identique
+            for cpt2 in range(cpt+1, len(mergedSequence)):
+                event2:LinearEvent = mergedSequence[cpt2]
+                if event2.opt:
+                    if event == event2 and isinstance(event, LinearCall):
+                        # on supprime le doublon
+                        del mergedSequence[cpt]
+                        cpt -= 1
+                        break
+                else:
+                    # on ne peut pas avoir de doublon optionnel si on rencontre un event non optionnel avant
+                    break
+        cpt += 1
+
     result:LinearEventWithStats = LinearEventWithStats()
     result.update(mergedSequence, statsMerge[0], statsMerge[1]-1) # -1 sur le compteur d'alignement pour ne pas comptabiliser le merge du premier Begin qui sera toujours présent
+
     return result
+
+"""Tests de la fusion de séquences linéarisées"""
+"""
+# 0 - ABC et AC => AB*C
+print("Test 0 : ABC et AC => AB*C")
+result = mergeLinearSequences([LinearCall(Call("A")), LinearCall(Call("B")), LinearCall(Call("C"))], [LinearCall(Call("A")), LinearCall(Call("C"))])
+print(result.linearEvent)
+print()
+
+# 1 - [AB[C]] et [[A]BC] => [[A]B[C]]
+print("Test 1 : [AB[C]] et [[A]BC] => [[A]B[C]]")
+result = mergeLinearSequences([LinearBegin(), LinearCall(Call("A")), LinearCall(Call("B")), LinearBegin(),LinearCall(Call("C")), LinearEnd(), LinearEnd()], [LinearBegin(), LinearBegin(), LinearCall(Call("A")), LinearEnd(), LinearCall(Call("B")), LinearCall(Call("C")), LinearEnd()])
+print(result.linearEvent)
+print()
+
+#  2 - A[C]B et AB => A[C]*B
+print("Test 2 : A[C]B et AB => A[C]*B")
+result = mergeLinearSequences([LinearCall(Call("A")), LinearBegin(),LinearCall(Call("C")), LinearEnd(), LinearCall(Call("B"))], [LinearCall(Call("A")), LinearCall(Call("B"))])
+print(result)
+print()
+
+# 3. A[BC] and [AB]C => [A*[B]C*]
+print("Test 3 : A[BC] et [AB]C => [A*[B]C*]")
+result = mergeLinearSequences([LinearCall(Call("A")), LinearBegin(),LinearCall(Call("B")), LinearCall(Call("C")), LinearEnd()], [LinearBegin(), LinearCall(Call("A")), LinearCall(Call("B")), LinearEnd(), LinearCall(Call("C"))])
+print(str(result))
+print()
+
+# 4. A[B] et [AB] => [A[B]]
+print("Test 4 : A[B] et [AB] => [A[B]]")
+result = mergeLinearSequences([LinearCall(Call("A")), LinearBegin(),LinearCall(Call("B")), LinearEnd()], [LinearBegin(), LinearCall(Call("A")), LinearCall(Call("B")), LinearEnd()])
+print(str(result))
+print()
+
+# 5. [A]B et [AB] => [[A]B]
+print("Test 5 : [A]B et [AB] => [[A]B]")
+result = mergeLinearSequences([LinearBegin(), LinearCall(Call("A")), LinearEnd(), LinearCall(Call("B"))], [LinearBegin(), LinearCall(Call("A")), LinearCall(Call("B")), LinearEnd()])
+print(str(result))
+print()
+"""

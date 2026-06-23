@@ -341,12 +341,12 @@ class Scorable:
             # la partie 2 du score concerne la proximité. On cherche à réduire au maximum les proximités interne et externe.
             # Calcul du score de proximité interne
             nbEventsInsideBounds:int = self.getNbEventsInsideBounds()
-            insideProx = (1-(self.getEventLength()*self.getSupport())/nbEventsInsideBounds) if nbEventsInsideBounds > 0 else 0
+            insideProx = (self.getEventLength()*self.getSupport()/nbEventsInsideBounds) if nbEventsInsideBounds > 0 else 1
             # Calcul du score de proximité externe
             outsideProx = self.getNbEventsBetweenBounds()/self.getEpisodeLength()
 
             #  Le calcul des proximités internes et externes donnent des valeurs comprises dans l'intervalle [0,1] avec 0 très positif, donc on prend l'opposé et on balance les deux proximités en fonction du PROXIMITY_BALANCING
-            part2 = (1-NonOverlappedEpisode.PROXIMITY_BALANCING) * (1-insideProx) + NonOverlappedEpisode.PROXIMITY_BALANCING * (1-outsideProx)
+            part2 = (1-NonOverlappedEpisode.PROXIMITY_BALANCING) * insideProx + NonOverlappedEpisode.PROXIMITY_BALANCING * (1-outsideProx)
 
             if insideProx < 0 or outsideProx < 0:
                 print ("BUUUG")

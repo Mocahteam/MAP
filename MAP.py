@@ -183,7 +183,7 @@ class CompressionSet:
         """
         if any(solution == str(s.compression) for s in self.set):
             return 1
-        if any(s.countOpt == 0 and s.countAlign == 0 and s.countMerge == 0 for s in self.set):
+        if any(s.countOpt == -1 and s.countAlign == -1 and s.countMerge == -1 for s in self.set):
             return -1
         return 2
 
@@ -331,9 +331,9 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
         The algorithm stops after TIME_LIMIT seconds, adding an "OverTime"
         compression stat if the limit is reached.
     """
-    #gr = 8
-    #ws = 0.5
-    #pb = 0.5
+    #gr = 2.4
+    #ws = 0.9
+    #pb = 0.9
     PTKE.GAP_RATIO = gr
     NonOverlappedEpisode.WEIGHT_SUPPORT = ws
     NonOverlappedEpisode.PROXIMITY_BALANCING = pb
@@ -355,7 +355,7 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
         root:Root = roots[root_i]
         # Couper si ça prend trop de temps
         if time.time()-start_time > TIME_LIMIT:
-            compressions.set.add(CompressionStats(Sequence(), 0, 0, 0))
+            compressions.set.add(CompressionStats(Sequence(), -1, -1, -1))
             #for r in roots:
             #      print (r.content)
             break
@@ -447,6 +447,13 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
     #print(str(root))
     #print("Fin")
     # Enregistrement des compressions
-    for modelRoot in roots[1:]: # On saute le premier root (le root original)
-        compressions.set.add(CompressionStats(modelRoot.content, modelRoot.countOpt, modelRoot.countAlign, modelRoot.countMerge))
+    if len(roots) == 1: # aucune compression explorée, on retourne l'original
+        compressions.set.add(CompressionStats(roots[0].content, roots[0].countOpt, roots[0].countAlign, roots[0].countMerge))
+    else:
+        for modelRoot in roots[1:]: # On saute le premier root (le root original)
+            compressions.set.add(CompressionStats(modelRoot.content, modelRoot.countOpt, modelRoot.countAlign, modelRoot.countMerge))
     return compressions
+
+# Test pour une séquence donnée
+#from Event import Call
+#MAP([Call("G"), Call("I"),Call("I"),Call("X"),Call("I"),Call("I"),Call("V"),Call("I"),Call("X"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("I"),Call("V"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("I"),Call("V"),Call("I"),Call("V")], 2.4, 0.9, 0.9)

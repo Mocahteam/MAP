@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "exploreParameters.py",
             "console": "integratedTerminal",
-            "args": ["-f", "15_1_", "-d", "datasetXP", "-m", "exhaustive"]
+            "args": ["-f", "1_1_", "-d", "datasetXP_v2", "-m", "exhaustive"]
         }
     ]
 }

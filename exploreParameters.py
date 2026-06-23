@@ -692,7 +692,7 @@ def parse_arguments() -> argparse.Namespace:
 	parser.add_argument('-d', '--directory', help='Répertoire principal', required='-f' in sys.argv)
 	
 	# Second format : dataset prédéfini
-	group.add_argument('-s', '--dataset', choices=['dataset1', 'dataset2', 'dataset3'], help='Nom du dataset prédéfini à utiliser')
+	group.add_argument('-s', '--dataset', choices=['dataset1', 'dataset2', 'dataset3', 'datasetXP', 'datasetXPv2'], help='Nom du dataset prédéfini à utiliser')
 	
 	# Options communes aux deux formats
 	parser.add_argument('-m', '--mode', choices=['exhaustive', 'dichotomous'],
@@ -718,9 +718,12 @@ if __name__ == "__main__":
 			"dir": "./dataset3"
 		},
 		"datasetXP": {
-			#"files": ["1_Nothing", "2_Loop", "3_LoopBE", "4_LoopIfB-", "4_LoopIfB+", "4_LoopIfE-", "4_LoopIfE+", "4_LoopIfM-", "4_LoopIfM+", "5_LoopsSeq", "5_LoopsSeq2", "5_LoopsSeq3", "6_LoopSeqIf1", "6_LoopSeqIf2", "6_LoopSeqIf3", "7_NestedLoop", "7_NestedLoop2", "7_NestedLoop2", "7_NestedLoopIf1", "7_NestedLoopIf2", "7_NestedLoopIf3", "7_NestedLoopIf4"],
 			"files": ["15_1"],
 			"dir": "./datasetXP"
+		},
+		"datasetXPv2": {
+			"files": ["5_1_", "5_2_", "5_3_", "5_4_", "5_5_", "5_6_", "5_7_", "5_8_", "5_9_", "5_10_"],
+			"dir": "./datasetXP_v2"
 		}
 	}
 
@@ -753,3 +756,6 @@ if __name__ == "__main__":
 			print("Error: dir incorrect type")
 			sys.exit(1)
 		run(args.mode == "dichotomous", files_list, dataset_dir)
+
+#Exemples
+#py .\exploreParameters.py -f "7_4_" -d "datasetXP_v2" -m "exhaustive"

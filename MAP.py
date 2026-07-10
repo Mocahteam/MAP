@@ -456,4 +456,4 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
 
 # Test pour une séquence donnée
 #from Event import Call
-#MAP([Call("G"), Call("I"),Call("I"),Call("X"),Call("I"),Call("I"),Call("V"),Call("I"),Call("X"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("I"),Call("V"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("X"),Call("I"),Call("V"),Call("I"),Call("V"),Call("I"),Call("V")], 2.4, 0.9, 0.9)
+#MAP([Call("Q"),Call("J"),Call("Z"),Call("T"),Call("O"),Call("T"),Call("O"),Call("O"),Call("Q"),Call("J"),Call("Z"),Call("X"),Call("O"),Call("F"),Call("D"),Call("L")], 0.8, 0, 0.6)

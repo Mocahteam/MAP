@@ -357,7 +357,7 @@ class Sequence(Event):
 
         The linearized output will be (where Sb=SequenceBegin, Se=SequenceEnd):
         ```
-        C C Sb C C Sb C Se Se C
+         C C Sb C C Sb C Se Se C
         ```
 
         Returns:

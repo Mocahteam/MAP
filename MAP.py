@@ -1,8 +1,9 @@
 import copy
-import time
+import threading
 from Episode import NonOverlappedEpisode
 from Event import Event, LinearEventWithStats, Root, Sequence, LinearEvent, mergeLinearSequences
 from PTKE import PTKE
+import sys
 
 
 # init constant values
@@ -308,7 +309,7 @@ def aggregateMerge (newRoot:Root, mergedLinearSequence:LinearEventWithStats, mer
     newRoot.countMerge += mergedLinearSequence.countMerge+intercaletedEvents.countMerge
 
 # MAP => Mining Algorithm Patterns
-def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet:
+def MAP (event_list:list[Event], useThread:bool = True) -> CompressionSet:
     """
     Mining Algorithm Patterns (MAP) implementation.
     
@@ -320,9 +321,7 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
     
     Args:
         event_list (list[Event]): List of events to analyze
-        gr (float): Gap ratio for PTKE
-        ws (float): Weight support factor for scoring
-        pb (float): Proximity balancing factor
+        useThread (bool): does each sequence analysis has to be launch inside a thread
         
     Returns:
         CompressionSet: Set of different possible compressions with their stats
@@ -331,16 +330,12 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
         The algorithm stops after TIME_LIMIT seconds, adding an "OverTime"
         compression stat if the limit is reached.
     """
-    #gr = 2.4
-    #ws = 0.9
-    #pb = 0.9
-    PTKE.GAP_RATIO = gr
-    NonOverlappedEpisode.WEIGHT_SUPPORT = ws
-    NonOverlappedEpisode.PROXIMITY_BALANCING = pb
+
+    #PTKE.GAP_RATIO = 0.8
+    #NonOverlappedEpisode.WEIGHT_SUPPORT = 0
+    #NonOverlappedEpisode.PROXIMITY_BALANCING = 0
 
     compressions:CompressionSet = CompressionSet()
-
-    start_time:float = time.time()
 
     # Ajout d'un root stabilisable et association de la liste d'évènement à ce root
     roots:list[Root] = [Root(Sequence())]
@@ -349,17 +344,17 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
 
     originalRootLength = len(event_list)
 
+    # Affichage de la progression à la colonne 80
+    sys.stdout.write(
+            "\033[80G"              # aller à la colonne 80
+            f"Progression:   0%"
+        )
+    sys.stdout.flush()
+
     # tant qu'il y a au moins un root à explorer
     root_i:int = 0
     while root_i < len(roots):
         root:Root = roots[root_i]
-        # Couper si ça prend trop de temps
-        if time.time()-start_time > TIME_LIMIT:
-            compressions.set.add(CompressionStats(Sequence(), -1, -1, -1))
-            #for r in roots:
-            #      print (r.content)
-            break
-
         ptke:PTKE = PTKE()
         bestEpisodes:list[NonOverlappedEpisode] = ptke.getBestEpisodes(root.content.event_list)
         # Pour chaque épisode donné par tke, simuler la compression
@@ -368,79 +363,29 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
             bestEpisode:NonOverlappedEpisode = bestEpisodes[best_i]
             # On ne traite cet épisode que si son support est strictement supérieur à 1
             if bestEpisode.getSupport() > 1:
-                newRoot:Root = Root(Sequence())
-                newRoot.content.isRoot = True
-                # Transformation de cet épisode en une séquence linéarisée
-                bestPattern:list[LinearEvent] = bestEpisode.event.linearize()
-
-                #print (str(bestEpisode)+f" => {bestEpisode.score:.2f} (part1:{bestEpisode.part1:.2f}; part2:{bestEpisode.part2:.2f}) (inside:{bestEpisode.inside:.2f}; outside:{bestEpisode.outside:.2f})")
-
-                # On commence la compression avec le premier bound
-                mergedBound:tuple[int, int] = bestEpisode.boundlist[0]
-                # On injecte dans le nouveau root les traces précédant le premier bound
-                if mergedBound[0] > 0:
-                    newRoot.content.event_list = root.content.event_list[:mergedBound[0]]
-                # On fusionne le premier bound avec le meilleur pattern
-                mergedLinearSequence:LinearEventWithStats = mergeLinearSequences(root.content.getSubSequence(mergedBound[0], mergedBound[1]+1).linearize(), bestPattern)
-                mergedLinearSequence.countOpt += root.countOpt
-                mergedLinearSequence.countAlign += root.countAlign
-
-                # Une sequence linéarisée pour stocker les traces intercallées entre le bounds
-                intercaletedEvents:LinearEventWithStats = LinearEventWithStats()
-                # Parcourir tous les bounds
-                for k in range(1, len(bestEpisode.boundlist)):
-                    currentBound:tuple[int, int] = bestEpisode.boundlist[k]
-                    # vérifier si l'écart entre la fin du précédent et la fin de ce bound est inférieur au seuil
-                    #if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
-                    if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO)*NonOverlappedEpisode.PROXIMITY_BALANCING:
-                        # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre la fin des épisodes précédement fusionnés et le debut du bound courrant)
-                        if mergedBound[1]+1 < currentBound[0]:
-                            # On crée une séquence temporaire
-                            subSequence:Sequence = Sequence()
-                            # On clone le contenu intercallé
-                            subSequence.event_list = copy.deepcopy(root.content.event_list[mergedBound[1]+1:currentBound[0]])
-                            # Appel récursif de MAP pour compresser les traces intercalées
-                            result:CompressionSet = MAP(subSequence.event_list, gr, ws, pb)
-                            linearSequenceInsertedEvents:list[LinearEvent]
-                            if len(result.set) > 0 :
-                                # transformation de la première compression trouvée en une séquence linéarisée et on fait sauter le Begin et le End
-                                linearSequenceInsertedEvents = result.set.pop().compression.linearize()[1:-1]
-                            else:
-                                # Si pas de compression générée, on linéarise simplement la séquence entercalée et on fait sauter le Begin et le End
-                                linearSequenceInsertedEvents = subSequence.linearize()[1:-1]
-                            # On merge cette partie avec les évènements intercalés, à noter que lors des premiers Event intercallés on va chercher à fusionner [] avec une liste d'Events non vide, ils seront donc tous mis en optionnel et c'est justement ce que l'on cherche.
-                            result1:LinearEventWithStats = mergeLinearSequences(linearSequenceInsertedEvents, intercaletedEvents.linearEvent)
-                            # Prise en compte du résultat et comptabilisation des stats d'option et d'alignement
-                            intercaletedEvents.update(result1.linearEvent, result1.countOpt, result1.countAlign)
-
-                        # linearisation du bound courrant
-                        linearSequenceCurrentBound:list[LinearEvent] = root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize()
-                        # calcule la fusion entre le dernier état de fusion et cette nouvelle séquence linéarisée
-                        result2:LinearEventWithStats = mergeLinearSequences(linearSequenceCurrentBound, mergedLinearSequence.linearEvent)
-                        mergedLinearSequence.update(result2.linearEvent, result2.countOpt, result2.countAlign)
-
-                        # on étend la plage de la fusion pour englober ce nouvel épisode
-                        mergedBound = (mergedBound[0], currentBound[1])
-                    else:
-                        # l'écart entre la fusion précédente et le bound courant est trop importante donc on injecte la fusion précédente dans le newRoot
-                        aggregateMerge(newRoot, mergedLinearSequence, mergedBound, intercaletedEvents, currentBound[0], root)
-
-                        # on réinitialise la fusion à la fusion du bound courant et du pattern fournit par TKE
-                        mergedLinearSequence = mergeLinearSequences(root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize(), bestPattern)
-
-                        # on réinitialise les traces intercallées
-                        intercaletedEvents = LinearEventWithStats()
-                        # Et on repositionne le bound de fusion sur le bound courrant
-                        mergedBound = currentBound
-                
-                aggregateMerge(newRoot, mergedLinearSequence, mergedBound, intercaletedEvents, len(root.content.event_list), root)
-
-                # on ne stocke le nouveau root que s'il n'est pas plus long d'un quart de la longueur initiale (le -2 est pour ne pas compter le premier Begin et le dernier End de la linéarisation) et qu'il contient moins de Call que le root original et qu'on ne l'a pas déjà exploré
-                if len(newRoot.content.linearize())-2 <= originalRootLength*1.25 and newRoot.content.countCalls() <= originalRootLength and not any(newRoot == r for r in roots):
-                    roots.append(newRoot)
-                
+                stop_event:threading.Event = threading.Event()
+                if useThread:
+                    thread:threading.Thread = threading.Thread(target=processRoot, args=(bestEpisode, root, originalRootLength, roots, False, stop_event))
+                    thread.start()
+                    thread.join(TIME_LIMIT)
+                    if thread.is_alive():
+                        stop_event.set()
+                else:
+                    processRoot(bestEpisode, root, originalRootLength, roots, False, None)
             best_i += 1
+        
         root_i += 1
+
+        # Affichage de la progression à la colonne 80
+        sys.stdout.write(
+                "\033[80G"              # aller à la colonne 80
+                f"Progression: {float(root_i)*100/len(roots):3.0f}%"
+            )
+        sys.stdout.flush()
+    
+    # Se repositionner en début de ligne
+    sys.stdout.write("\r")
+    sys.stdout.flush()
 
     #print ("Analyse terminée, temps de calcul : "+str(time.time()-start_time))
     #print("Meilleure compression trouvée :")
@@ -454,6 +399,93 @@ def MAP (event_list:list[Event], gr:float, ws:float, pb:float) -> CompressionSet
             compressions.set.add(CompressionStats(modelRoot.content, modelRoot.countOpt, modelRoot.countAlign, modelRoot.countMerge))
     return compressions
 
+def processRoot(bestEpisode:NonOverlappedEpisode, root:Root, originalRootLength:int, roots:list[Root], useThread:bool, stop_event:threading.Event|None) -> None:
+    newRoot:Root = Root(Sequence())
+    newRoot.content.isRoot = True
+    # Transformation de cet épisode en une séquence linéarisée
+    bestPattern:list[LinearEvent] = bestEpisode.event.linearize()
+
+    #print (str(bestEpisode)+f" => {bestEpisode.getScore():.2f} (part1:{bestEpisode.part1:.2f}; part2:{bestEpisode.part2:.2f}) (inside:{bestEpisode.inside:.2f}; outside:{bestEpisode.outside:.2f})")
+
+    # On commence la compression avec le premier bound
+    mergedBound:tuple[int, int] = bestEpisode.boundlist[0]
+    # On injecte dans le nouveau root les traces précédant le premier bound
+    if mergedBound[0] > 0:
+        newRoot.content.event_list = root.content.event_list[:mergedBound[0]]
+    # On fusionne le premier bound avec le meilleur pattern
+    mergedLinearSequence:LinearEventWithStats = mergeLinearSequences(root.content.getSubSequence(mergedBound[0], mergedBound[1]+1).linearize(), bestPattern)
+    mergedLinearSequence.countOpt += root.countOpt
+    mergedLinearSequence.countAlign += root.countAlign
+
+    # Une sequence linéarisée pour stocker les traces intercallées entre le bounds
+    intercaletedEvents:LinearEventWithStats = LinearEventWithStats()
+    # Parcourir tous les bounds
+    for k in range(1, len(bestEpisode.boundlist)):
+        currentBound:tuple[int, int] = bestEpisode.boundlist[k]
+        # vérifier si l'écart entre la fin du précédent et la fin de ce bound est inférieur au seuil
+        #if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO):
+        if currentBound[1] - mergedBound[1] <= (currentBound[1]-currentBound[0] + 1)*(1 + PTKE.GAP_RATIO)*NonOverlappedEpisode.PROXIMITY_BALANCING:
+            # extraction de la séquence linéarisée entre les deux bounds (on inclus toutes les traces intercallées entre la fin des épisodes précédement fusionnés et le debut du bound courrant)
+            if mergedBound[1]+1 < currentBound[0]:
+                # On crée une séquence temporaire
+                subSequence:Sequence = Sequence()
+                # On clone le contenu intercallé
+                subSequence.event_list = copy.deepcopy(root.content.event_list[mergedBound[1]+1:currentBound[0]])
+                # Appel récursif de MAP pour compresser les traces intercalées
+                result:CompressionSet = MAP(subSequence.event_list, useThread)
+                linearSequenceInsertedEvents:list[LinearEvent]
+                if len(result.set) > 0 :
+                    # transformation de la première compression trouvée en une séquence linéarisée et on fait sauter le Begin et le End
+                    linearSequenceInsertedEvents = result.set.pop().compression.linearize()[1:-1]
+                else:
+                    # Si pas de compression générée, on linéarise simplement la séquence entercalée et on fait sauter le Begin et le End
+                    linearSequenceInsertedEvents = subSequence.linearize()[1:-1]
+                # On merge cette partie avec les évènements intercalés, à noter que lors des premiers Event intercallés on va chercher à fusionner [] avec une liste d'Events non vide, ils seront donc tous mis en optionnel et c'est justement ce que l'on cherche.
+                result1:LinearEventWithStats = mergeLinearSequences(linearSequenceInsertedEvents, intercaletedEvents.linearEvent)
+                # Prise en compte du résultat et comptabilisation des stats d'option et d'alignement
+                intercaletedEvents.update(result1.linearEvent, result1.countOpt, result1.countAlign)
+
+            # linearisation du bound courrant
+            linearSequenceCurrentBound:list[LinearEvent] = root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize()
+            # calcule la fusion entre le dernier état de fusion et cette nouvelle séquence linéarisée
+            result2:LinearEventWithStats = mergeLinearSequences(linearSequenceCurrentBound, mergedLinearSequence.linearEvent)
+            mergedLinearSequence.update(result2.linearEvent, result2.countOpt, result2.countAlign)
+
+            # on étend la plage de la fusion pour englober ce nouvel épisode
+            mergedBound = (mergedBound[0], currentBound[1])
+        else:
+            # l'écart entre la fusion précédente et le bound courant est trop importante donc on injecte la fusion précédente dans le newRoot
+            aggregateMerge(newRoot, mergedLinearSequence, mergedBound, intercaletedEvents, currentBound[0], root)
+
+            # on réinitialise la fusion à la fusion du bound courant et du pattern fournit par TKE
+            mergedLinearSequence = mergeLinearSequences(root.content.getSubSequence(currentBound[0], currentBound[1]+1).linearize(), bestPattern)
+
+            # on réinitialise les traces intercallées
+            intercaletedEvents = LinearEventWithStats()
+            # Et on repositionne le bound de fusion sur le bound courrant
+            mergedBound = currentBound
+
+        if stop_event is not None and stop_event.is_set():
+            return
+    
+    aggregateMerge(newRoot, mergedLinearSequence, mergedBound, intercaletedEvents, len(root.content.event_list), root)
+
+    # on ne stocke le nouveau root que s'il n'est pas plus long que le double de la longueur initiale (le -2 est pour ne pas compter le premier Begin et le dernier End de la linéarisation) et qu'il contient moins de Call que le root de départ et qu'on ne l'a pas déjà exploré
+    #if len(newRoot.content.linearize())-1.25 <= originalRootLength*2 and newRoot.content.countCalls() < originalRootLength and not any(newRoot == r for r in roots):
+    # on ne stocke le nouveau root que s'il ne contient moins de Call que le root original et qu'on ne l'a pas déjà exploré
+    if newRoot.content.countCalls() < root.content.countCalls() and not any(newRoot == r for r in roots):
+        roots.append(newRoot)
+
 # Test pour une séquence donnée
 #from Event import Call
-#MAP([Call("Q"),Call("J"),Call("Z"),Call("T"),Call("O"),Call("T"),Call("O"),Call("O"),Call("Q"),Call("J"),Call("Z"),Call("X"),Call("O"),Call("F"),Call("D"),Call("L")], 0.8, 0, 0.6)
+#PTKE.GAP_RATIO = 0.8
+#NonOverlappedEpisode.WEIGHT_SUPPORT = 0
+#NonOverlappedEpisode.PROXIMITY_BALANCING = 0.6
+#MAP([Call("Q"),Call("J"),Call("Z"),Call("T"),Call("O"),Call("T"),Call("O"),Call("O"),Call("Q"),Call("J"),Call("Z"),Call("X"),Call("O"),Call("F"),Call("D"),Call("L")])
+
+#from Event import Call
+#PTKE.GAP_RATIO = 0
+#NonOverlappedEpisode.WEIGHT_SUPPORT = 1
+#NonOverlappedEpisode.PROXIMITY_BALANCING = 1
+#cs:CompressionSet = MAP([Call("J"),Call("E"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("E"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E"),Call("J"),Call("E")])
+#print(cs.getCode("[J[E]]"))

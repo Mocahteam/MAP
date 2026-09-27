@@ -7,6 +7,8 @@ import numpy as np
 import sys
 from decimal import Decimal
 import argparse
+from PTKE import PTKE
+from Episode import NonOverlappedEpisode
 
 # la classe Point
 # un objet Point représente par sa valeur de gr, ws et pb
@@ -94,7 +96,13 @@ def get_from_map(point:Point, trace:str, solution:str) -> CompressionSet:
 		eventList:list[Event] = []
 		for char in trace:
 			eventList.append(Call(char))
-		g_exploredMap[key] = MAP(eventList, float(gr), float(ws), float(pb))
+
+		# Initialisation des hyperparamètres
+		PTKE.GAP_RATIO = float(gr)
+		NonOverlappedEpisode.WEIGHT_SUPPORT = float(ws)
+		NonOverlappedEpisode.PROXIMITY_BALANCING = float(pb)
+
+		g_exploredMap[key] = MAP(eventList)
 
 		#print()
 		#for c in g_exploredMap[key].set:
@@ -608,7 +616,13 @@ def search_exhaustive(trace:str, solution:str) -> None:
 				eventList:list[Event] = []
 				for char in trace:
 					eventList.append(Call(char))
-				compressions:CompressionSet = MAP(eventList, float(gr), float(ws), float(pb))
+				
+				# Initialisation des hyperparamètres
+				PTKE.GAP_RATIO = float(gr)
+				NonOverlappedEpisode.WEIGHT_SUPPORT = float(ws)
+				NonOverlappedEpisode.PROXIMITY_BALANCING = float(pb)
+
+				compressions:CompressionSet = MAP(eventList)
 
 				g_tab_parametersToBestResultPos[i][j][k] = compressions.getCode(solution)
 				
@@ -645,7 +659,7 @@ def run(dichotomous:bool, files:list[str], mainDir:str) -> None:
 			search_gr_ws_by_rect(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
 			np.save(mainDir+"/files_npy/dichotomous_"+fileName+".npy",g_tab_parametersToBestResultPos)
-			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
+			print("\033[1G\033[2KNombe de points explorés : "+str(len(g_exploredMap)))
 			# Sauvegarde des solutions explorées
 			g_exploredMap_dict:dict[str, list[CompressionStats]] = {}
 			for key, value in g_exploredMap.items():
@@ -670,7 +684,7 @@ def run(dichotomous:bool, files:list[str], mainDir:str) -> None:
 			search_exhaustive(trace, solution)
 			# Mise en évidence en vert des paramètres permettant d'obtenir la meilleure solution
 			np.save(mainDir+"/files_npy/exhaustive_"+fileName+".npy", g_tab_parametersToBestResultPos)
-			print("Nombe de points explorés : "+str(len(g_exploredMap))+"                                                        ")
+			print("\033[1G\033[2KNombe de points explorés : "+str(len(g_exploredMap)))
 			# Sauvegarde des solutions explorées
 			g_exploredMap_dict:dict[str, list[CompressionStats]] = {}
 			for key, value in g_exploredMap.items():
@@ -758,4 +772,4 @@ if __name__ == "__main__":
 		run(args.mode == "dichotomous", files_list, dataset_dir)
 
 #Exemples
-#py .\exploreParameters.py -f "7_4_" -d "datasetXP_v2" -m "exhaustive"
+#py .\exploreParameters.py -f "5_5_" -d "datasetXP_v3" -m "exhaustive"

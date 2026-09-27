@@ -455,7 +455,7 @@ class NonOverlappedEpisode(Episode, Scorable):
         Returns:
             int: Distance between start of first bound and end of last bound
         """
-        return self.boundlist[-1][1] - self.boundlist[0][0]
+        return self.boundlist[-1][1] - self.boundlist[0][0] + 1
     
 class BoundGraph (Scorable):
     """

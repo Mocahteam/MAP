@@ -61,10 +61,9 @@ Trois hyperparamètres pilotent le comportement de l'algorithme :
 
 | Paramètre | Abréviation | Variable dans le code | Plage explorée | Rôle |
 |---|---|---|---|---|
-| Gap ratio | `gr` | `PTKE.GAP_RATIO` | [0 ; 8] | Taille des « trous » tolérés entre deux occurrences d'un épisode, proportionnellement à la longueur de l'épisode. `0` = seules les occurrences contiguës sont fusionnées. Plus `gr` est grand, plus MAP accepte d'évènements intercalés (qui deviendront optionnels). |
-| Weight support | `ws` | `NonOverlappedEpisode.WEIGHT_SUPPORT` | [0 ; 1] | Pondération, dans le score d'un épisode, entre son **support** (nombre d'occurrences) et sa **proximité**. `1` = seul le support compte ; `0` = seule la proximité compte. |
-| Proximity balancing | `pb` | `NonOverlappedEpisode.PROXIMITY_BALANCING` | [0 ; 1] | Équilibre entre la proximité **interne** (compacité des occurrences) et **externe** (écart entre occurrences). `0` = proximité interne uniquement ; `1` = proximité externe uniquement. Sans effet si `ws = 1`. |
-
+| Gap ratio | `gr` | `PTKE.GAP_RATIO` | [0 ; 8] | Détermine la distance maximale tolérée entre deux occurrences consécutives d'un épisode pendant la phase de fusion. Une valeur faible favorise les répétitions compactes et contiguës, tandis qu'une valeur plus élevée permet de regrouper dans un même motif des occurrences séparées par des intervalles plus longs. |
+| Weight support | `ws` | `NonOverlappedEpisode. WEIGHT_SUPPORT` | [0 ; 1] | Détermine l'importance de la fréquence des épisodes. Lorsque WS tend vers 1, la sélection des épisodes est principalement guidée par le soutien, ce qui favorise les motifs très fréquents. À l'inverse, des valeurs plus faibles augmentent l'influence des critères structurels et peuvent favoriser des épisodes moins fréquents mais plus cohérents. |
+| Proximity balancing | `pb` | `NonOverlappedEpisode. PROXIMITY_BALANCING` | [0 ; 1] | Détermine la manière dont la proximité est interprétée tout au long de l'algorithme. Lors de l'évaluation des épisodes, il équilibre la contribution de la proximité interne (occurrences compactes comportant peu d'événements intercalés) et de la proximité externe (occurrences situées à proximité les unes des autres dans la séquence). Au cours de la phase de fusion, PB influence également la distance admissible entre des occurrences d'épisodes consécutives par le biais du seuil GR |
 ---
 
 ## Organisation du dépôt
@@ -283,31 +282,26 @@ Une cellule permet aussi de tester un jeu de poids sur une seule trace, pour le 
 
 ```bash
 # 1. Explorer exhaustivement l'espace des paramètres sur un dataset
-python exploreParameters.py -f all -d datasetXP -m exhaustive
+python exploreParameters.py -f all -d datasetXP_v3 -m exhaustive
 
 # 2. Lancer Jupyter
 jupyter notebook
 ```
 
-3. Dans **`MAP_Visualization.ipynb`**, mettre `mainDir = "./datasetXP"`, puis visualiser les zones de réussite et identifier les meilleurs triplets (`gr`, `ws`, `pb`).
-4. Dans **`MAP_Analysis.ipynb`**, mettre `mainDir = "./datasetXP"` et `version = "exhaustive"`, puis rechercher les meilleurs poids de la fonction de score et exporter les résultats hard/soft.
+3. Dans **`MAP_Visualization.ipynb`**, mettre `mainDir = "./datasetXP_v3"`, puis visualiser les zones de réussite et identifier les meilleurs triplets (`gr`, `ws`, `pb`).
+4. Dans **`MAP_Analysis.ipynb`**, mettre `mainDir = "./datasetXP_v3"` et `version = "exhaustive"`, puis rechercher les meilleurs poids de la fonction de score et exporter les résultats hard/soft.
 5. Utiliser le réglage retenu pour lancer MAP sur de nouvelles traces (voir [Lancer MAP sur une séquence donnée](#lancer-map-sur-une-séquence-donnée)).
 
 ---
 
 ## Points d'attention
 
-- **Temps de calcul** : le mode exhaustif exécute MAP 1 331 fois par trace. Sur `datasetXP` (160 traces), prévoir un temps conséquent. Le mode dichotomique est utile pour un premier aperçu, mais les notebooks reposent principalement sur des résultats exhaustifs.
-- **`-f all` et fichiers sans solution** : toutes les traces de `example/` doivent avoir leur solution dans `example/solutions/`. Dans `dataset1`, `m12.log`, `m13.log` et `test.log` n'en ont pas : `-f all -d dataset1` s'arrêtera sur une erreur. Utilisez `-s dataset1` ou retirez ces fichiers.
-- **Datasets prédéfinis** : l'option `-s datasetXPv2` pointe vers `./datasetXP_v2`, qui n'est pas présent dans le dépôt. L'entrée `dataset3` ne contient qu'un seul fichier dans la liste codée en dur.
+- **Temps de calcul** : le mode exhaustif exécute MAP 1 331 fois par trace. Sur `datasetXP_v3` (100 traces), prévoir un temps conséquent. Le mode dichotomique est utile pour un premier aperçu, mais les notebooks reposent principalement sur des résultats exhaustifs.
+- **`-f all` et fichiers sans solution** : toutes les traces de `example/` doivent avoir leur solution dans `example/solutions/`.
 - **Solutions multiples** : les notebooks acceptent plusieurs solutions séparées par une tabulation, mais `exploreParameters.py` compare la ligne entière, ce qui revient à n'accepter qu'une seule solution.
 - **Affichage console** : MAP affiche sa progression à la colonne 80 au moyen de séquences d'échappement ANSI. Dans un terminal qui ne les interprète pas, la sortie peut paraître bruitée.
 
 ---
-
-## Contexte
-
-Ce travail est issu en partie du stage de fin de Master 2 ANDROIDE (2020-2021) de Yufei LIU : « Utilisation de Data Mining pour construire un modèle de programme informatique à partir de traces d'exécution ». Les traces proviennent notamment du jeu sérieux Prog&Play (voir `convertPP2Tokens.py`).
 
 ## Licence
 

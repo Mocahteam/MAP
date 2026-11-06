@@ -772,4 +772,4 @@ if __name__ == "__main__":
 		run(args.mode == "dichotomous", files_list, dataset_dir)
 
 #Exemples
-#py .\exploreParameters.py -f "5_5_" -d "datasetXP_v3" -m "exhaustive"
+#py .\exploreParameters.py -f all -d "datasetXP_v3" -m "exhaustive"
